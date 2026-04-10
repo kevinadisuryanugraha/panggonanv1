@@ -1,371 +1,62 @@
-/* Custom Styles for Panggonan */
+﻿/* =============================================================
+   custom.css â€” Global Styles untuk SEMUA halaman Panggonan
+   
+   Style yang khusus per-halaman ada di file terpisah:
+     home.css     â†’ Beranda (index.html)
+     about.css    â†’ Tentang Kami (about-us/index.html)
+     projects.css â†’ Galeri (projects/index.html)
+     contact.css  â†’ Kontak (contact-us/index.html) [inline di HTML]
+   ============================================================= */
+
+/* ---- Brand Variables (Palet Warna Panggonan) ---- */
 :root {
-  /* Golden Brand Palette */
   --primary-gold: #c5a880;
   --bg-cream: #f9f6f0;
   --text-dark: #2c2c2c;
   --accent-gold: #e2cba6;
 }
 
+/* ---- Body Global ---- */
 body {
   background-color: var(--bg-cream);
   color: var(--text-dark);
 }
 
-/* Override Webflow's default construction image */
+/* ---- Override background hero (ganti gambar konstruksi template) ---- */
 .hero {
   background-image: none !important;
   background-color: var(--bg-cream) !important;
 }
 
-/* Sembunyikan Logo Webflow */
-.w-webflow-badge {
+/* ---- Sembunyikan badge "Made in Panggonan" ---- */
+.w-panggonan-badge {
   display: none !important;
 }
 
-/* Fix FAQ Layout Messiness */
-.question-block {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  padding: 24px 10px 24px 0px !important;
+/* ---- Fix lebar dropdown nav agar teks "Tanya Jawab" tidak terpotong ---- */
+.nav-menu .dropdown-list.w--open,
+.nav-menu .w-dropdown-list.w--open {
+  width: 170px !important;
+  min-width: 170px !important;
+  max-width: none !important;
+  overflow: visible !important;
+}
+
+.dropdown-wraper {
   width: 100% !important;
-  box-sizing: border-box !important;
+  overflow: visible !important;
 }
 
-/* Remove Webflow's invisible clearfix pseudo-elements which become flex items and break the alignment ONLY ON FAQ */
-.question-block::before,
-.question-block::after {
-  display: none !important;
-  content: none !important;
+.dropdown-link {
+  white-space: nowrap !important;
+  display: block !important;
 }
 
-.faq-question {
-  max-width: 90% !important;
-  line-height: 1.5 !important;
-  margin-bottom: 0 !important;
-  text-align: left !important;
-  white-space: normal !important; /* Forces HTML whitespace collapsing */
-}
 
-.plus-icon {
-  flex-shrink: 0 !important;
-  margin-left: 15px !important;
-}
-
-/* Fix Testimonial Slider Overflow */
-.mask.w-slider-mask {
-  height: 400px !important; /* Increase height to accommodate longer Indonesian texts */
-}
-
-.slide.w-slide {
-  height: 100% !important;
-}
-
-.slider-wrap {
-  height: 100% !important;
-  justify-content: space-between !important;
-  box-sizing: border-box !important;
-}
-
-/* Premium Gallery / Project Cards Layout - Alternative: Alternating Minimalist Rows */
-.project-block {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 80px !important; /* Huge breathing room */
-  align-items: stretch !important;
-}
-
-.project-block .w-dyn-item {
-  margin-top: 0 !important;
-}
-
-/* Make card a horizontal row */
-.project-card {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  border: none !important;
-  padding: 0 !important;
-  background: transparent !important;
-  gap: 60px !important;
-}
-
-/* Even items reverse the flex direction */
-.project-block .w-dyn-item:nth-child(even) .project-card {
-  flex-direction: row-reverse !important;
-}
-
-.project-cover {
-  width: 55% !important; /* Image takes slightly more space */
-  border-radius: 12px !important;
-  margin-bottom: 0 !important;
-  overflow: hidden !important;
-  position: relative !important;
-  aspect-ratio: 16/10 !important; /* Classic landscape */
-  background-color: var(--image-background) !important;
-  flex-shrink: 0 !important;
-}
-
-.project-cover img {
-  transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.project-card:hover .project-cover img {
-  transform: scale(1.05) !important;
-}
-
-/* Typography taking up the rest */
-.project-title {
-  width: 45% !important;
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 12px !important;
-  align-items: flex-start !important;
-  text-align: left !important;
-}
-
-/* For even items, optional: text-align right */
-.project-block .w-dyn-item:nth-child(even) .project-title {
-  /* text-align: right !important; /* disabled for cleaner left-aligned reading */
-  align-items: flex-start !important;
-}
-
-.project-title h5 {
-  font-size: 2.2rem !important; /* BIG Typography */
-  margin-bottom: 0 !important;
-  color: var(--text-dark) !important;
-  line-height: 1.2 !important;
-}
-
-.project-title div {
-  font-size: 1.1rem !important;
-  font-style: italic !important;
-  opacity: 0.7;
-}
-
-/* Mobile Fallback: Stack vertically */
-@media screen and (max-width: 768px) {
-  .project-block {
-    gap: 50px !important;
-  }
-  .project-card,
-  .project-block .w-dyn-item:nth-child(even) .project-card {
-    flex-direction: column !important;
-    gap: 20px !important;
-  }
-  .project-cover,
-  .project-title {
-    width: 100% !important;
-  }
-  .project-title h5 {
-    font-size: 1.6rem !important;
-  }
-}
-
-/* =========================================
-   Ambiance Bento Grid Layout 
-   ========================================= */
-.ambiance-bento-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(2, minmax(240px, auto));
-  gap: 30px;
-  width: 100%;
-}
-
-.ambiance-bento-grid .team-card {
-  width: 100% !important; /* Override conc base layout */
-  margin: 0 !important;
-  display: flex;
-  flex-direction: column;
-}
-
-.ambiance-bento-grid .team-cover {
-  height: 100%;
-  width: 100%;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 20px;
-}
-
-.ambiance-bento-grid .team-cover img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.ambiance-bento-grid .team-card:hover .team-cover img {
-  transform: scale(1.05);
-}
-
-/* Specific Bento Placements */
-.bento-1 {
-  grid-column: 1 / span 4;
-  grid-row: 1 / span 2;
-}
-.bento-1 .team-cover {
-  min-height: 480px;
-}
-
-.bento-2 {
-  grid-column: 5 / span 2;
-  grid-row: 1 / span 1;
-}
-.bento-2 .team-cover {
-  min-height: 240px;
-}
-
-.bento-3 {
-  grid-column: 5 / span 1;
-  grid-row: 2 / span 1;
-}
-.bento-3 .team-cover {
-  min-height: 200px;
-}
-
-.bento-4 {
-  grid-column: 6 / span 1;
-  grid-row: 2 / span 1;
-}
-.bento-4 .team-cover {
-  min-height: 200px;
-}
-
-/* Custom Text Resizing for Bento 1 (Hero Space) */
-.bento-1 .body-large {
-  font-size: 2.2rem !important;
-  line-height: 1.2;
-  margin-bottom: 8px;
-}
-
-/* Mobile Breakpoints */
-@media screen and (max-width: 991px) {
-  .ambiance-bento-grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto;
-  }
-  .bento-1 {
-    grid-column: 1 / span 2;
-    grid-row: 1;
-  }
-  .bento-1 .team-cover {
-    min-height: 350px;
-  }
-  .bento-2 {
-    grid-column: 1 / span 2;
-    grid-row: 2;
-  }
-  .bento-3,
-  .bento-4 {
-    grid-column: span 1;
-    grid-row: 3;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .ambiance-bento-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-  }
-  .bento-1 .team-cover,
-  .bento-2 .team-cover,
-  .bento-3 .team-cover,
-  .bento-4 .team-cover {
-    min-height: 250px;
-  }
-}
-
-/* =========================================
-   Menu Showcase Grid Layout 
-   ========================================= */
-.menu-showcase-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-  width: 100%;
-}
-
-.menu-showcase-grid .menu-card {
-  width: 100%;
-}
-
-/* Modern Vertical Menu Card Redesign */
-.menu-showcase-grid .blog-card {
-  flex-direction: column !important;
-  align-items: stretch !important;
-  gap: 24px !important;
-  padding: 0 !important;
-  border: none !important;
-  background: transparent !important;
-  height: 100%;
-}
-
-.menu-showcase-grid .blog-cover {
-  width: 100% !important;
-  max-width: 100% !important;
-  height: 420px;
-  border-radius: 16px;
-  overflow: hidden;
-  margin: 0 !important;
-}
-
-.menu-showcase-grid .blog-cover img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s ease;
-}
-
-.menu-showcase-grid .blog-card:hover .blog-cover img {
-  transform: scale(1.04);
-}
-
-.menu-showcase-grid .blog-data {
-  padding: 0 5px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.menu-showcase-grid .blog-top div:first-child {
-  text-transform: uppercase;
-  font-size: 0.85rem;
-  letter-spacing: 1px;
-  color: #d4af37; /* Gold accent */
-  margin-bottom: 8px;
-  font-weight: 600;
-}
-
-.menu-showcase-grid .body-large {
-  font-size: 1.8rem !important;
-  line-height: 1.2;
-}
-
-@media screen and (max-width: 991px) {
-  .menu-showcase-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .menu-showcase-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-  .menu-showcase-grid .blog-cover {
-    height: 350px;
-  }
-}
-
-/* =========================================
-   Hero Assets Overrides
-   ========================================= */
+/* ============================================================
+   Hero Assets â€” Background & Rasio Gambar
+   (Dipakai di semua halaman yang ada hero section)
+   ============================================================ */
 .hero-wrap {
   background-image:
     linear-gradient(#002d13b3, #3a22004d),
@@ -380,100 +71,30 @@ body {
   object-position: top center !important;
 }
 
-/* Fix: only the CTA/dark section (last section before footer) needs no top padding.
-   Do NOT strip padding from the testimonial slider section. */
-section.to-top.bg-black,
-.section.to-top .cta {
-  /* handled via inline margin on the CTA block */
-}
-
-/* Give the testimonial slider section proper breathing room */
-
-/* The CTA section (dark bg) stays flush with above: no top padding */
+/* ============================================================
+   Section Padding â€” Override Default
+   Hanya CTA section (dark/bg-black) yang tidak punya padding atas
+   agar menyatu dengan section di atasnya.
+   ============================================================ */
 .section.to-top.bg-black {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
   margin: 0 !important;
 }
 
-/* Force history timeline items to always be visible
-   (Webflow's scroll animation sets opacity:0 on init but may not animate them
-   outside of the Webflow hosting environment) */
-.history-right .year,
-.history-right .history-icon,
-.history-right .history-wrap {
-  opacity: 1 !important;
-  transform: none !important;
-}
+/* ============================================================
+   CTA Section â€” Dipakai di semua halaman
+   (Beranda, Tentang, Galeri, Layanan, Kontak)
+   ============================================================ */
 
-/* Fix history-card layout: give history-wrap flex:1 so it fills remaining space
-   and text does not overflow outside the bordered box */
-.history-card {
-  align-items: flex-start !important;
-}
-
-/* Fix .year box: widen it so "Langkah X" fits on one line */
-.year {
-  max-width: 90px !important;
-  min-width: 80px !important;
-  padding: 8px 10px !important;
-  white-space: nowrap !important;
-  text-align: center !important;
-  flex-shrink: 0 !important;
-  font-size: 0.78rem !important;
-}
-
-/* Re-align history-line with center of arrow icon after widening .year
-   Formula: year_max-width(90) + gap(40) + icon_half(11) = 141px */
-.history-line {
-  margin-left: 141px !important;
-}
-
-/* Responsive: tablet (< 992px) — year stays ~80px, gap becomes 20px */
-@media screen and (max-width: 991px) {
-  .history-line {
-    margin-left: 111px !important; /* 80 + 20 + 11 */
-  }
-}
-.history-wrap {
-  flex: 1 1 0 !important;
-  min-width: 0 !important; /* allow flex item to shrink below content size */
-  word-break: break-word !important;
-  overflow-wrap: break-word !important;
-  overflow: hidden !important;
-}
-
-.history-wrap h5 {
-  white-space: normal !important;
-  overflow-wrap: break-word !important;
-}
-
-.history-wrap div {
-  white-space: normal !important;
-  overflow-wrap: break-word !important;
-  word-break: break-word !important;
-}
-
-/* Nilai Tambah Layanan – ensure team-cover has a min-height
-   so cards are never blank, and images fill the space properly */
-.team-cover {
-  min-height: 240px;
-}
-
-.team-cover img.cover-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* CTA image – ensure it fills the container */
+/* Gambar CTA mengisi container */
 .cta-image img.cover-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-/* CTA stat cards – add vertical padding and a top border divider */
+/* Stat cards: padding vertikal + garis pembatas atas */
 .cta-card {
   padding: 20px 0 !important;
   border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
@@ -484,3 +105,120 @@ section.to-top.bg-black,
   margin-top: 12px !important;
   row-gap: 8px !important;
 }
+
+/* ============================================================
+   FAQ Layout Fixes
+   (Dipakai di halaman faq/index.html)
+   ============================================================ */
+
+/* Pastikan label pertanyaan dan ikon plus sejajar horizontal */
+.question-block {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 24px 10px 24px 0px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Hapus pseudo-element yang bisa merusak layout flex */
+.question-block::before,
+.question-block::after {
+  display: none !important;
+  content: none !important;
+}
+
+.faq-question {
+  max-width: 90% !important;
+  line-height: 1.5 !important;
+  margin-bottom: 0 !important;
+  text-align: left !important;
+  white-space: normal !important;
+}
+
+.plus-icon {
+  flex-shrink: 0 !important;
+  margin-left: 15px !important;
+}
+
+/* ---- Navbar Primary Button â€” Hubungi Kami tidak boleh wrap ---- */
+.desktop-button .primary-button,
+.tablet-button .primary-button,
+.nav-wrapper .primary-button {
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+}
+
+.desktop-button .primary-button div,
+.tablet-button .primary-button div {
+  white-space: nowrap !important;
+}
+
+/* Pastikan nav-wrapper tidak compress elemen-elemennya */
+.nav-wrapper {
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  gap: 20px;
+}
+
+/* Kurangi gap antar item menu jika layar terlalu sempit */
+.nav-menu,
+.menu-wraper {
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+}
+
+
+/* Fix layout gap below footer */
+html, body {
+  height: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.page-wrap {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  min-height: 100vh;
+}
+.footer {
+  margin-bottom: 0 !important;
+}
+
+
+/* Hide builder badge that might cause invisible gap */
+.w-panggonan-badge { display: none !important; }
+
+
+/* ============================================================
+   GLOBAL FOOTER IMAGE AESTHETICS
+   ============================================================ */
+.footer-image-wrapper {
+  grid-column: span 2;
+  width: 100%;
+  height: 220px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+}
+
+.footer-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.75;
+  transition: opacity 0.4s ease, transform 0.8s ease;
+}
+
+.footer-image-wrapper:hover img {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+@media screen and (max-width: 991px) {
+  .footer-image-wrapper {
+    grid-column: span 1;
+    min-height: 140px;
+  }
+}
+
