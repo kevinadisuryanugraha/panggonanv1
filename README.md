@@ -2,25 +2,25 @@
 
 Sebuah proyek website statis berkelas premium (Editorial Style) yang dirancang khusus untuk merepresentasikan identitas, sejarah, dan layanan dari **Panggonan Resto** (Cabang GDC Depok & Ciracas).
 
-Proyek ini telah dikembangkan dengan fokus pada seni *storytelling* visual (seperti kutipan filosofi "Clueyourun"), performa yang sangat cepat, dan fungsionalitas pemesanan (reservasi) langsung yang terintegrasi dengan WhatsApp multi-cabang.
+Proyek ini telah dikembangkan dengan fokus pada seni _storytelling_ visual (seperti kutipan filosofi "Kluyuran"), performa yang sangat cepat, dan fungsionalitas pemesanan (reservasi) langsung yang terintegrasi dengan WhatsApp multi-cabang.
 
 ---
 
 ## 🌟 Fitur Utama
 
-- **Desain Premium & Asimetris (Opsi C)**: Menggunakan pola desain terang (*light-theme*) dengan kombinasi warna *Cream, Gold*, dan *Black* untuk menonjolkan kesan eksklusif dan elegan.
-- **Sistem Grid Responsif (Bento Grid)**: Tata letak *masonry* modern pada galeri "Atmosfer Panggonan" dan "Nilai Tambah Layanan" yang secara otomatis menyesuaikan (*responsive*) secara sempurna di resolusi Desktop, Layar Tablet (iPad), hingga *Mobile*.
-- **Integrasi Reservasi WhatsApp Dinamis**: Formulir pemesanan tiket/meja/event yang menggunakan *Vanilla JavaScript* untuk memproses input (Nama Lengkap, Pilihan Cabang, Tanggal, dll) dan menyusunnya menjadi pesan WhatsApp siap kirim yang rapi secara otomatis.
-- **Kemandirian Infrastruktur (100% *Self-Hosted*)**: Seluruh aset kode (HTML, CSS, JS), ikon SVG, dan ilustrasi gambar telah diisolasi secara lokal. Tidak ada lagi ketergantungan pada *server* luar atau CDN pihak ketiga (seperti *Webflow*).
-- **SEO & Meta Siap Rilis**: Telah dioptimasi dengan struktur tag *Heading*, *Meta Description*, dan grafis *Open Graph* (OG) yang relevan untuk mesin pencari Google.
+- **Desain Premium & Asimetris (Opsi C)**: Menggunakan pola desain terang (_light-theme_) dengan kombinasi warna _Cream, Gold_, dan _Black_ untuk menonjolkan kesan eksklusif dan elegan.
+- **Sistem Grid Responsif (Bento Grid)**: Tata letak _masonry_ modern pada galeri "Atmosfer Panggonan" dan "Nilai Tambah Layanan" yang secara otomatis menyesuaikan (_responsive_) secara sempurna di resolusi Desktop, Layar Tablet (iPad), hingga _Mobile_.
+- **Integrasi Reservasi WhatsApp Dinamis**: Formulir pemesanan tiket/meja/event yang menggunakan _Vanilla JavaScript_ untuk memproses input (Nama Lengkap, Pilihan Cabang, Tanggal, dll) dan menyusunnya menjadi pesan WhatsApp siap kirim yang rapi secara otomatis.
+- **Kemandirian Infrastruktur (100% _Self-Hosted_)**: Seluruh aset kode (HTML, CSS, JS), ikon SVG, dan ilustrasi gambar telah diisolasi secara lokal. Tidak ada lagi ketergantungan pada _server_ luar atau CDN pihak ketiga (seperti _Webflow_).
+- **SEO & Meta Siap Rilis**: Telah dioptimasi dengan struktur tag _Heading_, _Meta Description_, dan grafis _Open Graph_ (OG) yang relevan untuk mesin pencari Google.
 
 ## 🛠️ Tumpukan Teknologi (Tech Stack)
 
-Website ini adalah **Static Site** (Situs Statis) murni yang tidak membutuhkan *Database* atau bahasa prosesor sisi server (*Backend* seperti PHP/Node.js). Sangat ringan dan aman.
+Website ini adalah **Static Site** (Situs Statis) murni yang tidak membutuhkan _Database_ atau bahasa prosesor sisi server (_Backend_ seperti PHP/Node.js). Sangat ringan dan aman.
 
 - **Struktur**: HTML5 Semantik
-- **Gaya (Styling)**: CSS3 Lanjutan (Animasi transisi, *CSS Variables*, *Flexbox*, dan *Grid Layout*)
-- **Fungsionalitas**: *Vanilla JavaScript* (ES6) dan *jQuery v3.5.1* (opsional untuk animasi bawaan)
+- **Gaya (Styling)**: CSS3 Lanjutan (Animasi transisi, _CSS Variables_, _Flexbox_, dan _Grid Layout_)
+- **Fungsionalitas**: _Vanilla JavaScript_ (ES6) dan _jQuery v3.5.1_ (opsional untuk animasi bawaan)
 - **Desain Font**: Sora (Google Fonts)
 
 ## 📁 Struktur Direktori Proyek
@@ -41,29 +41,30 @@ Website ini adalah **Static Site** (Situs Statis) murni yang tidak membutuhkan *
 └── README.md             # Dokumentasi Proyek Ini
 ```
 
-## 🚀 Panduan Peluncuran (*Deployment*)
+## 🚀 Panduan Peluncuran (_Deployment_)
 
-Karena struktur proyek ini adalah **Situs Statis (Static HTML)**, proses menaikkan website ini ke Internet agar dapat diakses publik sangatlah mudah dan tidak memerlukan *cPanel* konvensional.
+Karena struktur proyek ini adalah **Situs Statis (Static HTML)**, proses menaikkan website ini ke Internet agar dapat diakses publik sangatlah mudah dan tidak memerlukan _cPanel_ konvensional.
 
 Kami sangat merekomendasikan menggunakan layanan seperti **Netlify**, **Vercel**, atau **GitHub Pages** (gratis dengan SSL/HTTPS terpasang otomatis).
 
-### Cara *Hosting* via Netlify Drop:
-1. Buka peramban (*browser*) dan kunjungi [Netlify Drop](https://drop.netlify.com/).
-2. Buka aplikasi *File Explorer* (Windows/Mac) Anda.
-3. Arahkan direktori Windows ke folder utama proyek ini: 
+### Cara _Hosting_ via Netlify Drop:
+
+1. Buka peramban (_browser_) dan kunjungi [Netlify Drop](https://drop.netlify.com/).
+2. Buka aplikasi _File Explorer_ (Windows/Mac) Anda.
+3. Arahkan direktori Windows ke folder utama proyek ini:
    `c:\laragon\www\porto-apps\50+client\panggonan_version\conc-panggonanv1 - Copy`
 4. Lakukan **Drag & Drop** (Tarik & Pisahkan) keseluruhan isi folder utama tersebut tepat di atas antarmuka layar Netlify Drop tadi.
-5. Tunggu proses kompilasi beberapa detik, lalu website siap meluncur (*Live*).
-6. Masuk ke manu *Domain Management* di pengaturan akun Netlify untuk menyambungkan dengan domain asli (seperti `panggonan.id` atau `panggonanresto.com`).
+5. Tunggu proses kompilasi beberapa detik, lalu website siap meluncur (_Live_).
+6. Masuk ke manu _Domain Management_ di pengaturan akun Netlify untuk menyambungkan dengan domain asli (seperti `panggonan.id` atau `panggonanresto.com`).
 
 ---
 
 ## 🎨 Panduan Modifikasi & Pemeliharaan (Maintenance)
 
-- **Mengubah Desain Warna Utama**: Tema primer (terutama *Gold* dan *Cream*) dapat dengan mudah diubah nilainya melalui inisialisasi *:root* pada file utama `assets/css/style.css` garis awal (baris `1 - 50`).
+- **Mengubah Desain Warna Utama**: Tema primer (terutama _Gold_ dan _Cream_) dapat dengan mudah diubah nilainya melalui inisialisasi _:root_ pada file utama `assets/css/style.css` garis awal (baris `1 - 50`).
 - **Nomor Telepon Reservasi**: Jika ada perubahan pada nomor layanan WhatsApp, Anda hanya perlu mengutak-atik fungsi JavaScript pada file `contact-us/index.html` (di baris `<script>` paling dasar dokumen halaman).
-- **Penambahan Aset Baru**: Pastikan untuk selalu menggunakan format `.webp` atau mengkompresi `.jpeg / .png` terlebih dahulu sebelum meletakkannya di *folder* `assets/images/` untuk menjaga metrik kecepatan *loading* halaman (PageSpeed) tetap di angka > 90.
+- **Penambahan Aset Baru**: Pastikan untuk selalu menggunakan format `.webp` atau mengkompresi `.jpeg / .png` terlebih dahulu sebelum meletakkannya di _folder_ `assets/images/` untuk menjaga metrik kecepatan _loading_ halaman (PageSpeed) tetap di angka > 90.
 
 ---
 
-> *Dikembangkan dan direvitalisasi khusus oleh Panggonan Developer Team & Antigravity Assistant. Seluruh hak cipta desain konten dimiliki oleh Panggonan, 2024.*
+> _Dikembangkan dan direvitalisasi khusus oleh Panggonan Developer Team & Antigravity Assistant. Seluruh hak cipta desain konten dimiliki oleh Panggonan, 2024._
