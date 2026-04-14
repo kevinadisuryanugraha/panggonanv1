@@ -78,7 +78,7 @@
 
       .journal-grid {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         gap: 32px;
         margin-top: 0;
       }
@@ -97,7 +97,7 @@
       }
       .journal-img-wrap {
         width: 100%;
-        aspect-ratio: 4/3;
+        aspect-ratio: 4/5;
         overflow: hidden;
       }
       .journal-img {
@@ -272,6 +272,11 @@
                         class="dropdown-link w-dropdown-link"
                         >Layanan</a
                       >
+                      <a
+                        href="../gallery/"
+                        class="dropdown-link w-dropdown-link"
+                        >Galeri</a
+                      >
                       <a href="../faq/" class="dropdown-link w-dropdown-link"
                         >Tanya Jawab</a
                       >
@@ -382,52 +387,98 @@
             <div class="journal-card">
               <div class="journal-img-wrap">
                 <img
-                  src="../assets/images/panggonan_aset_ke_2/sudut_telepon.webp"
+                  src="../assets/images/jurnal/kluyuran1.webp"
                   loading="lazy"
-                  alt="Detail Benda Antik"
+                  alt="Kopi Klu Yu Ran"
                   class="journal-img"
                 />
               </div>
               <div class="journal-content">
-                <div class="journal-date">Jejak Kluyuran</div>
-                <div class="journal-quote">
-                  "Sesuatu yang terbuang bukan berarti tak punya arti. Ketika ia
-                  diletakkan pada ruang dan waktu yang tepat, ia akan bernarasi
-                  lebih kuat daripada yang mewah."
+                <div class="journal-date">Oleh Bp. Masyuri (Founder)</div>
+                <div class="journal-quote" style="font-size: 1.15rem">
+                  "Satu | KLU sy dpt dari Mas Prof. Topo | YU saat ngopi² sesaat
+                  | RAN"
                 </div>
-                <div class="journal-text">
-                  Konsep industrial sering kali berakhir membosankan. Namun
-                  dengan menyematkan barang lama seperti telepon antik atau
-                  sudut yang tidak sempurna, kita justru memberikan ruh dan
-                  nostalgia pada material. Anda mungkin mengambil foto di sudut
-                  ini hari ini, dan saat melihatnya beberapa tahun lagi, Anda
-                  tetap akan merasakan atmosfer haru yang pernah Anda bagikan di
-                  sini.
+                <div class="journal-text" style="font-size: 0.88rem">
+                  what then s e n i ooor.. @ kopi KLU YU RAN<br /><br />
+                  pada setiap K A R Y A disana ada sidik jari kita...<br /><br />
+                  yaaa KLU YU RAN yg memberi insight kebermanfaatan.<br />
+                  Tetiba ketemuan dan lanjut jadi bincang² yg mencerahkan..
                 </div>
               </div>
             </div>
 
             <!-- Journal Card 2 -->
             <div class="journal-card">
-              <div class="journal-img-wrap">
-                <img
-                  src="../assets/images/panggonan_aset_ke_2/ambiance_sudut_tempatmakan.webp"
-                  loading="lazy"
-                  alt="Ambiance Malam"
-                  class="journal-img"
-                />
+              <div class="journal-img-wrap" style="position: relative">
+                <video
+                  src="../assets/images/jurnal/kluyuran2.mp4#t=0.001"
+                  preload="metadata"
+                  controls
+                  muted
+                  loop
+                  playsinline
+                  style="width: 100%; height: 100%; object-fit: cover"
+                  onplay="
+                    this.parentElement.querySelector(
+                      '.vid-play-btn',
+                    ).style.opacity = '0';
+                    this.parentElement.querySelector(
+                      '.vid-play-btn',
+                    ).style.pointerEvents = 'none';
+                  "
+                  onpause="
+                    this.parentElement.querySelector(
+                      '.vid-play-btn',
+                    ).style.opacity = '1';
+                    this.parentElement.querySelector(
+                      '.vid-play-btn',
+                    ).style.pointerEvents = 'auto';
+                  "
+                ></video>
+                <div
+                  class="vid-play-btn"
+                  style="
+                    position: absolute;
+                    inset: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: opacity 0.3s ease;
+                    cursor: pointer;
+                  "
+                  onclick="this.parentElement.querySelector('video').play()"
+                >
+                  <div
+                    style="
+                      width: 64px;
+                      height: 64px;
+                      border-radius: 50%;
+                      background: rgba(0, 0, 0, 0.55);
+                      backdrop-filter: blur(6px);
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      border: 2px solid rgba(212, 175, 55, 0.5);
+                    "
+                  >
+                    <svg width="24" height="28" viewBox="0 0 24 28" fill="none">
+                      <path d="M3 1.5L22 14L3 26.5V1.5Z" fill="#d4af37" />
+                    </svg>
+                  </div>
+                </div>
               </div>
               <div class="journal-content">
-                <div class="journal-date">Jejak Kluyuran</div>
-                <div class="journal-quote">
-                  "Kita tidak memaksa pengunjung untuk melihat. Kita menyediakan
-                  tempat agar mereka dapat merasa."
+                <div class="journal-date">Oleh Bp. Masyuri (Founder)</div>
+                <div class="journal-quote" style="font-size: 1.15rem">
+                  "t a k c l u e | y o u | r u n.<br />Satu h a r i satu
+                  Silaturahmi.."
                 </div>
-                <div class="journal-text">
-                  Cahaya redup dan tekstur bata yang dibiarkan terekspos
-                  bukanlah sebuah kebetulan. Ada perhitungan matang dalam
-                  arsitektur modern Panggonan untuk meredam kebisingan dari
-                  luar, mengajak Anda larut dalam keheningan yang hangat.
+                <div class="journal-text" style="font-size: 0.88rem">
+                  Mereka h s e n y u m s e i n d a h pagi<br />
+                  b e r c e n g k r a m a s e t u l u s h a t i<br />
+                  D a m a i s e n t o s a rasa b a h a g i a<br /><br />
+                  Smngt p a g i Indonesia
                 </div>
               </div>
             </div>
@@ -436,48 +487,25 @@
             <div class="journal-card">
               <div class="journal-img-wrap">
                 <img
-                  src="../assets/images/panggonan_aset_ke_2/sugeng_rawuh.webp"
+                  src="../assets/images/panggonan_aset_ke_2/ambiance_luar_malam.webp"
                   loading="lazy"
-                  alt="Pintu Masuk Sugeng Rawuh"
+                  alt="Kanvas Pagi"
                   class="journal-img"
                 />
               </div>
               <div class="journal-content">
-                <div class="journal-date">Jejak Kluyuran</div>
-                <div class="journal-quote">
-                  "Sugeng Rawuh adalah mantra. Begitu langkah Anda melewati
-                  batas pintu, biarkanlah sejenak beban tertinggal di anak
-                  tangga."
+                <div class="journal-date">Oleh Bp. Masyuri (Founder)</div>
+                <div class="journal-quote" style="font-size: 1.15rem">
+                  "@panggonan, g a k c l u e | y o u | r u n"
                 </div>
-                <div class="journal-text">
-                  Aroma, sapaan, dan senyum. Kluyuran tidak hanya tentang
-                  melihat-lihat, namun juga meresapi bagaimana sapaan khas
-                  ketimuran yang membungkus tempat ini.
-                </div>
-              </div>
-            </div>
-
-            <!-- Journal Card 4 -->
-            <div class="journal-card">
-              <div class="journal-img-wrap">
-                <img
-                  src="../assets/images/panggonan_aset_ke_2/ambiance_malam.webp"
-                  loading="lazy"
-                  alt="Suasana Eksterior Malam"
-                  class="journal-img"
-                />
-              </div>
-              <div class="journal-content">
-                <div class="journal-date">Oleh Founder Panggonan</div>
-                <div class="journal-quote">
-                  "Setiap sudut yang terbingkai langit malam mengajarkan satu
-                  hal: ada kedamaian dalam bayang-bayang."
-                </div>
-                <div class="journal-text">
-                  Saat matahari terbenam, permainan lampu akan memberi nyawa
-                  baru pada sudut-sudut Panggonan. Dari situlah
-                  inspirasi-inspirasi besar acap kali lahir tanpa direncana.
-                  Teruslah ber-'Kluyuran'.
+                <div class="journal-text" style="font-size: 0.88rem">
+                  Pagi h a r i, rinai menyapa bukan l e b a t, hanya rintik
+                  syahdu<br />
+                  l a m p u jalan masih m e n y a l a pantulannya m e n a r i di
+                  genangan<br />
+                  S i l u e t pohon, basah dan I n d a h<br /><br />
+                  Menjelma l u k i s a n d i k a n v a s pagi<br /><br />
+                  Smngt p a g i Indonesia
                 </div>
               </div>
             </div>
@@ -664,70 +692,289 @@
             </div>
           </div>
           <div class="footer-middle">
-            <a href="../" class="footer-logo w-inline-block"
+            <a
+              href=""
+              aria-current="page"
+              class="footer-logo w-inline-block w--current"
               ><h3 style="margin: 0; color: #d4af37">Panggonan</h3></a
             >
             <div class="footer-contacts">
               <div class="contact-card">
-                <div>Kirim Email</div>
-                <a
-                  href="mailto:hello@panggonan.id"
-                  class="footer-link body-large"
-                  >hello@panggonan.id</a
+                <div
+                  style="
+                    color: #d4af37;
+                    font-weight: 600;
+                    margin-bottom: 12px;
+                    font-size: 1.1rem;
+                    text-transform: uppercase;
+                    letter-spacing: 0.05em;
+                  "
                 >
-              </div>
-              <div class="contact-card">
-                <div>Telepon</div>
-                <a href="tel:+6208784535918" class="footer-link body-large"
-                  >+62 878-4535-9184</a
-                >
-              </div>
-              <div class="contact-card">
-                <div>Ikuti Kami</div>
-                <div class="social-outer">
-                  <a
-                    href="https://www.instagram.com/panggonan_gdc"
-                    target="_blank"
-                    class="social-icon w-inline-block"
-                    ><img
-                      src="../assets/images/icons/instagram-icon.svg"
-                      loading="lazy"
-                      alt="Instagram"
-                  /></a>
-                  <a
-                    href="https://www.linkedin.com/"
-                    target="_blank"
-                    class="social-icon w-inline-block"
-                    ><img
-                      src="../assets/images/icons/linkedin-icon.svg"
-                      loading="lazy"
-                      alt="LinkedIn"
-                  /></a>
-                  <a
-                    href="https://x.com/"
-                    target="_blank"
-                    class="social-icon w-inline-block"
-                    ><img
-                      src="../assets/images/icons/twitter-icon.svg"
-                      loading="lazy"
-                      alt="X"
-                  /></a>
-                  <a
-                    href="https://www.facebook.com/"
-                    target="_blank"
-                    class="social-icon w-inline-block"
-                    ><img
-                      src="../assets/images/icons/facebook-icon.svg"
-                      loading="lazy"
-                      alt="Facebook"
-                  /></a>
+                  Kirim Email
                 </div>
+                <a
+                  href="mailto:panggonanresto@gmail.com"
+                  class="footer-link"
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    font-size: 0.9rem;
+                    line-height: 1.6;
+                  "
+                >
+                  <img
+                    src="../assets/images/icons/mail.svg"
+                    width="16"
+                    alt="Email"
+                    style="opacity: 0.7"
+                  />
+                  panggonanresto@gmail.com
+                </a>
+                <a
+                  href="mailto:panggonanciracas@gmail.com"
+                  class="footer-link"
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    font-size: 0.9rem;
+                    line-height: 1.6;
+                  "
+                >
+                  <img
+                    src="../assets/images/icons/mail.svg"
+                    width="16"
+                    alt="Email"
+                    style="opacity: 0.7"
+                  />
+                  panggonanciracas@gmail.com
+                </a>
+                <a
+                  href="mailto:panggonangdc@gmail.com"
+                  class="footer-link"
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    font-size: 0.9rem;
+                    line-height: 1.6;
+                  "
+                >
+                  <img
+                    src="../assets/images/icons/mail.svg"
+                    width="16"
+                    alt="Email"
+                    style="opacity: 0.7"
+                  />
+                  panggonangdc@gmail.com
+                </a>
+              </div>
+              <div class="contact-card">
+                <div
+                  style="
+                    color: #d4af37;
+                    font-weight: 600;
+                    margin-bottom: 12px;
+                    font-size: 1.1rem;
+                    text-transform: uppercase;
+                    letter-spacing: 0.05em;
+                  "
+                >
+                  Telepon
+                </div>
+                <a
+                  href="tel:+6287828888538"
+                  class="footer-link"
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    font-size: 0.9rem;
+                    line-height: 1.6;
+                  "
+                >
+                  <img
+                    src="../assets/images/icons/phone.svg"
+                    width="16"
+                    alt="Phone"
+                    style="opacity: 0.7"
+                  />
+                  Ciracas: 0878-2888-8538
+                </a>
+                <a
+                  href="tel:+6287845359184"
+                  class="footer-link"
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    font-size: 0.9rem;
+                    line-height: 1.6;
+                  "
+                >
+                  <img
+                    src="../assets/images/icons/phone.svg"
+                    width="16"
+                    alt="Phone"
+                    style="opacity: 0.7"
+                  />
+                  GDC: 0878-4535-9184
+                </a>
+              </div>
+              <div class="contact-card">
+                <div
+                  style="
+                    color: #d4af37;
+                    font-weight: 600;
+                    margin-bottom: 12px;
+                    font-size: 1.1rem;
+                    text-transform: uppercase;
+                    letter-spacing: 0.05em;
+                  "
+                >
+                  Instagram
+                </div>
+                <a
+                  href="https://www.instagram.com/panggonan.resto/?hl=id"
+                  target="_blank"
+                  class="footer-link"
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    font-size: 0.9rem;
+                    line-height: 1.6;
+                  "
+                >
+                  <img
+                    src="../assets/images/icons/instagram-icon.svg"
+                    width="16"
+                    alt="IG"
+                    style="opacity: 0.7"
+                  />
+                  panggonan.resto
+                </a>
+                <a
+                  href="https://www.instagram.com/panggonan_gdc/?hl=id"
+                  target="_blank"
+                  class="footer-link"
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    font-size: 0.9rem;
+                    line-height: 1.6;
+                  "
+                >
+                  <img
+                    src="../assets/images/icons/instagram-icon.svg"
+                    width="16"
+                    alt="IG"
+                    style="opacity: 0.7"
+                  />
+                  panggonan_gdc
+                </a>
+                <a
+                  href="https://www.instagram.com/panggonan_ciracas/?hl=id"
+                  target="_blank"
+                  class="footer-link"
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    font-size: 0.9rem;
+                    line-height: 1.6;
+                  "
+                >
+                  <img
+                    src="../assets/images/icons/instagram-icon.svg"
+                    width="16"
+                    alt="IG"
+                    style="opacity: 0.7"
+                  />
+                  panggonan_ciracas
+                </a>
+              </div>
+              <div class="contact-card">
+                <div
+                  style="
+                    color: #d4af37;
+                    font-weight: 600;
+                    margin-bottom: 12px;
+                    font-size: 1.1rem;
+                    text-transform: uppercase;
+                    letter-spacing: 0.05em;
+                  "
+                >
+                  TikTok
+                </div>
+                <a
+                  href="https://www.tiktok.com/@panggonan.resto"
+                  target="_blank"
+                  class="footer-link"
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    font-size: 0.9rem;
+                    line-height: 1.6;
+                  "
+                >
+                  <img
+                    src="../assets/images/icons/tiktok-icon.svg"
+                    width="16"
+                    alt="TikTok"
+                    style="opacity: 0.7"
+                  />
+                  @panggonan.resto
+                </a>
+                <a
+                  href="https://www.tiktok.com/@panggonan_gdc"
+                  target="_blank"
+                  class="footer-link"
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    font-size: 0.9rem;
+                    line-height: 1.6;
+                  "
+                >
+                  <img
+                    src="../assets/images/icons/tiktok-icon.svg"
+                    width="16"
+                    alt="TikTok"
+                    style="opacity: 0.7"
+                  />
+                  @panggonan_gdc
+                </a>
+                <a
+                  href="https://www.tiktok.com/@panggonan.ciracas"
+                  target="_blank"
+                  class="footer-link"
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    font-size: 0.9rem;
+                    line-height: 1.6;
+                  "
+                >
+                  <img
+                    src="../assets/images/icons/tiktok-icon.svg"
+                    width="16"
+                    alt="TikTok"
+                    style="opacity: 0.7"
+                  />
+                  @panggonan.ciracas
+                </a>
               </div>
             </div>
           </div>
           <div class="footer-bottom">
             <div class="body-small" style="color: rgba(255, 255, 255, 0.4)">
-              © 2024 Panggonan. Seluruh hak cipta dilindungi.
+              &copy; 2026 Panggonan. Seluruh hak cipta dilindungi.
             </div>
           </div>
         </div>

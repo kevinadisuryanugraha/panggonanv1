@@ -52,7 +52,6 @@ body {
   display: block !important;
 }
 
-
 /* ============================================================
    Hero Assets â€” Background & Rasio Gambar
    (Dipakai di semua halaman yang ada hero section)
@@ -60,7 +59,7 @@ body {
 .hero-wrap {
   background-image:
     linear-gradient(#002d13b3, #3a22004d),
-    url("../images/panggonan_aset_ke_2/suasana_landscape.webp") !important;
+    url("../images/panggonan_aset_ke_2/hero.webp") !important;
 }
 
 .hero-top {
@@ -168,9 +167,9 @@ body {
   flex-wrap: nowrap !important;
 }
 
-
 /* Fix layout gap below footer */
-html, body {
+html,
+body {
   height: 100%;
   margin: 0 !important;
   padding: 0 !important;
@@ -184,10 +183,10 @@ html, body {
   margin-bottom: 0 !important;
 }
 
-
 /* Hide builder badge that might cause invisible gap */
-.w-panggonan-badge { display: none !important; }
-
+.w-panggonan-badge {
+  display: none !important;
+}
 
 /* ============================================================
    GLOBAL FOOTER IMAGE AESTHETICS
@@ -207,7 +206,9 @@ html, body {
   height: 100%;
   object-fit: cover;
   opacity: 0.75;
-  transition: opacity 0.4s ease, transform 0.8s ease;
+  transition:
+    opacity 0.4s ease,
+    transform 0.8s ease;
 }
 
 .footer-image-wrapper:hover img {
@@ -221,4 +222,3 @@ html, body {
     min-height: 140px;
   }
 }
-
