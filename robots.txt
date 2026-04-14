@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /401/
+Disallow: /404/
+Disallow: /coming-soon/
+Disallow: /chat_owner_hari_ini/
+
+Sitemap: https://panggonan.com/sitemap.xml
