@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panggonan - Advanced Traffic Dashboard</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link href="../assets/images/logo.webp" rel="shortcut icon" type="image/x-icon" />
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+
+    <!-- LOGIN SCREEN -->
+    <div id="auth-screen" class="auth-overlay">
+        <div class="auth-modal">
+            <div class="glow-sphere"></div>
+            <img src="../assets/images/logo.webp" alt="Panggonan Logo" class="auth-logo">
+            <h2>Portal Eksekutif</h2>
+            <p>Masukkan kunci sandi untuk mengakses data real-time lalu lintas situs web Panggonan Resto.</p>
+            <div class="input-group">
+                <input type="password" id="auth-password" placeholder="Key akses..." autocomplete="off">
+            </div>
+            <button class="btn-auth" onclick="verifyPassword()">Akses Dasbor</button>
+            <div id="auth-error" class="hidden-error">Kunci sandi tidak valid. Akses ditolak.</div>
+        </div>
+    </div>
+
+    <!-- MAIN DASHBOARD -->
+    <div id="main-dashboard" class="dashboard-wrap hidden">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <img src="../assets/images/logo.webp" alt="Panggonan" width="40" height="40" style="border-radius:50%">
+                <span>Panggonan Analytics</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#" class="active"><i class="fas fa-chart-line"></i> Ringkasan Trafik</a>
+                <a href="#" class="inactive"><i class="fas fa-users"></i> Demografi</a>
+                <a href="#" class="inactive"><i class="fas fa-bullseye"></i> Perilaku Konversi</a>
+                <a href="#" class="inactive"><i class="fas fa-cog"></i> Pengaturan GA4</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="../index.html"><i class="fas fa-arrow-left"></i> Kembali ke Website</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-content">
+            <header class="topbar">
+                <div class="page-title">
+                    <h1>Real-time Traffic Overview</h1>
+                    <span class="pulse-indicator"><span class="dot"></span> Live Sync</span>
+                </div>
+                <div class="user-profile">
+                    <span class="user-role">Administrator</span>
+                    <div class="avatar">A</div>
+                </div>
+            </header>
+
+            <!-- Metrics Cards -->
+            <div class="metrics-grid">
+                <div class="metric-card glass">
+                    <div class="metric-header">
+                        <span class="title">Total Kunjungan (Bulan Ini)</span>
+                        <i class="fas fa-users" style="color: #6366f1;"></i>
+                    </div>
+                    <div class="metric-value" id="val-kunjungan">14,258</div>
+                    <div class="metric-trend positive">
+                        <i class="fas fa-arrow-up"></i> 12.4% vs bulan lalu
+                    </div>
+                </div>
+
+                <div class="metric-card glass">
+                    <div class="metric-header">
+                        <span class="title">Klik Reservasi / WA</span>
+                        <i class="fas fa-mouse-pointer" style="color: #10b981;"></i>
+                    </div>
+                    <div class="metric-value">1,342</div>
+                    <div class="metric-trend positive">
+                        <i class="fas fa-arrow-up"></i> 5.8% vs bulan lalu
+                    </div>
+                </div>
+
+                <div class="metric-card glass">
+                    <div class="metric-header">
+                        <span class="title">Durasi Sesi Rata-Rata</span>
+                        <i class="fas fa-clock" style="color: #f59e0b;"></i>
+                    </div>
+                    <div class="metric-value">02m 45s</div>
+                    <div class="metric-trend neutral">
+                        <i class="fas fa-minus"></i> stabil
+                    </div>
+                </div>
+
+                <div class="metric-card glass">
+                    <div class="metric-header">
+                        <span class="title">Pengunjung Aktif Saat Ini</span>
+                        <i class="fas fa-broadcast-tower" style="color: #ef4444;"></i>
+                    </div>
+                    <div class="metric-value pulse-text" id="val-realtime">18</div>
+                    <div class="metric-trend">
+                        Diperbarui 1 detik lalu
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Area -->
+            <div class="charts-wrap">
+                <div class="chart-box glass main-chart">
+                    <h3>Tren Traffic 30 Hari Terakhir</h3>
+                    <div class="chart-container">
+                        <canvas id="trafficChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-box glass side-chart">
+                    <h3>Sumber Kunjungan (Traffic Source)</h3>
+                    <div class="chart-container">
+                        <canvas id="sourceChart"></canvas>
+                    </div>
+                    <br>
+                    <ul class="source-list">
+                        <li><span class="color-dot" style="background: #6366f1"></span> Pencarian Google (Search) <span class="perc">56%</span></li>
+                        <li><span class="color-dot" style="background: #10b981"></span> Instagram Link <span class="perc">30%</span></li>
+                        <li><span class="color-dot" style="background: #f59e0b"></span> Tautan Langsung (Direct) <span class="perc">14%</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="status-bar glass">
+                <i class="fas fa-shield-check"></i> Google Analytics 4 (Data Stream: G-PX9Y2Z) Connected • Tembok Api Enkripsi AES-256 Aktif
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Custom JS -->
+    <script src="../assets/js/dashboard.js"></script>
+</body>
+</html>
