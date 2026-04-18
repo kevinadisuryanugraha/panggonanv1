@@ -55,6 +55,15 @@ Berikut adalah rincian transparan mengenai apa saja perihal yang **Diperbarui, D
 *   **Ekspansi Tombol 'Galeri' Terpusat:**
     Memberikan injeksi baru sub-menu bertajuk **"Galeri"** langsung ke dalam badan tarik-turun (Dropdown) Navbar agar eksplorasi pameran visual resto tak lagi memerlukan klik berlebih dari para pelanggan.
 
+*   **🆕 Dashboard Traffic Kunjungan (Halaman Eksklusif Owner):**
+    Fitur *advanced* yang sangat teknis dan di luar cakupan paket standar. Sebuah halaman rahasia (`/admin-traffic/`) telah dibangun sepenuhnya:
+    *   **Login Portal Eksekutif** — Terkunci dengan kata sandi agar hanya admin/owner yang bisa masuk. Tampil futuristik dengan efek *glassmorphism* dan *glow sphere*.
+    *   **Grafik Traffic 30 Hari (Line Chart)** — Memvisualisasikan tren kunjungan harian ke website secara dinamis dengan animasi interaktif.
+    *   **Grafik Sumber Kunjungan (Doughnut Chart)** — Memperlihatkan dari mana pengunjung datang (Google, Instagram, atau langsung).
+    *   **Metrik Kartu Analitik** — Total kunjungan bulanan, jumlah klik Reservasi/WA, durasi sesi rata-rata, dan penghitung pengunjung aktif *real-time*.
+    *   **Akses \"Pintu Rahasia\"** — Simbol © di bagian paling bawah halaman utama berfungsi sebagai tautan tersembunyi menuju Portal Login Dasbor. Pengunjung biasa tidak akan menyadarinya.
+    *   **Kode Pelacak Google Analytics 4 (GA4)** — Ditanam di seluruh 11 halaman HTML untuk menangkap data nyata saat website sudah di-hosting.
+
 ---
 
 ### 🗑️ 3. APA SAJA YANG DIHAPUS / DISINGKIRKAN (*Removed*)
