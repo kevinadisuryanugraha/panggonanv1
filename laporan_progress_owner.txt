@@ -11,6 +11,9 @@ Berikut adalah rincian transparan mengenai apa saja perihal yang **Diperbarui, D
 
 ### 🔄 1. APA SAJA YANG DIPERBARUI (*Updated*)
 
+*   **Rebranding Dominasi Identitas "Panggonan":**
+    Sesuai masukan terbaru, porsi penyebutan "Kluyuran" (atau Kopi Kluyuran) telah direduksi drastis dan dikembalikan pada posisi semestinya sebagai nama filosofi/buku tamu (Jurnal), bukan sebagai merek utama. Semua judul besar (*heading*), teks CTA (*Call to Action*), instruksi formulir, dan meta deskripsi kini memprioritaskan dan menonjolkan nama resmi **Panggonan**. Kutipan asli Bapak/Founder tetap dijaga keasliannya.
+
 *   **Validasi & Otomasi Nomor Telepon (Di seluruh laman):** 
     Telah dilakukan penelusuran masif untuk menyapu rentetan Link Kontak WA yang keliru/acak. Semuanya dirombak mutlak mengarah ke nomor otentik owner terkini:
     *   Cabang Ciracas tervalidasi ke nomor: **`0878-2888-8538`**
