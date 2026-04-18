@@ -163,10 +163,33 @@ body.dashboard-body {
 .dashboard-wrap {
     display: flex;
     min-height: 100vh;
+    width: 100vw;
+    max-width: 100%;
+    overflow-x: hidden; /* THE ULTIMATE FIX FOR TABLE BLEED SCROLL HORIZONTAL */
 }
 
 .dashboard-wrap.hidden {
     display: none;
+}
+
+/* MOBILE OVERLAY */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: 90;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
 }
 
 /* SIDEBAR */
@@ -177,9 +200,8 @@ body.dashboard-body {
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
-    transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s ease, max-height 0.4s ease, opacity 0.4s ease;
+    transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 100;
-    overflow: hidden; /* Mencegah content spilling saat height 0 */
 }
 
 .sidebar.collapsed {
@@ -194,6 +216,24 @@ body.dashboard-body {
     font-weight: 800;
     font-size: 1.1rem;
     border-bottom: 1px solid var(--border-color);
+}
+
+.brand-text {
+    flex-grow: 1;
+}
+
+.sidebar-close-btn {
+    display: none; /* Only Show <= 1024px */
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.sidebar-close-btn:hover {
+    color: var(--danger);
 }
 
 .nav-links {
@@ -250,8 +290,8 @@ body.dashboard-body {
 
 /* CONTENT AREA */
 .dashboard-content {
-    flex-grow: 1;
-    min-width: 0; /* Mencegah flexbox memanjang melebihi batas layar */
+    flex: 1 1 0; /* GROW AND SHRINK, Base width 0. Stops table overflow forced layout bloat */
+    min-width: 0;
     padding: 30px 40px;
     display: flex;
     flex-direction: column;
@@ -296,7 +336,6 @@ body.dashboard-body {
     font-size: 1.8rem;
     font-weight: 800;
     margin-bottom: 4px;
-    transition: font-size 0.3s;
 }
 
 .pulse-indicator {
@@ -767,7 +806,16 @@ body.dashboard-body {
    RESPONSIVE FULL BREAKDOWN
 ---------------------------------- */
 
-/* Tablet & Smaller Desktop */
+/* Desktop & iPad Landscape (>1024px) */
+/* Normal side-by-side Push layout */
+@media (min-width: 1025px) {
+    .sidebar.collapsed {
+        margin-left: -260px;
+    }
+}
+
+/* iPad Portrait & Mobile (<= 1024px) */
+/* Off-Canvas Drawer Layout */
 @media (max-width: 1024px) {
     .charts-wrap {
         flex-direction: column;
@@ -779,33 +827,32 @@ body.dashboard-body {
     .log-search {
         width: 100%;
     }
-}
-
-/* Mobile & Small Tablets */
-@media (max-width: 768px) {
-    .dashboard-wrap {
-        flex-direction: column;
-    }
     .sidebar {
-        width: 100%;
-        border-right: none;
-        border-bottom: 1px solid var(--border-color);
-        transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease;
-        max-height: 500px;
-        overflow: hidden; /* Mengunci tumpahan text */
-        margin-left: 0 !important;
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        height: 100vh;
+        z-index: 100;
+        box-shadow: 4px 0 20px rgba(0,0,0,0.5);
     }
-    /* Sembunyikan sidebar tanpa merusak padding */
     .sidebar.collapsed {
-        max-height: 0;
-        opacity: 0;
-        padding-top: 0;
-        padding-bottom: 0;
-        border-bottom: none;
-        pointer-events: none;
+        margin-left: -260px;
+        box-shadow: none;
+    }
+    .sidebar-close-btn {
+        display: block; /* Tampilkan tombol X */
     }
     .dashboard-content {
-        padding: 20px 16px; /* Padding card yg lebih wajar */
+        padding: 24px;
+        width: 100%;
+    }
+}
+
+/* Mobile Devices (<= 768px) */
+@media (max-width: 768px) {
+    .dashboard-content {
+        padding: 16px;
         gap: 16px;
     }
     .topbar {

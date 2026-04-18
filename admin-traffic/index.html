@@ -34,11 +34,16 @@
 
     <!-- MAIN DASHBOARD -->
     <div id="main-dashboard" class="dashboard-wrap hidden">
+
+        <!-- Mobile Overlay -->
+        <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="brand">
                 <img src="../assets/images/logo.webp" alt="Panggonan" width="40" height="40" style="border-radius:50%">
-                <span>Panggonan Analytics</span>
+                <span class="brand-text">Panggonan Analytics</span>
+                <button class="sidebar-close-btn" onclick="toggleSidebar()"><i class="fas fa-times"></i></button>
             </div>
             <nav class="nav-links">
                 <a href="#" class="active"><i class="fas fa-chart-line"></i> Ringkasan Trafik</a>

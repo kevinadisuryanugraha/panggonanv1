@@ -70,7 +70,12 @@ function logoutDashboard() {
 // Fungsi Navigasi Burger Sidebar
 function toggleSidebar() {
     const sidebar = document.querySelector('.sidebar');
+    const overlay = document.querySelector('.sidebar-overlay');
     sidebar.classList.toggle('collapsed');
+    
+    if (overlay) {
+        overlay.classList.toggle('active');
+    }
 }
 
 // 2. CHART VISUALIZATIONS
