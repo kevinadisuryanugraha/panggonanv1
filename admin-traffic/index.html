@@ -134,8 +134,60 @@
                 </div>
             </div>
 
+            <!-- Visitor Log Table Section -->
+            <div class="visitor-log-section glass">
+                <div class="log-header">
+                    <div class="log-title-area">
+                        <h3><i class="fas fa-list-alt"></i> Log Pengunjung Website</h3>
+                        <span class="log-badge" id="log-count-badge">248 entri</span>
+                    </div>
+                    <div class="log-controls">
+                        <div class="filter-tabs">
+                            <button class="filter-tab active" data-filter="hari" onclick="filterVisitors('hari', this)">Hari Ini</button>
+                            <button class="filter-tab" data-filter="minggu" onclick="filterVisitors('minggu', this)">Minggu Ini</button>
+                            <button class="filter-tab" data-filter="bulan" onclick="filterVisitors('bulan', this)">Bulan Ini</button>
+                            <button class="filter-tab" data-filter="tahun" onclick="filterVisitors('tahun', this)">Tahun Ini</button>
+                        </div>
+                        <div class="log-search">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="visitor-search" placeholder="Cari IP / Lokasi / Halaman..." oninput="searchVisitors(this.value)">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="visitor-table" id="visitor-table">
+                        <thead>
+                            <tr>
+                                <th class="sortable" onclick="sortTable(0)">No <i class="fas fa-sort"></i></th>
+                                <th class="sortable" onclick="sortTable(1)">Tanggal & Waktu <i class="fas fa-sort"></i></th>
+                                <th class="sortable" onclick="sortTable(2)">Alamat IP <i class="fas fa-sort"></i></th>
+                                <th>Perangkat</th>
+                                <th>Browser</th>
+                                <th class="sortable" onclick="sortTable(5)">Lokasi <i class="fas fa-sort"></i></th>
+                                <th>Halaman Dikunjungi</th>
+                                <th class="sortable" onclick="sortTable(7)">Durasi <i class="fas fa-sort"></i></th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="visitor-tbody">
+                            <!-- Diisi oleh JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="table-footer">
+                    <div class="table-info" id="table-info">Menampilkan 1-20 dari 248 entri</div>
+                    <div class="table-pagination">
+                        <button class="page-btn" onclick="changePage(-1)"><i class="fas fa-chevron-left"></i></button>
+                        <span class="page-indicator" id="page-indicator">Halaman 1 / 13</span>
+                        <button class="page-btn" onclick="changePage(1)"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
             <div class="status-bar glass">
-                <i class="fas fa-shield-check"></i> Google Analytics 4 (Data Stream: G-PX9Y2Z) Connected • Tembok Api Enkripsi AES-256 Aktif
+                <i class="fas fa-shield-check"></i> Google Analytics 4 (Data Stream: G-PX9Y2Z) Connected • Tembok Api Enkripsi AES-256 Aktif • <span id="status-clock"></span>
             </div>
 
         </main>
