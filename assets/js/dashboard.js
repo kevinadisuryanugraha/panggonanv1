@@ -67,6 +67,12 @@ function logoutDashboard() {
     window.location.reload();
 }
 
+// Fungsi Navigasi Burger Sidebar
+function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.classList.toggle('collapsed');
+}
+
 // 2. CHART VISUALIZATIONS
 function initCharts() {
     const labels = Array.from({length: 30}, (_, i) => `H-${30 - i}`);
