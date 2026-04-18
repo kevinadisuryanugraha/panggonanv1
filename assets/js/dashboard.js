@@ -5,23 +5,24 @@
 
 // 1. AUTHENTICATION LOGIC
 const PASSWORD = "password";
+const SESSION_KEY = "panggonan_dashboard_access";
+
+// Cek apakah sudah login sebelumnya di sesi ini
+document.addEventListener("DOMContentLoaded", () => {
+    if (sessionStorage.getItem(SESSION_KEY) === "granted") {
+        unlockDashboard(false);
+    }
+});
 
 function verifyPassword() {
     const input = document.getElementById('auth-password').value;
     const errorMsg = document.getElementById('auth-error');
-    
+
     if(input === PASSWORD) {
         errorMsg.classList.remove('show');
-        document.getElementById('auth-screen').classList.add('fade-out');
-        
-        setTimeout(() => {
-            document.getElementById('auth-screen').style.display = 'none';
-            document.getElementById('main-dashboard').classList.remove('hidden');
-            initCharts();
-            initVisitorLog();
-            startLiveSimulation();
-            startClock();
-        }, 500);
+        // Simpan sesi ke browser
+        sessionStorage.setItem(SESSION_KEY, "granted");
+        unlockDashboard(true);
     } else {
         errorMsg.classList.add('show');
         const modal = document.querySelector('.auth-modal');
@@ -32,9 +33,39 @@ function verifyPassword() {
     }
 }
 
+function unlockDashboard(withAnimation) {
+    if (withAnimation) {
+        document.getElementById('auth-screen').classList.add('fade-out');
+        setTimeout(() => {
+            initDashboardComponents();
+        }, 500);
+    } else {
+        initDashboardComponents();
+    }
+}
+
+function initDashboardComponents() {
+    document.getElementById('auth-screen').style.display = 'none';
+    document.getElementById('main-dashboard').classList.remove('hidden');
+    // Mencegah inisialisasi ganda jika di-refresh
+    if (!window.dashboardInitialized) {
+        initCharts();
+        initVisitorLog();
+        startLiveSimulation();
+        startClock();
+        window.dashboardInitialized = true;
+    }
+}
+
 document.getElementById('auth-password').addEventListener('keypress', function (e) {
     if (e.key === 'Enter') verifyPassword();
 });
+
+// Fungsi Logout
+function logoutDashboard() {
+    sessionStorage.removeItem(SESSION_KEY);
+    window.location.reload();
+}
 
 // 2. CHART VISUALIZATIONS
 function initCharts() {
