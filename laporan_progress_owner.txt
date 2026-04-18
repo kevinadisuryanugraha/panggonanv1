@@ -14,6 +14,12 @@ Berikut adalah rincian transparan mengenai apa saja perihal yang **Diperbarui, D
 *   **Rebranding Dominasi Identitas "Panggonan":**
     Sesuai masukan terbaru, porsi penyebutan "Kluyuran" (atau Kopi Kluyuran) telah direduksi drastis dan dikembalikan pada posisi semestinya sebagai nama filosofi/buku tamu (Jurnal), bukan sebagai merek utama. Semua judul besar (*heading*), teks CTA (*Call to Action*), instruksi formulir, dan meta deskripsi kini memprioritaskan dan menonjolkan nama resmi **Panggonan**. Kutipan asli Bapak/Founder tetap dijaga keasliannya.
 
+*   **Sinkronisasi Total Daftar Harga & Menu Fisik:**
+    Sistem menu digital telah diformat ulang 100% mengikuti proporsi gambar menu cetak terbaru yang diberikan owner.
+    *   Mengoreksi harga (contoh: Ayam Goreng kini jadi Rp 32.000 dengan tambahan *Kremes*).
+    *   Menambahkan kategori hilang seperti **Menu Baru** (Sapi Black Papper, Sayur Asam) dan **Minuman Jadul** (Sarsaparilla, Coffee Beer, Temulawak).
+    *   Menertibkan kembali posisi Nasi Goreng Jawa ke dalam **Menu Sore**, serta menghapus camilan tak relevan.
+
 *   **Validasi & Otomasi Nomor Telepon (Di seluruh laman):** 
     Telah dilakukan penelusuran masif untuk menyapu rentetan Link Kontak WA yang keliru/acak. Semuanya dirombak mutlak mengarah ke nomor otentik owner terkini:
     *   Cabang Ciracas tervalidasi ke nomor: **`0878-2888-8538`**
