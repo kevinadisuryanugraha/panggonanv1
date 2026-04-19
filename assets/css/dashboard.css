@@ -812,6 +812,9 @@ body.dashboard-body {
     .sidebar.collapsed {
         margin-left: -260px;
     }
+    .sidebar-overlay {
+        display: none !important;
+    }
 }
 
 /* iPad Portrait & Mobile (<= 1024px) */

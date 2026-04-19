@@ -71,10 +71,29 @@ function logoutDashboard() {
 function toggleSidebar() {
     const sidebar = document.querySelector('.sidebar');
     const overlay = document.querySelector('.sidebar-overlay');
+    
     sidebar.classList.toggle('collapsed');
     
     if (overlay) {
-        overlay.classList.toggle('active');
+        if (window.innerWidth <= 1024) {
+            // Pada Mobile/Tablet, overlay aktif jika sidebar TERBUKA (tidak memiliki class collapsed)
+            if (!sidebar.classList.contains('collapsed')) {
+                overlay.classList.add('active');
+            } else {
+                overlay.classList.remove('active');
+            }
+        } else {
+            // Desktop tidak pakai overlay
+            overlay.classList.remove('active');
+        }
+    }
+}
+
+// Inisialisasi: Tutup sidebar secara otomatis jika layar ukuran mobile/tablet saat pertama kali muat
+if (window.innerWidth <= 1024) {
+    const sidebar = document.querySelector('.sidebar');
+    if (sidebar && !sidebar.classList.contains('collapsed')) {
+        sidebar.classList.add('collapsed');
     }
 }
 
