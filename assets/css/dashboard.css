@@ -24,8 +24,10 @@
 body.dashboard-body {
     background-color: var(--bg-dark);
     color: var(--text-main);
-    overflow-x: hidden;
-    min-height: 100vh;
+    overflow: hidden; /* KUNCI TOTAL BODY SCROLL! */
+    height: 100vh;
+    height: 100dvh; /* Mobile Safari fix */
+    margin: 0;
 }
 
 /* ------------------------
@@ -162,10 +164,11 @@ body.dashboard-body {
 ------------------------ */
 .dashboard-wrap {
     display: flex;
-    min-height: 100vh;
+    height: 100vh;
+    height: 100dvh;
     width: 100vw;
     max-width: 100%;
-    overflow-x: hidden; /* THE ULTIMATE FIX FOR TABLE BLEED SCROLL HORIZONTAL */
+    overflow: hidden; /* Mengunci halaman di batas 100% tinggi dan lebar viewport */
 }
 
 .dashboard-wrap.hidden {
@@ -200,12 +203,14 @@ body.dashboard-body {
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
-    position: sticky;
-    top: 0;
-    height: 100vh;
+    overflow-y: auto; /* Izinkan scroll mandiri jika menu terlalu panjang */
     transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 100;
 }
+
+/* Hide scrollbar for aesthetics */
+.sidebar::-webkit-scrollbar { width: 5px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 5px; }
 
 .sidebar.collapsed {
     margin-left: -260px;
@@ -293,8 +298,10 @@ body.dashboard-body {
 
 /* CONTENT AREA */
 .dashboard-content {
-    flex: 1 1 0; /* GROW AND SHRINK, Base width 0. Stops table overflow forced layout bloat */
+    flex: 1 1 0; /* GROW AND SHRINK, Base width 0 */
     min-width: 0;
+    overflow-y: auto; /* SCROLL MANDIRI UNTUK KONTEN! */
+    overflow-x: hidden;
     padding: 30px 40px;
     display: flex;
     flex-direction: column;
