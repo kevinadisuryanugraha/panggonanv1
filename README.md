@@ -32,7 +32,7 @@ Website ini adalah **Static Site** (Situs Statis) murni yang tidak membutuhkan _
 │   ├── 📁 css/           # Kumpulan Stylesheets (style.css, custom.css, home.css)
 │   ├── 📁 images/        # Seluruh aset gambar (resolusi tinggi & ikon SVG)
 │   └── 📁 js/            # Skrip Logika Website (Navigasi & Form WhatsApp)
-├── 📁 blog/              # (Draft) Direktori Artikel Jurnal
+├── 📁 blog/              # Direktori Jurnal Panggonan (Cerita & Filosofi)
 ├── 📁 contact-us/        # Halaman Kontak & Form Reservasi WhatsApp (Multi-Cabang)
 ├── 📁 faq/               # Halaman Pusat Bantuan & Pertanyaan Interaktif
 ├── 📁 menu/              # Halaman Katalog Sajian & Resep
