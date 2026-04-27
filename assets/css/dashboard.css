@@ -3,7 +3,7 @@
 :root {
     --bg-dark: #0f172a;
     --sidebar-bg: #1e293b;
-    --card-bg: rgba(30, 41, 59, 0.7);
+    --card-bg: rgba(255, 255, 255, 0.04); /* Diubah agar lebih kontras dari background */
     --text-main: #f8fafc;
     --text-muted: #94a3b8;
     --accent: #6366f1;
@@ -11,7 +11,7 @@
     --success: #10b981;
     --warning: #f59e0b;
     --danger: #ef4444;
-    --border-color: rgba(255, 255, 255, 0.08);
+    --border-color: rgba(255, 255, 255, 0.12); /* Dipertegas agar tidak hilang saat scaling Windows */
 }
 
 * {
@@ -315,6 +315,7 @@ body.dashboard-body {
     backdrop-filter: blur(10px);
     border: 1px solid var(--border-color);
     border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
 }
 
 /* TOPBAR */
@@ -398,9 +399,14 @@ body.dashboard-body {
 
 /* METRICS GRID */
 .metrics-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: 30px;
+}
+
+.metrics-grid > .metric-card {
+    flex: 1 1 min(100%, 260px);
 }
 
 .metric-card {
@@ -439,6 +445,7 @@ body.dashboard-body {
 .charts-wrap {
     display: flex;
     gap: 20px;
+    margin-bottom: 30px;
 }
 
 .chart-box {
@@ -934,4 +941,31 @@ body.dashboard-body {
     .page-title h1 {
         font-size: 1.15rem; /* Makin kecil untuk HP mungil */
     }
+}
+
+/* SPA View Transitions */
+.view-section {
+    display: none;
+    animation: fadeInView 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.view-section.active {
+    display: block;
+}
+
+@keyframes fadeInView {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.ga4-input:focus {
+    outline: none;
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+}
+
+.nav-link-btn.active {
+    color: var(--accent) !important;
+    background: rgba(99, 102, 241, 0.1) !important;
+    border-right: 3px solid var(--accent);
 }

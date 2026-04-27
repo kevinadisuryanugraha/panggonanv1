@@ -48,6 +48,13 @@ Keseluruhan website telah disempurnakan berdasarkan arahan final:
 - **Identitas "KLU YU RAN"**: Menginjeksi nilai filosofi dan puisi otentik ("Merekah senyum seindah pagi...") pada laman Tentang Kami.
 - **Peningkatan Responsivitas Antarmuka**: Redesain Grid _Footer_ menjadi format 4-kolom super responsif, pembersihan _white-space_, penetapan Sub-Navigasi Galeri terintegrasi, dan pembaruan Hak Cipta &copy; 2026.
 
+## 🚀 Versi 1.2 (Panggonan Executive Dashboard)
+Peluncuran sistem portal analitik berbasis SPA (Single Page Application) eksklusif untuk manajemen Panggonan Resto:
+- **Arsitektur SPA Cepat**: Navigasi antar metrik instan tanpa *reload* (Ringkasan Trafik, Demografi, Perilaku Konversi, Pengaturan GA4) berbasis JavaScript murni.
+- **Visualisasi Glassmorphism**: Antarmuka modern dengan transparansi kaca (blur), *drop shadow* elegan, dan transisi mulus.
+- **Responsivitas Sempurna**: Grid kartu metrik dan bagan Chart.js dikonfigurasi menggunakan Flexbox & CSS Grid yang mampu beradaptasi dari layar ultrawide hingga smartphone.
+- **Sistem Keamanan Akses**: Proteksi login berbasis *Key* dengan validasi `sessionStorage`.
+
 ## 🚀 Panduan Peluncuran (_Deployment_)
 
 Karena struktur proyek ini adalah **Situs Statis (Static HTML)**, proses menaikkan website ini ke Internet agar dapat diakses publik sangatlah mudah dan tidak memerlukan _cPanel_ konvensional.

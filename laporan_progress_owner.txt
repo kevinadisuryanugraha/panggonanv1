@@ -1,117 +1,244 @@
-# 📝 Laporan Progress Akhir (Pencapaian 100% Berdasarkan Permintaan Owner)
+## PROPOSAL KOLABORASI DIGITAL
 
-**Tanggal:** 14 April 2026
-**Ringkasan Status:** `SELESAI KESELURUHAN (100% COMPLETE & MATCHED)`
+# Warkoem Website
 
-Laporan ini ditujukan khusus kepada staf/owner untuk meninjau riwayat eksekusi kode terhadap seluruh perintah dan keinginan terbaru. Hingga titik penyelesaian ini, seluruh referensi perbaikan yang bersumber dari arsip pesan _chat_ telah berhasil tereksekusi tanpa cela.
+#### Pengembangan Official Digital Hub untuk Memperkuat Branding, Operasional, dan Dominasi
 
-Berikut adalah rincian transparan mengenai apa saja perihal yang **Diperbarui, Ditambahkan**, dan **Dihapus/Disesuaikan** di dalam seluruh lapisan proyek situs **Panggonan Resto**.
+#### Pencarian Google Warkoem Jatiasih
 
----
+```
+Disusun oleh
+```
+### Kevin
 
-### 🔄 1. APA SAJA YANG DIPERBARUI (*Updated*)
+```
+Founder HANSCO
+```
+```
+18 April 2026
+```
 
-*   **Rebranding Dominasi Identitas "Panggonan":**
-    Sesuai masukan terbaru, porsi penyebutan "Kluyuran" (atau Kopi Kluyuran) telah direduksi drastis dan dikembalikan pada posisi semestinya sebagai nama filosofi/buku tamu (Jurnal), bukan sebagai merek utama. Semua judul besar (*heading*), teks CTA (*Call to Action*), instruksi formulir, dan meta deskripsi kini memprioritaskan dan menonjolkan nama resmi **Panggonan**. Kutipan asli Bapak/Founder tetap dijaga keasliannya.
+## 1. Latar Belakang & Perspektif Strategis
 
-*   **Sinkronisasi Total Daftar Harga & Menu Fisik:**
-    Sistem menu digital telah diformat ulang 100% mengikuti proporsi gambar menu cetak terbaru yang diberikan owner.
-    *   Mengoreksi harga (contoh: Ayam Goreng kini jadi Rp 32.000 dengan tambahan *Kremes*).
-    *   Menambahkan kategori hilang seperti **Menu Baru** (Sapi Black Papper, Sayur Asam) dan **Minuman Jadul** (Sarsaparilla, Coffee Beer, Temulawak).
-    *   Menertibkan kembali posisi Nasi Goreng Jawa ke dalam **Menu Sore**, serta menghapus camilan tak relevan.
+Warkoem Jatiasih telah menunjukkan positioning yang kuat sebagai destinasi berkumpul yang hidup, relevan,
+dan memiliki keterikatan komunitas yang nyata. Daya tarik tersebut bukan hanya dibentuk oleh produk dan
+atmosfer, tetapi juga oleh ritme event, konten sosial media, serta pengalaman brand yang terasa dekat
+dengan audiensnya.
 
-*   **Validasi & Otomasi Nomor Telepon (Di seluruh laman):** 
-    Telah dilakukan penelusuran masif untuk menyapu rentetan Link Kontak WA yang keliru/acak. Semuanya dirombak mutlak mengarah ke nomor otentik owner terkini:
-    *   Cabang Ciracas tervalidasi ke nomor: **`0878-2888-8538`**
-    *   Cabang GDC tervalidasi ke nomor: **`0878-4535-9184`**
-    *(Hal ini sudah meliputi perbaikan tombol Call to Action yang keliru di halaman "Layanan").*
+Pada fase pertumbuhan seperti ini, kebutuhan utama manajemen bukan sekadar menambah kanal digital,
+melainkan membangun pusat informasi yang lebih tertib, kredibel, dan siap menopang ekspansi brand.
+Informasi yang masih tersebar melalui percakapan admin, dokumen terpisah, atau unggahan yang cepat
+tenggelam perlu ditingkatkan menjadi ekosistem digital resmi yang merepresentasikan kualitas brand secara
+konsisten.
 
-*   **Perbaikan Estafet Akun Email:** 
-    Email kontak di bagian *Footer* diperbarui hingga final dengan entitas resmi: `panggonanresto@gmail.com`, `panggonanciracas@gmail.com`, dan `panggonangdc@gmail.com`.
+Aset strategis Warkoem saat ini:
 
-*   **Penyelarasan Tautan Media Sosial Instan:** 
-    Memperbaiki seluruh tata rute Instagram (`panggonan.resto`, `panggonan_gdc`, `panggonan_ciracas`) beserta akun TikTok seluruh cabang agar persis menavigasi ke akun resmi saat ikon ditekan. Update ini serentak berlaku di ke-8 halaman HTML turunan.
+- Brand visual dan atmosfer yang sudah kuat di benak target market lokal.
+- Komunitas pelanggan yang aktif mengikuti event dan aktivitas brand.
+- Potensi konten estetik yang tinggi untuk promosi digital berkelanjutan.
+- Peluang besar untuk memperkuat kehadiran lokal pada Google Search dan Google Maps.
 
-*   **Harmonisasi Menu Navigasi (*Navbar Synchronization*):**
-    Mengalibrasi ulang kemerataan tata letak bilah _Dropdown Menu_ pada seluruh halaman (`index.html`, `menu`, `faq`, `services`, dst). Bila pelanggan sedang menelusuri halaman Jurnal, mereka tetap bisa melihat menu navigasi sekunder yang sama bersihnya seperti di laman Muka.
+Tantangan yang saat ini masih perlu ditata secara lebih eksekutif:
 
-*   **Modernisasi Struktur Kaki (*Footer*) & Hak Cipta:**
-    *   Sistem tampilan blok *Footer* direkayasa secara teknis dari bentuk desain 3-kolom menjadi sistem baris adaptif **4-kolom (`auto-fit`)**. Formulasi ini mengatasi problem estetika acak-acakan (*layout breakage*) manakala pengunjung menggunakan layar Handphone sempit.
-    *   Tahun rilis dipastikan konsisten dan setara menjadi **&copy; 2026** di seluruh tapak *footer* (salah satunya di file `services/index.html` yang sempat usang pada tahun angka 2024 yang kini telah ditangani).
+- Akses menu masih terasa manual dan belum sepraktis standar pengalaman digital modern.
+- Informasi event berpotensi tercecer di berbagai kanal sehingga momentum promosi tidak termanfaatkan
+    optimal.
+- Kebutuhan rekrutmen belum tampil dalam alur yang rapi, efisien, dan profesional.
+- Masukan pelanggan berisiko langsung keluar ke ruang publik sebelum sempat ditangani secara internal.
 
----
+Kesimpulannya, Warkoem telah memiliki energi brand yang sangat kuat. Tahap berikutnya adalah
+menghadirkan infrastruktur digital yang setara, sehingga seluruh momentum brand dapat dikonversi menjadi
+pengalaman pelanggan yang lebih premium, operasional yang lebih efisien, dan visibilitas digital yang lebih
+dominan.
 
-### ➕ 2. APA SAJA YANG DITAMBAHKAN (*Added*)
+## 2. Solusi yang Ditawarkan: Warkoem Social Hub
 
-*   **Implementasi Ruang Puisi "KLU YU RAN" (Halaman *Tentang Kami*):**
-    Bertolak tuntas dari *screenshot* curahan gaya bahasa sang owner, sebuah blok *"Poetry Section"* bernuansa premium arang kontras (`#1a1a1a`) difabrikasi cantik di sela-sela sejarah halaman `about-us/index.html`.
-    Rangkaian kalimat tersebut memuat identitas puitis persis seperti yang dilontarkan owner:
-    > *"Satu hari satu silaturahmi, Merekah senyum seindah pagi. Bercengkrama setulus hati, Damai sentosa rasa bahagia, Selamat pagi Indonesia."* 
-    Fitur ini dirangkul dengan narasi filosofis mengenai semboyan *"KLU YU RAN"* sebagai ruh tempat bersantap ini yang menonjolkan hangatnya interaksi ("melukis di kanvas pagi").
+HANSCO mengusulkan pembangunan Official Digital Hub yang dirancang bukan hanya sebagai website,
+melainkan sebagai pusat kendali informasi digital Warkoem. Platform ini akan menjadi satu pintu resmi yang
+merepresentasikan kualitas brand kepada pelanggan, calon staf, maupun publik secara lebih profesional.
 
-*   **Injeksi Kekuatan Visual pada Halaman Kontak:**
-    Menambahkan instalasi gambar estetik (*visual filler*) berskala besar pada laman `contact-us/index.html`. Karya visual `panggonan7.jpeg` ditanam untuk membunuh tembok kekosongan ruang putih (*white-space bleeding*) yang sebelumnya terlihat merusak kemegahan balok teks. Selain mendiamkan masalah kekosongan, foto juga diperkuat mikrosistem _hover-zoom_ redup kala berinteraksi dengan pijakan mouse pelanggan.
+Ruang lingkup utama yang direkomendasikan:
 
-*   **Ekspansi Tombol 'Galeri' Terpusat:**
-    Memberikan injeksi baru sub-menu bertajuk **"Galeri"** langsung ke dalam badan tarik-turun (Dropdown) Navbar agar eksplorasi pameran visual resto tak lagi memerlukan klik berlebih dari para pelanggan.
+- Interactive Digital Menu - katalog menu yang estetik, ringan, cepat diakses, dan nyaman dibuka melalui
+    smartphone.
+- Event & DJ Spotlight - halaman atau blok kalender interaktif untuk mengelola jadwal live music, DJ
+    performance, dan event tematik secara lebih terstruktur.
+- Integrated Recruitment Portal - halaman lowongan kerja yang memperkuat citra profesional sekaligus
+    memudahkan proses penyaringan kandidat.
+- Internal Feedback System - kanal masukan privat agar keluhan dan saran dapat dikelola terlebih dahulu
+    secara internal sebelum bergeser ke ruang publik.
 
-*   **🆕 Dashboard Traffic Kunjungan (Halaman Eksklusif Owner):**
-    Fitur *advanced* yang sangat teknis dan di luar cakupan paket standar. Sebuah halaman rahasia (`/admin-traffic/`) telah dibangun sepenuhnya:
-    *   **Login Portal Eksekutif** — Terkunci dengan kata sandi agar hanya admin/owner yang bisa masuk. Tampil futuristik dengan efek *glassmorphism* dan *glow sphere*.
-    *   **Grafik Traffic 30 Hari (Line Chart)** — Memvisualisasikan tren kunjungan harian ke website secara dinamis dengan animasi interaktif.
-    *   **Grafik Sumber Kunjungan (Doughnut Chart)** — Memperlihatkan dari mana pengunjung datang (Google, Instagram, atau langsung).
-    *   **Metrik Kartu Analitik** — Total kunjungan bulanan, jumlah klik Reservasi/WA, durasi sesi rata-rata, dan penghitung pengunjung aktif *real-time*.
-    *   **Akses \"Pintu Rahasia\"** — Simbol © di bagian paling bawah halaman utama berfungsi sebagai tautan tersembunyi menuju Portal Login Dasbor. Pengunjung biasa tidak akan menyadarinya.
-    *   **Kode Pelacak Google Analytics 4 (GA4)** — Ditanam di seluruh 11 halaman HTML untuk menangkap data nyata saat website sudah di-hosting.
 
----
+Dampak bisnis yang dituju:
 
-### 🗑️ 3. APA SAJA YANG DIHAPUS / DISINGKIRKAN (*Removed*)
+- Memperkuat kesan profesional dan bernilai tinggi pada brand Warkoem.
+- Memudahkan pelanggan mengakses informasi penting secara cepat dan konsisten.
+- Mengurangi ketergantungan pada penjelasan manual dari admin atau staf operasional.
+- Membuka peluang akuisisi pelanggan baru melalui pencarian organik Google.
+- Meningkatkan kontrol manajemen atas komunikasi brand, rekrutmen, dan penanganan feedback.
 
-*   **Eradikasi _"Dead White-space"_ Sebelah Logo:**
-    Secara spesifik melenyapkan kode *margin* siluman yang selama ini memicu gap renggang tidak sehat membentang menjauhi Logo Panggonan. Perbaikan ini mengembalikan kerapatan elemen yang apik dan simetris di laman kontak.
+## 3. Standar Implementasi Premium
 
-*   **Pembongkaran Batas Lebar Kaku pada Kotak Narahubung:**
-    Hukum pemrograman web berbasis pixel lama (seperti paku mati `min-width`) dicerai seutuhnya dari arsitektur kontak per-cabang. Gaya ortodoks ini diganti metode elastis `flex-basis` dan kalkulasi responsif `clamp()`. Sehingga mustahil bagi tampilan susunan info kontak mendesak keluar dinding (*overlap* teks layar Handphone).
+Standar pengerjaan HANSCO berorientasi pada kualitas implementasi yang matang, tidak berhenti pada visual
+yang menarik, tetapi juga menekankan performa, struktur, dan kesiapan website untuk tumbuh menjadi aset
+digital jangka panjang.
 
----
+```
+Komponen Standar Implementasi HANSCO
+```
+```
+Advanced SEO
+```
+```
+Optimasi struktur halaman, heading, metadata, kata kunci lokal, dan fondasi
+indexing agar Warkoem lebih kompetitif pada pencarian seperti 'warkop 24
+jam Jatiasih'.
+```
+```
+High-Performance Visual
+```
+```
+Penggunaan format gambar modern seperti .webp untuk menjaga foto produk
+dan ambience tetap tajam dengan waktu muat yang efisien di perangkat
+mobile.
+Mobile-First Experience Desain antarmuka diprioritaskan untuk kenyamanan mayoritas pengunjung dari smartphone, termasuk area menu, event, dan formulir feedback.
+Premium Multi-Page
+Structure
+```
+```
+Arsitektur halaman disusun rapi dan scalable agar mudah dikembangkan ke
+kebutuhan promosi, campaign, maupun landing page event berikutnya.
+Conversion-Oriented
+Layout
+```
+```
+Setiap bagian diarahkan agar pengunjung terdorong mengambil aksi yang jelas:
+melihat menu, menghadiri event, mengirim lamaran, atau menyampaikan
+feedback.
+```
+## 4. Struktur Halaman yang Direkomendasikan
 
-### 🔍 4. OPTIMASI MESIN PENCARI GOOGLE (*SEO Full Optimization*)
+Berdasarkan karakter brand dan kebutuhan operasional Warkoem, berikut struktur halaman yang
+direkomendasikan untuk tahap implementasi awal:
 
-Agar website muncul di **halaman pertama Google** saat orang mencari "Panggonan Resto", "Restoran Panggonan", atau kata kunci serupa, telah dilakukan penanaman infrastruktur SEO tingkat lanjut secara menyeluruh:
+- Home / Landing Page Brand Warkoem
+- Digital Menu
+- Event & DJ Spotlight
+- About / Story of Warkoem
+- Gallery / Visual Atmosphere
+- Recruitment Portal
+- Contact & Location
+- Feedback / Customer Care
 
-*   **Pembuatan `sitemap.xml` (Peta Situs):**
-    File peta navigasi khusus untuk robot Google yang memuat seluruh 8 URL halaman website. Memastikan Google menjelajahi dan mengindeks setiap sudut situs tanpa terlewat.
+Struktur ini bersifat fleksibel dan dapat dimulai dari versi inti terlebih dahulu, lalu dikembangkan bertahap
+sesuai agenda promosi, kebutuhan operasional, dan prioritas manajemen.
 
-*   **Pembuatan `robots.txt` (Izin Crawling):**
-    Mengatur halaman mana yang boleh dan tidak boleh dijelajahi Google. Halaman error (401, 404) dan folder internal diblokir agar tidak mengotori hasil pencarian.
 
-*   **JSON-LD Schema Markup (Data Terstruktur Restoran):**
-    Menanamkan kode "bahasa rahasia Google" bertipe `Restaurant` di halaman utama, berisi:
-    *   Nama resmi, deskripsi, dan logo Panggonan
-    *   **2 Alamat cabang lengkap** (Ciracas & GDC Depok) beserta koordinat GPS
-    *   Nomor telepon asli kedua cabang
-    *   Email, jam buka, kisaran harga, jenis masakan
-    *   Seluruh tautan Instagram & TikTok resmi
-    *   Rating agregat (4.4/5 dari 550+ ulasan)
-    Dengan ini, Google mengenali Panggonan sebagai **entitas bisnis restoran sungguhan**, bukan sekadar halaman web biasa.
+## 5. Penawaran Investasi
 
-*   **Canonical URL (Di 8 halaman):**
-    Setiap halaman kini memiliki penanda alamat resmi agar Google tidak bingung membedakan duplikat konten.
+Skema anggaran berikut dirancang untuk memberikan gambaran yang rapi, transparan, dan mudah dievaluasi
+oleh manajemen. Nilai investasi mencerminkan pengembangan premium yang siap mendukung operasional
+Warkoem selama 24 jam penuh.
 
-*   **Geo Meta Tags / Local SEO (Di 8 halaman):**
-    Koordinat geografis Ciracas & Depok ditanamkan agar Google menampilkan Panggonan saat pencarian lokal (*"restoran terdekat"*, *"tempat makan Ciracas"*).
+```
+Komponen Layanan Nilai Investasi Keterangan
+Professional Development
+Services Rp4.000.^
+```
+```
+Pengembangan 8 halaman premium, sistem
+menu interaktif, portal rekrutmen, integrasi
+SEO, dan struktur website siap-kelola.
+```
+```
+Biaya Operasional Tahunan ± Rp1.000.
+```
+```
+Estimasi hosting 12GB, domain, dan aktivasi
+SSL untuk menjaga website tetap stabil dan
+aman.
+```
+```
+Total Investasi Digital Asset Rp5.000.
+```
+```
+Nilai total untuk menghadirkan fondasi
+digital resmi yang profesional, mudah
+dikembangkan, dan relevan bagi
+pertumbuhan brand.
+```
+```
+Catatan Eksekutif Included
+```
+```
+Angka operasional tahunan bersifat estimatif
+dan dapat disesuaikan dengan vendor atau
+skema infrastruktur yang dipilih manajemen.
+```
+Dengan investasi ini, Warkoem tidak hanya memperoleh website, tetapi juga sebuah digital asset yang
+memperkuat reputasi brand, memperlancar operasional informasi, dan membuka peluang pertumbuhan
+organik yang lebih berkelanjutan.
 
-*   **Open Graph Image (Di 8 halaman):**
-    Saat link website di-share via WhatsApp, Instagram, atau Facebook, kini otomatis tampil *preview* gambar suasana malam Panggonan yang cantik beserta judul dan deskripsi profesional.
+## 6. Timeline Implementasi
 
-*   **Penyempurnaan Title & Keywords Homepage:**
-    Judul halaman utama dioptimasi dari generik menjadi keyword-rich: *"Panggonan Resto — Rumah Makan Tradisional Jawa | Ciracas & GDC Depok"*. Ditambah 12+ kata kunci relevan untuk memperkuat jangkauan pencarian.
+Agar proses pengambilan keputusan lebih mudah, berikut timeline implementasi yang telah disusun dalam
+format eksekutif dengan target penyelesaian 4 minggu kerja:
 
-**⚠️ Langkah Terakhir Agar Aktif di Google (Dilakukan Setelah Hosting):**
-Setelah website di-hosting dengan domain resmi, tinggal mendaftarkan ke [Google Search Console](https://search.google.com/search-console) dan mengirimkan `sitemap.xml`. Dalam 3–7 hari, Panggonan akan mulai terindeks dan muncul di pencarian Google.
+```
+Fase Fokus Pekerjaan Output Utama Estimasi
+Minggu 1 Discovery & Asset Gathering Pemetaan kebutuhan, identitas visual, pengumpulan aset foto, ambience, dan materi event. 5 hari kerja
+```
+```
+Minggu 2 Core Development
+```
+```
+Pembangunan struktur multi-page premium,
+implementasi menu digital, dan kerangka halaman
+inti.
+```
+```
+5 hari kerja
+```
+```
+Minggu 3 Advanced SEO & Optimization
+```
+```
+Penanaman schema markup, optimasi kata kunci
+lokal, peningkatan kecepatan visual, dan pengujian
+mobile responsiveness.
+```
+```
+5 hari kerja
+```
+```
+Minggu 4 Final Review & Deployment Review bersama manajemen, finalisasi revisi, goserta pendaftaran ke Google Search Console. - live, 5 hari kerja
+```
+## 7. Penutup & Rekomendasi Tindak Lanjut
 
----
+Saya memandang Warkoem bukan sekadar tempat makan atau titik nongkrong, melainkan sebuah brand lokal
+yang telah memiliki denyut komunitas, atmosfer, dan potensi pertumbuhan yang sangat kuat. Karena itu,
 
-**🏁 KESIMPULAN KONFIRMASI:** 
-Tugas analisis ulang, penambahan detail estetika (KLU YU RAN), kelengkapan halaman turunan *(Multi-Page)*, normalisasi logika antarmuka seluler, serta **optimasi SEO penuh untuk dominasi pencarian Google** telah diselesaikan utuh. Modul kode berstatus **LAYAK TAYANG (PRODUCTION-READY)**.
+
+website resmi yang dirancang dengan standar yang tepat akan berfungsi sebagai perpanjangan identitas
+brand - bukan sekadar etalase online.
+
+Melalui Warkoem Social Hub, manajemen akan memiliki fondasi digital yang lebih tertata untuk mengelola
+pengalaman pelanggan, aktivitas promosi, kebutuhan rekrutmen, hingga penguatan dominasi pencarian lokal
+secara lebih terukur.
+
+```
+Call to Action: Apabila Manajemen Warkoem berkenan, saya merekomendasikan tindak lanjut
+berupa persetujuan prinsip kolaborasi, penunjukan PIC untuk sesi kick-off, serta penjadwalan review
+kebutuhan detail agar tahap implementasi dapat dimulai secara efektif dan terarah.
+```
+Sebagai langkah awal, HANSCO siap menyiapkan demo struktur halaman atau pembahasan lanjutan yang
+lebih teknis agar manajemen dapat menilai arah implementasi secara konkret sebelum proyek dijalankan
+penuh.
+
+Hormat saya,
+
+#### Kevin
+
+Founder HANSCO
+
+

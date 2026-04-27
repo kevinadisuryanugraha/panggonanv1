@@ -412,3 +412,97 @@ function renderTable() {
         : 'Tidak ada data ditemukan';
     document.getElementById('page-indicator').textContent = `Halaman ${currentPage} / ${totalPages}`;
 }
+
+// =============================================
+// 6. SPA VIEW ENGINE & DEMOGRAFI CHARTS
+// =============================================
+function switchView(viewId, linkElement) {
+    // 1. Hide all views
+    document.querySelectorAll('.view-section').forEach(el => {
+        el.classList.remove('active');
+        setTimeout(() => el.style.display = 'none', 50); // delay for transition
+    });
+
+    // 2. Show target view
+    const targetView = document.getElementById(viewId);
+    if(targetView) {
+        setTimeout(() => {
+            targetView.style.display = 'block';
+            targetView.classList.add('active');
+        }, 50);
+    }
+
+    // 3. Update active state on sidebar links
+    document.querySelectorAll('.nav-link-btn').forEach(el => {
+        el.classList.remove('active');
+        el.classList.add('inactive');
+    });
+    if(linkElement) {
+        linkElement.classList.add('active');
+        linkElement.classList.remove('inactive');
+        
+        // Update topbar title based on clicked link
+        const titleText = linkElement.innerText.trim();
+        document.getElementById('topbar-title').innerText = titleText;
+    }
+
+    // 4. Initialize specific charts if viewing them for the first time
+    if(viewId === 'view-demografi' && !window.demografiChartsInit) {
+        setTimeout(initDemografiCharts, 100);
+        window.demografiChartsInit = true;
+    }
+}
+
+function initDemografiCharts() {
+    // Chart Usia (Bar)
+    const ctxAge = document.getElementById('ageChart');
+    if (ctxAge) {
+        new Chart(ctxAge.getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ['18-24', '25-34', '35-44', '45-54', '55+'],
+                datasets: [{
+                    label: 'Persentase (%)',
+                    data: [15, 45, 25, 10, 5],
+                    backgroundColor: 'rgba(16, 185, 129, 0.7)',
+                    borderColor: '#10b981',
+                    borderWidth: 1,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
+                    x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
+    }
+
+    // Chart Device (Doughnut)
+    const ctxDevice = document.getElementById('deviceChart');
+    if (ctxDevice) {
+        new Chart(ctxDevice.getContext('2d'), {
+            type: 'pie',
+            data: {
+                labels: ['Mobile', 'Desktop', 'Tablet'],
+                datasets: [{
+                    data: [68, 28, 4],
+                    backgroundColor: ['#f43f5e', '#3b82f6', '#10b981'],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { color: '#94a3b8', padding: 20 } }
+                }
+            }
+        });
+    }
+}

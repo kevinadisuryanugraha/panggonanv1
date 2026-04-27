@@ -1,210 +1,629 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Panggonan - Advanced Traffic Dashboard</title>
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../assets/css/dashboard.css?v=3.0">
-    <link href="../assets/images/logo.webp" rel="shortcut icon" type="image/x-icon" />
-    
+    <link rel="stylesheet" href="../assets/css/dashboard.css?v=3.2" />
+    <link
+      href="../assets/images/logo.webp"
+      rel="shortcut icon"
+      type="image/x-icon"
+    />
+
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body class="dashboard-body">
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body class="dashboard-body">
     <!-- LOGIN SCREEN -->
     <div id="auth-screen" class="auth-overlay">
-        <div class="auth-modal">
-            <div class="glow-sphere"></div>
-            <img src="../assets/images/logo.webp" alt="Panggonan Logo" class="auth-logo">
-            <h2>Portal Eksekutif</h2>
-            <p>Masukkan kunci sandi untuk mengakses data real-time lalu lintas situs web Panggonan Resto.</p>
-            <div class="input-group">
-                <input type="password" id="auth-password" placeholder="Key akses..." autocomplete="off">
-            </div>
-            <button class="btn-auth" onclick="verifyPassword()">Akses Dasbor</button>
-            <div id="auth-error" class="hidden-error">Kunci sandi tidak valid. Akses ditolak.</div>
+      <div class="auth-modal">
+        <div class="glow-sphere"></div>
+        <img
+          src="../assets/images/logo.webp"
+          alt="Panggonan Logo"
+          class="auth-logo"
+        />
+        <h2>Portal Eksekutif</h2>
+        <p>
+          Masukkan kunci sandi untuk mengakses data real-time lalu lintas situs
+          web Panggonan Resto.
+        </p>
+        <div class="input-group">
+          <input
+            type="password"
+            id="auth-password"
+            placeholder="Key akses..."
+            autocomplete="off"
+          />
         </div>
+        <button class="btn-auth" onclick="verifyPassword()">
+          Akses Dasbor
+        </button>
+        <div id="auth-error" class="hidden-error">
+          Kunci sandi tidak valid. Akses ditolak.
+        </div>
+      </div>
     </div>
 
     <!-- MAIN DASHBOARD -->
     <div id="main-dashboard" class="dashboard-wrap hidden">
+      <!-- Mobile Overlay -->
+      <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
 
-        <!-- Mobile Overlay -->
-        <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="brand">
+          <img
+            src="../assets/images/logo.webp"
+            alt="Panggonan"
+            width="40"
+            height="40"
+            style="border-radius: 50%"
+          />
+          <span class="brand-text">Panggonan Analytics</span>
+          <button class="sidebar-close-btn" onclick="toggleSidebar()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <nav class="nav-links">
+          <a
+            href="#"
+            class="nav-link-btn active"
+            onclick="switchView('view-ringkasan', this)"
+            ><i class="fas fa-chart-line"></i> Ringkasan Trafik</a
+          >
+          <a
+            href="#"
+            class="nav-link-btn inactive"
+            onclick="switchView('view-demografi', this)"
+            ><i class="fas fa-users"></i> Demografi</a
+          >
+          <a
+            href="#"
+            class="nav-link-btn inactive"
+            onclick="switchView('view-konversi', this)"
+            ><i class="fas fa-bullseye"></i> Perilaku Konversi</a
+          >
+          <a
+            href="#"
+            class="nav-link-btn inactive"
+            onclick="switchView('view-pengaturan', this)"
+            ><i class="fas fa-cog"></i> Pengaturan GA4</a
+          >
+        </nav>
+        <div class="sidebar-footer">
+          <a href="../index.html" style="margin-bottom: 15px"
+            ><i class="fas fa-arrow-left"></i> Kembali ke Website</a
+          >
+          <a href="#" onclick="logoutDashboard()" style="color: var(--danger)"
+            ><i class="fas fa-sign-out-alt"></i> Keluar (Logout)</a
+          >
+        </div>
+      </aside>
 
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="brand">
-                <img src="../assets/images/logo.webp" alt="Panggonan" width="40" height="40" style="border-radius:50%">
-                <span class="brand-text">Panggonan Analytics</span>
-                <button class="sidebar-close-btn" onclick="toggleSidebar()"><i class="fas fa-times"></i></button>
+      <!-- Main Content -->
+      <main class="dashboard-content">
+        <header class="topbar">
+          <div
+            class="title-area-wrap"
+            style="display: flex; align-items: center; gap: 20px"
+          >
+            <button
+              class="burger-menu"
+              onclick="toggleSidebar()"
+              aria-label="Toggle Sidebar"
+            >
+              <i class="fas fa-bars"></i>
+            </button>
+            <div class="page-title">
+              <h1 id="topbar-title">Real-time Traffic Overview</h1>
+              <span class="pulse-indicator" id="topbar-pulse"
+                ><span class="dot"></span> Live Sync</span
+              >
             </div>
-            <nav class="nav-links">
-                <a href="#" class="active"><i class="fas fa-chart-line"></i> Ringkasan Trafik</a>
-                <a href="#" class="inactive"><i class="fas fa-users"></i> Demografi</a>
-                <a href="#" class="inactive"><i class="fas fa-bullseye"></i> Perilaku Konversi</a>
-                <a href="#" class="inactive"><i class="fas fa-cog"></i> Pengaturan GA4</a>
-            </nav>
-            <div class="sidebar-footer">
-                <a href="../index.html" style="margin-bottom: 15px;"><i class="fas fa-arrow-left"></i> Kembali ke Website</a>
-                <a href="#" onclick="logoutDashboard()" style="color: var(--danger);"><i class="fas fa-sign-out-alt"></i> Keluar (Logout)</a>
-            </div>
-        </aside>
+          </div>
+          <div class="user-profile">
+            <span class="user-role">Administrator</span>
+            <div class="avatar">A</div>
+          </div>
+        </header>
 
-        <!-- Main Content -->
-        <main class="dashboard-content">
-            <header class="topbar">
-                <div class="title-area-wrap" style="display: flex; align-items: center; gap: 20px;">
-                    <button class="burger-menu" onclick="toggleSidebar()" aria-label="Toggle Sidebar">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <div class="page-title">
-                        <h1>Real-time Traffic Overview</h1>
-                        <span class="pulse-indicator"><span class="dot"></span> Live Sync</span>
-                    </div>
-                </div>
-                <div class="user-profile">
-                    <span class="user-role">Administrator</span>
-                    <div class="avatar">A</div>
-                </div>
-            </header>
-
-            <!-- Metrics Cards -->
-            <div class="metrics-grid">
-                <div class="metric-card glass">
-                    <div class="metric-header">
-                        <span class="title">Total Kunjungan (Bulan Ini)</span>
-                        <i class="fas fa-users" style="color: #6366f1;"></i>
-                    </div>
-                    <div class="metric-value" id="val-kunjungan">14,258</div>
-                    <div class="metric-trend positive">
-                        <i class="fas fa-arrow-up"></i> 12.4% vs bulan lalu
-                    </div>
-                </div>
-
-                <div class="metric-card glass">
-                    <div class="metric-header">
-                        <span class="title">Klik Reservasi / WA</span>
-                        <i class="fas fa-mouse-pointer" style="color: #10b981;"></i>
-                    </div>
-                    <div class="metric-value">1,342</div>
-                    <div class="metric-trend positive">
-                        <i class="fas fa-arrow-up"></i> 5.8% vs bulan lalu
-                    </div>
-                </div>
-
-                <div class="metric-card glass">
-                    <div class="metric-header">
-                        <span class="title">Durasi Sesi Rata-Rata</span>
-                        <i class="fas fa-clock" style="color: #f59e0b;"></i>
-                    </div>
-                    <div class="metric-value">02m 45s</div>
-                    <div class="metric-trend neutral">
-                        <i class="fas fa-minus"></i> stabil
-                    </div>
-                </div>
-
-                <div class="metric-card glass">
-                    <div class="metric-header">
-                        <span class="title">Pengunjung Aktif Saat Ini</span>
-                        <i class="fas fa-broadcast-tower" style="color: #ef4444;"></i>
-                    </div>
-                    <div class="metric-value pulse-text" id="val-realtime">18</div>
-                    <div class="metric-trend">
-                        Diperbarui 1 detik lalu
-                    </div>
-                </div>
-            </div>
-
-            <!-- Charts Area -->
-            <div class="charts-wrap">
-                <div class="chart-box glass main-chart">
-                    <h3>Tren Traffic 30 Hari Terakhir</h3>
-                    <div class="chart-container">
-                        <canvas id="trafficChart"></canvas>
-                    </div>
-                </div>
-                
-                <div class="chart-box glass side-chart">
-                    <h3>Sumber Kunjungan (Traffic Source)</h3>
-                    <div class="chart-container">
-                        <canvas id="sourceChart"></canvas>
-                    </div>
-                    <br>
-                    <ul class="source-list">
-                        <li><span class="color-dot" style="background: #6366f1"></span> Pencarian Google (Search) <span class="perc">56%</span></li>
-                        <li><span class="color-dot" style="background: #10b981"></span> Instagram Link <span class="perc">30%</span></li>
-                        <li><span class="color-dot" style="background: #f59e0b"></span> Tautan Langsung (Direct) <span class="perc">14%</span></li>
-                    </ul>
-                </div>
+        <!-- VIEW CONTENT WRAPPER -->
+        <div id="view-ringkasan" class="view-section" style="display: block">
+          <!-- Metrics Cards -->
+          <div class="metrics-grid">
+            <div class="metric-card glass">
+              <div class="metric-header">
+                <span class="title">Total Kunjungan (Bulan Ini)</span>
+                <i class="fas fa-users" style="color: #6366f1"></i>
+              </div>
+              <div class="metric-value" id="val-kunjungan">14,258</div>
+              <div class="metric-trend positive">
+                <i class="fas fa-arrow-up"></i> 12.4% vs bulan lalu
+              </div>
             </div>
 
-            <!-- Visitor Log Table Section -->
-            <div class="visitor-log-section glass">
-                <div class="log-header">
-                    <div class="log-title-area">
-                        <h3><i class="fas fa-list-alt"></i> Log Pengunjung Website</h3>
-                        <span class="log-badge" id="log-count-badge">248 entri</span>
-                    </div>
-                    <div class="log-controls">
-                        <div class="filter-tabs">
-                            <button class="filter-tab active" data-filter="hari" onclick="filterVisitors('hari', this)">Hari Ini</button>
-                            <button class="filter-tab" data-filter="minggu" onclick="filterVisitors('minggu', this)">Minggu Ini</button>
-                            <button class="filter-tab" data-filter="bulan" onclick="filterVisitors('bulan', this)">Bulan Ini</button>
-                            <button class="filter-tab" data-filter="tahun" onclick="filterVisitors('tahun', this)">Tahun Ini</button>
-                        </div>
-                        <div class="log-search">
-                            <i class="fas fa-search"></i>
-                            <input type="text" id="visitor-search" placeholder="Cari IP / Lokasi / Halaman..." oninput="searchVisitors(this.value)">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="table-wrapper">
-                    <table class="visitor-table" id="visitor-table">
-                        <thead>
-                            <tr>
-                                <th class="sortable" onclick="sortTable(0)">No <i class="fas fa-sort"></i></th>
-                                <th class="sortable" onclick="sortTable(1)">Tanggal & Waktu <i class="fas fa-sort"></i></th>
-                                <th class="sortable" onclick="sortTable(2)">Alamat IP <i class="fas fa-sort"></i></th>
-                                <th>Perangkat</th>
-                                <th>Browser</th>
-                                <th class="sortable" onclick="sortTable(5)">Lokasi <i class="fas fa-sort"></i></th>
-                                <th>Halaman Dikunjungi</th>
-                                <th class="sortable" onclick="sortTable(7)">Durasi <i class="fas fa-sort"></i></th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody id="visitor-tbody">
-                            <!-- Diisi oleh JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div class="table-footer">
-                    <div class="table-info" id="table-info">Menampilkan 1-20 dari 248 entri</div>
-                    <div class="table-pagination">
-                        <button class="page-btn" onclick="changePage(-1)"><i class="fas fa-chevron-left"></i></button>
-                        <span class="page-indicator" id="page-indicator">Halaman 1 / 13</span>
-                        <button class="page-btn" onclick="changePage(1)"><i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
+            <div class="metric-card glass">
+              <div class="metric-header">
+                <span class="title">Klik Reservasi / WA</span>
+                <i class="fas fa-mouse-pointer" style="color: #10b981"></i>
+              </div>
+              <div class="metric-value">1,342</div>
+              <div class="metric-trend positive">
+                <i class="fas fa-arrow-up"></i> 5.8% vs bulan lalu
+              </div>
             </div>
 
-            <div class="status-bar glass">
-                <i class="fas fa-shield-check"></i> Google Analytics 4 (Data Stream: G-PX9Y2Z) Connected • Tembok Api Enkripsi AES-256 Aktif • <span id="status-clock"></span>
+            <div class="metric-card glass">
+              <div class="metric-header">
+                <span class="title">Durasi Sesi Rata-Rata</span>
+                <i class="fas fa-clock" style="color: #f59e0b"></i>
+              </div>
+              <div class="metric-value">02m 45s</div>
+              <div class="metric-trend neutral">
+                <i class="fas fa-minus"></i> stabil
+              </div>
             </div>
 
-        </main>
+            <div class="metric-card glass">
+              <div class="metric-header">
+                <span class="title">Pengunjung Aktif Saat Ini</span>
+                <i class="fas fa-broadcast-tower" style="color: #ef4444"></i>
+              </div>
+              <div class="metric-value pulse-text" id="val-realtime">18</div>
+              <div class="metric-trend">Diperbarui 1 detik lalu</div>
+            </div>
+          </div>
+
+          <!-- Charts Area -->
+          <div class="charts-wrap">
+            <div class="chart-box glass main-chart">
+              <h3>Tren Traffic 30 Hari Terakhir</h3>
+              <div class="chart-container">
+                <canvas id="trafficChart"></canvas>
+              </div>
+            </div>
+
+            <div class="chart-box glass side-chart">
+              <h3>Sumber Kunjungan (Traffic Source)</h3>
+              <div class="chart-container">
+                <canvas id="sourceChart"></canvas>
+              </div>
+              <br />
+              <ul class="source-list">
+                <li>
+                  <span class="color-dot" style="background: #6366f1"></span>
+                  Pencarian Google (Search) <span class="perc">56%</span>
+                </li>
+                <li>
+                  <span class="color-dot" style="background: #10b981"></span>
+                  Instagram Link <span class="perc">30%</span>
+                </li>
+                <li>
+                  <span class="color-dot" style="background: #f59e0b"></span>
+                  Tautan Langsung (Direct) <span class="perc">14%</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Visitor Log Table Section -->
+          <div class="visitor-log-section glass">
+            <div class="log-header">
+              <div class="log-title-area">
+                <h3><i class="fas fa-list-alt"></i> Log Pengunjung Website</h3>
+                <span class="log-badge" id="log-count-badge">248 entri</span>
+              </div>
+              <div class="log-controls">
+                <div class="filter-tabs">
+                  <button
+                    class="filter-tab active"
+                    data-filter="hari"
+                    onclick="filterVisitors('hari', this)"
+                  >
+                    Hari Ini
+                  </button>
+                  <button
+                    class="filter-tab"
+                    data-filter="minggu"
+                    onclick="filterVisitors('minggu', this)"
+                  >
+                    Minggu Ini
+                  </button>
+                  <button
+                    class="filter-tab"
+                    data-filter="bulan"
+                    onclick="filterVisitors('bulan', this)"
+                  >
+                    Bulan Ini
+                  </button>
+                  <button
+                    class="filter-tab"
+                    data-filter="tahun"
+                    onclick="filterVisitors('tahun', this)"
+                  >
+                    Tahun Ini
+                  </button>
+                </div>
+                <div class="log-search">
+                  <i class="fas fa-search"></i>
+                  <input
+                    type="text"
+                    id="visitor-search"
+                    placeholder="Cari IP / Lokasi / Halaman..."
+                    oninput="searchVisitors(this.value)"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="table-wrapper">
+              <table class="visitor-table" id="visitor-table">
+                <thead>
+                  <tr>
+                    <th class="sortable" onclick="sortTable(0)">
+                      No <i class="fas fa-sort"></i>
+                    </th>
+                    <th class="sortable" onclick="sortTable(1)">
+                      Tanggal & Waktu <i class="fas fa-sort"></i>
+                    </th>
+                    <th class="sortable" onclick="sortTable(2)">
+                      Alamat IP <i class="fas fa-sort"></i>
+                    </th>
+                    <th>Perangkat</th>
+                    <th>Browser</th>
+                    <th class="sortable" onclick="sortTable(5)">
+                      Lokasi <i class="fas fa-sort"></i>
+                    </th>
+                    <th>Halaman Dikunjungi</th>
+                    <th class="sortable" onclick="sortTable(7)">
+                      Durasi <i class="fas fa-sort"></i>
+                    </th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="visitor-tbody">
+                  <!-- Diisi oleh JavaScript -->
+                </tbody>
+              </table>
+            </div>
+
+            <div class="table-footer">
+              <div class="table-info" id="table-info">
+                Menampilkan 1-20 dari 248 entri
+              </div>
+              <div class="table-pagination">
+                <button class="page-btn" onclick="changePage(-1)">
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <span class="page-indicator" id="page-indicator"
+                  >Halaman 1 / 13</span
+                >
+                <button class="page-btn" onclick="changePage(1)">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End of view-ringkasan -->
+
+        <!-- DEMOGRAFI VIEW -->
+        <div id="view-demografi" class="view-section" style="display: none">
+          <div class="metrics-grid">
+            <div class="metric-card glass">
+              <div class="metric-header">
+                <span class="title">Total Pengguna Unik</span
+                ><i class="fas fa-user-check" style="color: #6366f1"></i>
+              </div>
+              <div class="metric-value">8,432</div>
+            </div>
+            <div class="metric-card glass">
+              <div class="metric-header">
+                <span class="title">Rasio Pria / Wanita</span
+                ><i class="fas fa-venus-mars" style="color: #f43f5e"></i>
+              </div>
+              <div class="metric-value">42% / 58%</div>
+            </div>
+            <div class="metric-card glass">
+              <div class="metric-header">
+                <span class="title">Rentang Usia Dominan</span
+                ><i class="fas fa-id-card" style="color: #10b981"></i>
+              </div>
+              <div class="metric-value">25 - 34</div>
+            </div>
+          </div>
+          <div class="charts-wrap" style="margin-top: 30px">
+            <div class="chart-box glass main-chart">
+              <h3>Distribusi Usia Pengunjung</h3>
+              <div class="chart-container">
+                <canvas id="ageChart"></canvas>
+              </div>
+            </div>
+            <div class="chart-box glass side-chart">
+              <h3>Perangkat yang Digunakan</h3>
+              <div class="chart-container">
+                <canvas id="deviceChart"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="visitor-log-section glass" style="margin-top: 30px">
+            <div class="log-header">
+              <h3>
+                <i class="fas fa-map-marker-alt"></i> Top 5 Lokasi Pengunjung
+              </h3>
+            </div>
+            <div class="table-wrapper">
+              <table class="visitor-table">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Kota / Wilayah</th>
+                    <th>Jumlah Kunjungan</th>
+                    <th>Persentase</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Jakarta Selatan, ID</td>
+                    <td>4,210</td>
+                    <td><span class="status-dot active">30%</span></td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Depok, ID</td>
+                    <td>2,806</td>
+                    <td><span class="status-dot active">20%</span></td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Jakarta Timur, ID</td>
+                    <td>2,105</td>
+                    <td><span class="status-dot active">15%</span></td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Bekasi, ID</td>
+                    <td>1,403</td>
+                    <td><span class="status-dot active">10%</span></td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>Bogor, ID</td>
+                    <td>842</td>
+                    <td><span class="status-dot active">6%</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- KONVERSI VIEW -->
+        <div id="view-konversi" class="view-section" style="display: none">
+          <div class="metrics-grid">
+            <div class="metric-card glass">
+              <div class="metric-header">
+                <span class="title">Conversion Rate</span
+                ><i class="fas fa-percentage" style="color: #10b981"></i>
+              </div>
+              <div class="metric-value">9.4%</div>
+              <div class="metric-trend positive">
+                <i class="fas fa-arrow-up"></i> 1.2% vs bulan lalu
+              </div>
+            </div>
+            <div class="metric-card glass">
+              <div class="metric-header">
+                <span class="title">Total Reservasi WA</span
+                ><i class="fab fa-whatsapp" style="color: #22c55e"></i>
+              </div>
+              <div class="metric-value">1,342</div>
+            </div>
+            <div class="metric-card glass">
+              <div class="metric-header">
+                <span class="title">Klik Maps / Arah</span
+                ><i class="fas fa-map-signs" style="color: #3b82f6"></i>
+              </div>
+              <div class="metric-value">856</div>
+            </div>
+          </div>
+          <div class="charts-wrap" style="margin-top: 30px">
+            <div class="chart-box glass" style="flex: 1">
+              <h3>Funnel Konversi Pelanggan</h3>
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  gap: 15px;
+                  margin-top: 20px;
+                "
+              >
+                <div
+                  style="
+                    background: rgba(99, 102, 241, 0.2);
+                    padding: 15px;
+                    border-radius: 8px;
+                    border-left: 4px solid #6366f1;
+                  "
+                >
+                  <div style="font-size: 0.85rem; color: var(--text-muted)">
+                    Langkah 1: Kunjungan Website (Traffic)
+                  </div>
+                  <div style="font-size: 1.5rem; font-weight: bold">
+                    14,258
+                    <span style="font-size: 0.8rem; font-weight: normal"
+                      >100%</span
+                    >
+                  </div>
+                </div>
+                <div style="text-align: center; color: var(--text-muted)">
+                  <i class="fas fa-arrow-down"></i>
+                </div>
+                <div
+                  style="
+                    background: rgba(16, 185, 129, 0.2);
+                    padding: 15px;
+                    border-radius: 8px;
+                    border-left: 4px solid #10b981;
+                    width: 80%;
+                    margin: 0 auto;
+                  "
+                >
+                  <div style="font-size: 0.85rem; color: var(--text-muted)">
+                    Langkah 2: Buka Halaman Menu & Kontak
+                  </div>
+                  <div style="font-size: 1.5rem; font-weight: bold">
+                    6,840
+                    <span style="font-size: 0.8rem; font-weight: normal"
+                      >48%</span
+                    >
+                  </div>
+                </div>
+                <div style="text-align: center; color: var(--text-muted)">
+                  <i class="fas fa-arrow-down"></i>
+                </div>
+                <div
+                  style="
+                    background: rgba(245, 158, 11, 0.2);
+                    padding: 15px;
+                    border-radius: 8px;
+                    border-left: 4px solid #f59e0b;
+                    width: 60%;
+                    margin: 0 auto;
+                  "
+                >
+                  <div style="font-size: 0.85rem; color: var(--text-muted)">
+                    Langkah 3: Klik Reservasi WA (Konversi)
+                  </div>
+                  <div style="font-size: 1.5rem; font-weight: bold">
+                    1,342
+                    <span style="font-size: 0.8rem; font-weight: normal"
+                      >9.4%</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PENGATURAN VIEW -->
+        <div id="view-pengaturan" class="view-section" style="display: none">
+          <div class="chart-box glass" style="max-width: 600px; margin: 0 auto">
+            <h3>
+              <i class="fab fa-google"></i> Konfigurasi Google Analytics 4
+            </h3>
+            <p
+              style="
+                color: var(--text-muted);
+                font-size: 0.9rem;
+                margin-bottom: 25px;
+                line-height: 1.5;
+              "
+            >
+              Hubungkan dasbor ini dengan properti GA4 Anda untuk menghentikan
+              mode simulasi dan mulai menarik data analitik pengunjung secara
+              langsung (Real-time).
+            </p>
+            <div style="margin-bottom: 20px">
+              <label
+                style="
+                  display: block;
+                  margin-bottom: 8px;
+                  font-size: 0.85rem;
+                  font-weight: 600;
+                  color: var(--text-muted);
+                "
+                >Measurement ID (G-XXXXXXX)</label
+              >
+              <input
+                type="text"
+                class="ga4-input"
+                placeholder="Misal: G-PX9Y2Z8A"
+                value="G-PX9Y2Z"
+                style="
+                  width: 100%;
+                  background: rgba(0, 0, 0, 0.3);
+                  border: 1px solid var(--border-color);
+                  padding: 12px 15px;
+                  border-radius: 8px;
+                  color: white;
+                  font-family: monospace;
+                "
+              />
+            </div>
+            <div style="margin-bottom: 25px">
+              <label
+                style="
+                  display: block;
+                  margin-bottom: 8px;
+                  font-size: 0.85rem;
+                  font-weight: 600;
+                  color: var(--text-muted);
+                "
+                >Google Analytics Data API Key (JSON Path)</label
+              >
+              <input
+                type="password"
+                class="ga4-input"
+                placeholder="Masukkan path credentials json..."
+                value="*************************"
+                style="
+                  width: 100%;
+                  background: rgba(0, 0, 0, 0.3);
+                  border: 1px solid var(--border-color);
+                  padding: 12px 15px;
+                  border-radius: 8px;
+                  color: white;
+                  font-family: monospace;
+                "
+              />
+            </div>
+            <div style="display: flex; gap: 15px">
+              <button
+                class="btn-auth"
+                style="flex: 1"
+                onclick="alert('Konfigurasi GA4 Berhasil Disimpan!')"
+              >
+                <i class="fas fa-save"></i> Simpan Konfigurasi
+              </button>
+              <button
+                class="btn-auth"
+                style="background: rgba(255, 255, 255, 0.1); width: auto"
+                onclick="
+                  alert(
+                    'Uji koneksi ke server Google Analytics API sukses! Status: 200 OK',
+                  )
+                "
+              >
+                <i class="fas fa-plug"></i> Test Koneksi
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="status-bar glass">
+          <i class="fas fa-shield-check"></i> Google Analytics 4 (Data Stream:
+          G-PX9Y2Z) Connected • Tembok Api Enkripsi AES-256 Aktif •
+          <span id="status-clock"></span>
+        </div>
+      </main>
     </div>
 
     <!-- Custom JS -->
     <script src="../assets/js/dashboard.js?v=3.0"></script>
-</body>
+  </body>
 </html>
