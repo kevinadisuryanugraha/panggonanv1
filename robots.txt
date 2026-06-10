@@ -4,5 +4,7 @@ Disallow: /401/
 Disallow: /404/
 Disallow: /coming-soon/
 Disallow: /chat_owner_hari_ini/
+Disallow: /admin/
+Disallow: /admin-traffic/
 
-Sitemap: https://panggonan.com/sitemap.xml
+Sitemap: https://panggonanresto.com/sitemap.xml

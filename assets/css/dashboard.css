@@ -171,129 +171,47 @@ body.dashboard-body {
     overflow: hidden; /* Mengunci halaman di batas 100% tinggi dan lebar viewport */
 }
 
-.dashboard-wrap.hidden {
-    display: none;
-}
-
-/* MOBILE OVERLAY */
-.sidebar-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(3px);
-    z-index: 90;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-}
-
-.sidebar-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* SIDEBAR */
-.sidebar {
-    width: 260px;
-    background: var(--sidebar-bg);
-    border-right: 1px solid var(--border-color);
+/* TRAFFIC SUB-NAV */
+.traffic-subnav {
     display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
-    overflow-y: auto; /* Izinkan scroll mandiri jika menu terlalu panjang */
-    transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 100;
-}
-
-/* Hide scrollbar for aesthetics */
-.sidebar::-webkit-scrollbar { width: 5px; }
-.sidebar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 5px; }
-
-.sidebar.collapsed {
-    margin-left: -260px;
-}
-
-.sidebar .brand {
-    padding: 24px;
-    display: flex;
-    align-items: center;
     gap: 12px;
-    font-weight: 800;
-    font-size: 1.1rem;
-    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 30px;
+    background: var(--card-bg);
+    padding: 12px;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    overflow-x: auto;
 }
 
-.brand-text {
-    flex-grow: 1;
-}
-
-.sidebar-close-btn {
-    display: none; /* Only Show <= 1024px */
+.traffic-subnav .nav-link-btn {
     background: transparent;
     border: none;
+    padding: 12px 24px;
     color: var(--text-muted);
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: color 0.2s;
-}
-
-.sidebar-close-btn:hover {
-    color: var(--danger);
-}
-
-.nav-links {
-    padding: 24px 0;
-    flex-grow: 1;
-}
-
-.nav-links a {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 24px;
-    color: var(--text-muted);
-    text-decoration: none;
+    font-size: 0.95rem;
     font-weight: 600;
-    font-size: 0.9rem;
-    transition: all 0.2s ease;
-}
-
-.nav-links a:hover {
-    color: var(--text-main);
-    background: rgba(255, 255, 255, 0.03);
-}
-
-.nav-links a.active {
-    color: var(--accent);
-    background: rgba(99, 102, 241, 0.1);
-    border-right: 3px solid var(--accent);
-}
-
-.nav-links i {
-    width: 20px;
-    text-align: center;
-}
-
-.sidebar-footer {
-    padding: 24px;
-    border-top: 1px solid var(--border-color);
-}
-
-.sidebar-footer a {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 0.85rem;
+    cursor: pointer;
+    border-radius: 12px;
+    transition: all 0.3s;
     display: flex;
     align-items: center;
-    gap: 8px;
-    transition: color 0.2s;
+    gap: 10px;
+    white-space: nowrap;
 }
 
-.sidebar-footer a:hover {
-    color: white;
+.traffic-subnav .nav-link-btn:hover {
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.traffic-subnav .nav-link-btn.active {
+    color: var(--accent);
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.traffic-metrics-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important;
 }
 
 /* CONTENT AREA */
@@ -419,10 +337,20 @@ body.dashboard-body {
 .metric-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    gap: 8px;
     font-size: 0.85rem;
     color: var(--text-muted);
     font-weight: 600;
+}
+
+.metric-header .title {
+    flex: 1;
+    line-height: 1.3;
+}
+
+.metric-header i {
+    flex-shrink: 0;
 }
 
 .metric-value {
@@ -871,6 +799,17 @@ body.dashboard-body {
 
 /* Mobile Devices (<= 768px) */
 @media (max-width: 768px) {
+    .traffic-dashboard-wrapper {
+        padding-bottom: 80px; /* Jarak agar tidak tertutup sidebar bawah */
+    }
+
+    .traffic-metrics-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .metric-value {
+        font-size: 1.8rem;
+    }
     .dashboard-content {
         padding: 16px;
         gap: 16px;

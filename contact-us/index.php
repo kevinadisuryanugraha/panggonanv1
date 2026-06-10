@@ -1,0 +1,1086 @@
+<!doctype html>
+<html data-domain="panggonanresto.com" lang="id">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  <meta charset="utf-8" />
+  <title>Hubungi Kami & Reservasi Cabang Depok & Ciracas | Panggonan Resto</title>
+  <meta
+    content="Kunjungi Panggonan di dua cabang kami GDC Depok dan Ciracas Jakarta Timur. Reservasi meja, tanya menu, atau hubungi kami langsung via WhatsApp."
+    name="description" />
+  <meta content="Hubungi Kami & Reservasi Cabang Depok & Ciracas | Panggonan Resto" property="og:title" />
+  <meta content="Kunjungi Panggonan di dua cabang kami GDC Depok dan Ciracas Jakarta Timur. Hubungi kami untuk reservasi dan pertanyaan."
+    property="og:description" />
+  <meta content="Hubungi Kami & Reservasi Cabang Depok & Ciracas | Panggonan Resto" property="twitter:title" />
+  <meta content="Kunjungi Panggonan di dua cabang kami GDC Depok dan Ciracas Jakarta Timur. Hubungi kami untuk reservasi dan pertanyaan."
+    property="twitter:description" />
+  <meta property="og:type" content="website" />
+  <meta content="summary_large_image" name="twitter:card" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <meta name="keywords"
+    content="Kontak Panggonan, Lokasi Panggonan, Reservasi Panggonan, GDC Depok, Ciracas Jakarta, WhatsApp Panggonan, Telepon Panggonan" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#1a1a1a" />
+  <link rel="canonical" href="https://panggonanresto.com/contact-us/" />
+  <meta name="geo.region" content="ID-JK" />
+  <meta name="geo.placename" content="Ciracas, Jakarta Timur" />
+  <meta name="geo.position" content="-6.3290;106.8718" />
+  <meta name="ICBM" content="-6.3290, 106.8718" />
+  <meta property="og:image"
+    content="https://panggonanresto.com/assets/images/panggonan_aset_ke_2/ambiance_malam.webp" />
+  <meta property="og:image:alt" content="Suasana malam Panggonan Resto" />
+  <meta property="og:url" content="https://panggonanresto.com/contact-us/" />
+  <meta property="og:locale" content="id_ID" />
+  <meta property="og:site_name" content="Panggonan Resto" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Beranda",
+            "item": "https://panggonanresto.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Hubungi Kami",
+            "item": "https://panggonanresto.com/contact-us/"
+          }
+        ]
+      },
+      {
+        "@type": "ContactPage",
+        "name": "Hubungi Kami & Reservasi Cabang Depok & Ciracas | Panggonan Resto",
+        "description": "Kunjungi Panggonan di dua cabang kami GDC Depok dan Ciracas Jakarta Timur. Reservasi meja, tanya menu, atau hubungi kami langsung via WhatsApp.",
+        "url": "https://panggonanresto.com/contact-us/"
+      }
+    ]
+  }
+  </script>
+  <link href="../assets/css/style.css" rel="stylesheet" type="text/css" />
+  <link href="../assets/css/custom.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous" />
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    WebFont.load({ google: { families: ["Sora:regular"] } });
+  </script>
+  <script type="text/javascript">
+    !(function (o, c) {
+      var n = c.documentElement,
+        t = " w-mod-";
+      n.className += t + "js";
+      ("ontouchstart" in o ||
+        (o.DocumentTouch && c instanceof DocumentTouch)) &&
+        (n.className += t + "touch");
+    })(window, document);
+  </script>
+  <link href="../assets/images/logo.webp" rel="shortcut icon" type="image/x-icon" />
+  <link href="../assets/images/logo.webp" rel="apple-touch-icon" />
+  <style>
+    /* Branch cards */
+    .branch-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 48px;
+    }
+
+    .branch-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--white);
+    }
+
+    .branch-map {
+      width: 100%;
+      height: 220px;
+      border: none;
+      display: block;
+    }
+
+    .branch-info {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .branch-badge {
+      display: inline-block;
+      background: var(--primary-gold, #d4af37);
+      color: #000;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+
+    .branch-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 0;
+      color: var(--black);
+    }
+
+    .branch-detail-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .branch-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #888;
+      font-weight: 600;
+    }
+
+    .branch-value {
+      font-size: 0.95rem;
+      color: var(--black);
+      line-height: 1.5;
+    }
+
+    .branch-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .branch-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .branch-btn:hover {
+      opacity: 0.85;
+    }
+
+    .branch-btn-wa {
+      background: #25d366;
+      color: #fff;
+    }
+
+    .branch-btn-maps {
+      background: var(--black);
+      color: #fff;
+    }
+
+    /* Inline contact bar */
+    .contact-detail {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: 40px;
+    }
+
+    .contact-mini-card {
+      flex: 1;
+      padding: 20px 28px;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .contact-mini-card:last-child {
+      border-right: none;
+    }
+
+    .social-wrap {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    /* Responsive */
+    @media (max-width: 991px) {
+      .branch-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-detail {
+        flex-direction: column;
+      }
+
+      .contact-mini-card {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .contact-mini-card:last-child {
+        border-bottom: none;
+      }
+
+      .event-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    /* Override Hover Tombol WhatsApp */
+    .btn-whatsapp {
+      background-color: #25d366 !important;
+      color: #fff !important;
+      filter: none !important; /* Mencegah filter invert global */
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-whatsapp:hover {
+      background-color: #128c7e !important; /* Hijau gelap khas WhatsApp */
+      color: #fff !important;
+      filter: none !important;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.25);
+    }
+
+    .btn-whatsapp:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.15);
+    }
+
+    /* Event & Reservation Form */
+    .reservasi-event {
+      padding: 80px 0;
+      background-color: #faf9f6;
+      margin-top: 80px;
+      border-top: 1px solid var(--border);
+    }
+
+    .event-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .event-image-wrap {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    }
+
+    .event-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      aspect-ratio: 4/5;
+      display: block;
+    }
+
+    .event-tags-overlay {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      right: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .e-tag {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #222;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      letter-spacing: 0.02em;
+    }
+
+    .wa-form {
+      background: var(--white);
+      padding: 32px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #444;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      background: #fafaf9;
+      transition: all 0.2s;
+      box-sizing: border-box;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--primary-gold, #d4af37);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+    }
+
+    .text-area {
+      resize: vertical;
+    }
+
+    /* SUCCESS MODAL styles */
+    .success-overlay {
+      position: fixed; inset: 0;
+      background: rgba(5, 6, 10, 0.85);
+      backdrop-filter: blur(10px);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 10002;
+      font-family: 'Sora', sans-serif;
+    }
+    .success-modal {
+      background: #fff;
+      border: 2px solid rgba(212, 175, 55, 0.5);
+      border-radius: 24px;
+      padding: 48px;
+      width: 100%;
+      max-width: 480px;
+      text-align: center;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.3);
+      animation: popUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes popUp {
+      from { transform: scale(0.85); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .success-icon {
+      width: 80px; height: 80px;
+      background: rgba(212, 175, 55, 0.1);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 28px auto;
+      color: #d4af37;
+    }
+    .success-modal h3 {
+      font-size: 1.5rem; color: #121622; margin-bottom: 16px;
+      font-weight: 700; letter-spacing: -0.02em;
+    }
+    .success-modal p {
+      color: #555; font-size: 0.95rem; line-height: 1.6; margin-bottom: 32px;
+    }
+    .btn-close-success {
+      background: #d4af37; color: #fff; border: none;
+      padding: 14px 40px; border-radius: 30px;
+      font-family: 'Sora', sans-serif; font-weight: 700;
+      font-size: 0.95rem; cursor: pointer; transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+    }
+    .btn-close-success:hover { background: #bda031; transform: translateY(-2px); }
+  </style>
+</head>
+
+<body>
+  <!-- SUCCESS MODAL OVERLAY -->
+  <div class="success-overlay" id="success-modal" style="display: none;">
+    <div class="success-modal">
+      <div class="success-icon">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+        </svg>
+      </div>
+      <h3>Reservasi Terkirim! ✨</h3>
+      <p id="success-modal-message">
+        Terima kasih! Detail reservasi Anda telah berhasil disimpan ke database kami. Kami juga telah mengarahkan Anda ke WhatsApp untuk konfirmasi instan dengan tim cabang kami.
+      </p>
+      <button class="btn-close-success" onclick="document.getElementById('success-modal').style.display = 'none';">Tutup</button>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <div data-w-id="c4cece30-ea7b-9bee-6ab3-e3f6d3fb5623" data-animation="default" data-collapse="medium"
+    data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
+    <div class="container w-container">
+      <div class="nav-wrapper">
+        <a href="../" class="brand w-nav-brand">
+          <h3 style="margin: 0; color: #d4af37">Panggonan</h3>
+        </a>
+        <nav role="navigation" class="nav-menu w-nav-menu">
+          <div class="menu-wraper">
+            <div data-w-id="c9554779-7a98-ebc3-6d3f-25bc12cf16bb" class="nav-outer">
+              <a href="../" class="nav-link w-nav-link">Beranda</a>
+              <div class="nav-line"></div>
+            </div>
+            <div data-w-id="7a84d105-ac7b-73ee-9db2-22ef823bf66d" class="nav-outer">
+              <a href="../about-us/" class="nav-link w-nav-link">Tentang Kami</a>
+              <div class="nav-line"></div>
+            </div>
+            <div data-w-id="0d59ca41-bfc7-676d-c79e-5915ca4d4009" class="nav-outer">
+              <a href="../menu/" class="nav-link w-nav-link">Menu</a>
+              <div class="nav-line"></div>
+            </div>
+            <div data-w-id="2eedfb42-47ec-746e-339b-083a716ae9a9" class="nav-outer">
+              <div data-hover="false" data-delay="0" data-w-id="bd1b9d5e-da99-33c1-ebf2-30f0a4ff637d"
+                class="dropdown w-dropdown">
+                <div class="navbar-dropdown w-dropdown-toggle">
+                  <div>Halaman</div>
+                  <img src="../assets/images/icons/dropdown-icon.svg" loading="lazy" alt="" class="dropdown-icon" decoding="async" />
+                </div>
+                <nav class="dropdown-list w-dropdown-list">
+                  <div class="dropdown-wraper">
+                    <a href="../services/" class="dropdown-link w-dropdown-link">Layanan</a>
+                    <a href="../gallery/" class="dropdown-link w-dropdown-link">Galeri</a>
+                    <a href="../faq/" class="dropdown-link w-dropdown-link">Tanya Jawab</a>
+                  </div>
+                </nav>
+              </div>
+              <div class="nav-line"></div>
+            </div>
+            <div data-w-id="f7736304-0fe0-85bb-bdba-d46abba42f16" class="nav-outer">
+              <a href="../blog/" class="nav-link w-nav-link">Jurnal</a>
+              <div class="nav-line"></div>
+            </div>
+            <div class="tablet-button">
+              <a data-w-id="482fbd4e-f018-7011-d00d-554d28c22612" href="../contact-us/"
+                class="primary-button w-inline-block">
+                <div>Hubungi Kami</div>
+                <img src="../assets/images/icons/btn-icon.svg" loading="lazy" alt="Arrow Icon" class="primary-button-image" decoding="async" />
+              </a>
+            </div>
+          </div>
+        </nav>
+        <div>
+          <div class="menu-button w-nav-button">
+            <div class="menu-outer">
+              <div data-w-id="c4cece30-ea7b-9bee-6ab3-e3f6d3fb5639" class="menu-bar"></div>
+              <div data-w-id="c4cece30-ea7b-9bee-6ab3-e3f6d3fb563a" class="menu-bar"></div>
+              <div data-w-id="c4cece30-ea7b-9bee-6ab3-e3f6d3fb563b" class="menu-bar last"></div>
+            </div>
+          </div>
+          <div class="desktop-button">
+            <a data-w-id="482fbd4e-f018-7011-d00d-554d28c22612" href="../contact-us/"
+              class="primary-button w-inline-block">
+              <div>Hubungi Kami</div>
+              <img src="../assets/images/icons/btn-icon.svg" loading="lazy" alt="Arrow Icon" class="primary-button-image" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE CONTENT -->
+  <div class="page-wrap">
+    <section class="top-section">
+      <div class="w-layout-blockcontainer container w-container">
+        <div class="section-wrap">
+          <!-- PAGE TITLE -->
+          <div class="page-title">
+            <div class="title-top">
+              <div class="caption">[</div>
+              <div class="caption">Hubungi Kami</div>
+              <div class="caption">]</div>
+            </div>
+            <h1>Ayo Ngobrol dengan Kami</h1>
+          </div>
+
+          <!-- CONTACT INFO BAR -->
+          <div class="contact-detail"
+            style="display: flex; flex-wrap: wrap; gap: 30px; padding: clamp(20px, 4vw, 30px);">
+
+            <!-- LEFT COLUMN (Info + Image) -->
+            <div style="display: flex; flex-direction: column; flex: 1 1 400px; gap: 30px;">
+
+              <!-- Info Row -->
+              <div style="display: flex; flex-wrap: wrap; gap: 24px;">
+                <div class="contact-mini-card" style="border: none; padding: 0; flex: 1 1 200px;">
+                  <div class="caption">Cabang Utama :</div>
+                  <div class="text-black">
+                    GDC Depok &amp; Ciracas,<br>Jakarta Timur
+                  </div>
+                </div>
+
+                <!-- Divider 1 -->
+                <div class="w-hidden-medium w-hidden-small w-hidden-tiny"
+                  style="width: 1px; background: var(--border);"></div>
+
+                <div class="contact-mini-card" style="border: none; padding: 0; flex: 1 1 200px;">
+                  <div class="caption">WhatsApp :</div>
+                  <div style="display: flex; flex-direction: column; gap: 6px;">
+                    <a href="https://wa.me/6287845359184" target="_blank" class="contact-link text-black">0878-4535-9184
+                      (Depok)</a>
+                    <a href="https://wa.me/6287828888538" target="_blank" class="contact-link text-black">0878-2888-8538
+                      (Ciracas)</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Image Filler -->
+              <div style="width: 100%; height: 160px; border-radius: 12px; overflow: hidden; margin-top: auto;">
+                <img src="../assets/images/panggonan7.jpeg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="Panggonan Atmosphere" loading="lazy" decoding="async">
+              </div>
+
+            </div>
+
+            <!-- Divider 2 -->
+            <div class="w-hidden-medium w-hidden-small w-hidden-tiny" style="width: 1px; background: var(--border);">
+            </div>
+
+            <!-- RIGHT COLUMN (Ikuti Kami) -->
+            <div class="contact-mini-card" style="border: none; padding: 0; flex: 1 1 280px;">
+              <div class="caption">Ikuti Kami</div>
+              <div class="social-wrap"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 24px; width: 100%;">
+
+                <!-- INSTAGRAM COLUMN -->
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  <div style="font-size: 0.85em; font-weight: 600; color: #888; margin-bottom: 4px;">Instagram</div>
+                  <a href="https://www.instagram.com/panggonan.resto/?hl=id" target="_blank"
+                    class="contact-link text-black" style="display:flex; align-items:center; gap:8px;">
+                    <img src="../assets/images/icons/instagram-icon.svg" loading="lazy" width="16" alt="Instagram" style="filter: brightness(0) opacity(0.6);" decoding="async" />
+                    panggonan.resto
+                  </a>
+                  <a href="https://www.instagram.com/panggonan_gdc/?hl=id" target="_blank"
+                    class="contact-link text-black" style="display:flex; align-items:center; gap:8px;">
+                    <img src="../assets/images/icons/instagram-icon.svg" loading="lazy" width="16" alt="Instagram" style="filter: brightness(0) opacity(0.6);" decoding="async" />
+                    panggonan_gdc
+                  </a>
+                  <a href="https://www.instagram.com/panggonan_ciracas/?hl=id" target="_blank"
+                    class="contact-link text-black" style="display:flex; align-items:center; gap:8px;">
+                    <img src="../assets/images/icons/instagram-icon.svg" loading="lazy" width="16" alt="Instagram" style="filter: brightness(0) opacity(0.6);" decoding="async" />
+                    panggonan_ciracas
+                  </a>
+                </div>
+
+                <!-- TIKTOK COLUMN -->
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  <div style="font-size: 0.85em; font-weight: 600; color: #888; margin-bottom: 4px;">TikTok</div>
+                  <a href="https://www.tiktok.com/@panggonan.resto" target="_blank" class="contact-link text-black"
+                    style="display:flex; align-items:center; gap:8px;">
+                    <img src="../assets/images/icons/tiktok-icon.svg" loading="lazy" width="16" alt="TikTok" style="filter: brightness(0) opacity(0.6);" decoding="async" />
+                    @panggonan.resto
+                  </a>
+                  <a href="https://www.tiktok.com/@panggonan_gdc" target="_blank" class="contact-link text-black"
+                    style="display:flex; align-items:center; gap:8px;">
+                    <img src="../assets/images/icons/tiktok-icon.svg" loading="lazy" width="16" alt="TikTok" style="filter: brightness(0) opacity(0.6);" decoding="async" />
+                    @panggonan_gdc
+                  </a>
+                  <a href="https://www.tiktok.com/@panggonan.ciracas" target="_blank" class="contact-link text-black"
+                    style="display:flex; align-items:center; gap:8px;">
+                    <img src="../assets/images/icons/tiktok-icon.svg" loading="lazy" width="16" alt="TikTok" style="filter: brightness(0) opacity(0.6);" decoding="async" />
+                    @panggonan.ciracas
+                  </a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EVENT HIGHLIGHT & WA FORM -->
+    <section class="reservasi-event" id="form-reservasi" style="
+          margin-top: 0;
+          border-top: none;
+          padding-top: 60px;
+          padding-bottom: 80px;
+        ">
+      <div class="w-layout-blockcontainer container w-container">
+        <div class="event-grid">
+          <!-- Left: Event Image & Highlights -->
+          <div class="event-image-wrap">
+            <img src="../assets/images/panggonan_aset_ke_2/sesi_potret.webp" loading="lazy" alt="Panggonan Event Reservasi" class="event-image" decoding="async" />
+            <div class="event-tags-overlay">
+              <span class="e-tag">Intimate Wedding</span>
+              <span class="e-tag">Acara Bukber</span>
+              <span class="e-tag">Family Gathering</span>
+              <span class="e-tag">Meeting Room</span>
+              <span class="e-tag">Photoshoot</span>
+              <span class="e-tag">Anniversary</span>
+            </div>
+          </div>
+
+          <!-- Right: WhatsApp Form -->
+          <div class="event-form-wrap">
+            <div class="title-wrapper" style="margin-bottom: 32px">
+              <div class="caption">[ LAYANAN EVENT & RESERVASI ]</div>
+              <h2 style="
+                    font-size: 2.2rem;
+                    margin-top: 12px;
+                    margin-bottom: 16px;
+                  ">
+                Reservasi Momen Spesial Anda
+              </h2>
+              <p style="color: #666; font-size: 1.05rem; line-height: 1.6">
+                Dapatkan penawaran dan tata ruang terbaik untuk setiap acara
+                penting Anda di Panggonan. Isi detail di bawah, dan tim kami
+                akan melayani Anda melalui WhatsApp.
+              </p>
+            </div>
+
+            <form id="wa-reservation-form" class="wa-form" onsubmit="submitWhatsAppForm(event)">
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Nama Lengkap</label>
+                  <input type="text" id="wa-nama" required class="input-field" placeholder="Nama Anda..." />
+                </div>
+                <div class="form-group">
+                  <label>Nomor WhatsApp (Aktif)</label>
+                  <input type="tel" id="wa-phone" required class="input-field" placeholder="081234567890" pattern="[0-9+-\s]*" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Pilih Cabang</label>
+                  <select id="wa-cabang" required class="input-field select-field">
+                    <option value="GDC Depok">GDC Depok</option>
+                    <option value="Ciracas">Ciracas, Jakarta Timur</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Jumlah Tamu / Pax</label>
+                  <input type="number" id="wa-pax" required class="input-field" placeholder="Contoh: 10" min="1" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Jenis Reservasi/Acara</label>
+                  <select id="wa-layanan" required class="input-field select-field">
+                    <option value="Makan Biasa / Santai">
+                      Makan Biasa / Santai
+                    </option>
+                    <option value="Intimate Wedding">Intimate Wedding</option>
+                    <option value="Acara Bukber">Acara Bukber</option>
+                    <option value="Family Gathering">Family Gathering</option>
+                    <option value="Meeting Room">Meeting Room</option>
+                    <option value="Photoshoot">Photoshoot</option>
+                    <option value="Anniversary">Anniversary</option>
+                    <option value="Lainnya">Lainnya...</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Tanggal & Jam Pelaksanaan</label>
+                  <div style="display: flex; gap: 12px;">
+                    <input type="date" id="wa-tanggal" required class="input-field" style="flex: 1;" title="Tanggal" />
+                    <input type="time" id="wa-jam" required class="input-field" style="flex: 1;" title="Jam" />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group" style="margin-bottom: 28px">
+                <label>Catatan Tambahan (Opsional)</label>
+                <textarea id="wa-pesan" class="input-field text-area" rows="3"
+                  placeholder="Contoh: Butuh setting layout U-shape, tambahan dekorasi, menu khusus..."></textarea>
+              </div>
+              <button type="submit" class="primary-button btn-whatsapp w-inline-block" style="
+                    width: 100%;
+                    justify-content: center;
+                    border: none;
+                    cursor: pointer;
+                  ">
+                <div>Kirim via WhatsApp</div>
+                <img src="../assets/images/icons/btn-icon.svg" loading="lazy" alt="" class="primary-button-image" decoding="async" />
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DUAL BRANCH CARDS -->
+    <section class="section" style="padding-top: 80px; padding-bottom: 80px">
+      <div class="w-layout-blockcontainer container w-container">
+        <div class="section-wrap">
+          <div class="title-wrapper text-center" style="
+                margin-bottom: 40px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+              ">
+            <div class="caption">[ LOKASI CABANG ]</div>
+            <h2 style="font-size: 2.5rem; margin-top: 12px">
+              Kunjungi Panggonan Secara Langsung
+            </h2>
+          </div>
+
+          <div class="branch-grid" style="margin-top: 0">
+            <!-- CABANG 1: GDC DEPOK -->
+            <div class="branch-card">
+              <iframe class="branch-map"
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15860.466!2d106.8254432!3d-6.4380999!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69ebf2d8cc812f%3A0x766c388ef63cde6d!2sPANGGONAN!5e0!3m2!1sid!2sid!4v1712393300000!5m2!1sid!2sid"
+                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                title="Peta Panggonan GDC Depok">
+              </iframe>
+              <div class="branch-info">
+                <span class="branch-badge">&#9733; 4.4 498 Ulasan</span>
+                <h2 class="branch-name">Panggonan GDC Depok</h2>
+                <div class="branch-detail-row">
+                  <span class="branch-label">Alamat</span>
+                  <span class="branch-value">Jl. Boulevard Grand Depok City No.17, Jatimulya, Kec.
+                    Cilodong, Kota Depok, Jawa Barat</span>
+                </div>
+                <div class="branch-detail-row">
+                  <span class="branch-label">Jam Buka</span>
+                  <span class="branch-value">Setiap Hari 10.00 22.00 WIB</span>
+                </div>
+                <div class="branch-detail-row">
+                  <span class="branch-label">Telepon / WhatsApp</span>
+                  <span class="branch-value">0878-4535-9184</span>
+                </div>
+                <div class="branch-actions">
+                  <a href="https://wa.me/6287845359184?text=Halo+Panggonan+GDC%2C+saya+ingin+reservasi+meja."
+                    target="_blank" class="branch-btn branch-btn-wa">
+                    Chat WhatsApp
+                  </a>
+                  <a href="https://maps.google.com/?q=Panggonan+GDC+Depok" target="_blank"
+                    class="branch-btn branch-btn-maps">
+                    Lihat di Maps
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- CABANG 2: CIRACAS -->
+            <div class="branch-card">
+              <iframe class="branch-map"
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15863.944!2d106.8831348!3d-6.3283158!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69ed003def8459%3A0xd9ef072786f95246!2sPANGGONAN%20Ciracas!5e0!3m2!1sid!2sid!4v1712393300000!5m2!1sid!2sid"
+                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                title="Peta Panggonan Ciracas">
+              </iframe>
+              <div class="branch-info">
+                <span class="branch-badge">&#9733; 3.6 55 Ulasan</span>
+                <h2 class="branch-name">Panggonan Ciracas</h2>
+                <div class="branch-detail-row">
+                  <span class="branch-label">Alamat</span>
+                  <span class="branch-value">Jl. Raya Ciracas No.8, RT.9/RW.3, Klp. Dua Wetan, Kec.
+                    Ciracas, Kota Jakarta Timur 13740</span>
+                </div>
+                <div class="branch-detail-row">
+                  <span class="branch-label">Jam Buka</span>
+                  <span class="branch-value">Setiap Hari 16.30 Malam WIB</span>
+                </div>
+                <div class="branch-detail-row">
+                  <span class="branch-label">Telepon / WhatsApp</span>
+                  <span class="branch-value">0878-2888-8538</span>
+                </div>
+                <div class="branch-actions">
+                  <a href="https://wa.me/6287828888538?text=Halo+Panggonan+Ciracas%2C+saya+ingin+reservasi+meja."
+                    target="_blank" class="branch-btn branch-btn-wa">
+                    Chat WhatsApp
+                  </a>
+                  <a href="https://maps.google.com/?q=Panggonan+Ciracas+Jakarta+Timur" target="_blank"
+                    class="branch-btn branch-btn-maps">
+                    Lihat di Maps
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- END BRANCH GRID -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="section to-top">
+      <div class="w-layout-blockcontainer container w-container">
+        <div class="cta" style="margin: 5rem 0">
+          <div class="cta-data">
+            <div class="cta-top">
+              <div class="title-wrapper">
+                <div class="caption text-white">[ Reservasi Tempat ]</div>
+                <h2 class="text-white">
+                  Mari Merangkai Cerita Anda Bersama Panggonan!
+                </h2>
+              </div>
+              <div>
+                <a href="https://wa.me/6287845359184?text=Halo+Panggonan%2C+saya+ingin+reservasi+meja." target="_blank"
+                  class="primary-button w-inline-block">
+                  <div>Pesan Mejamu Sekarang</div>
+                  <img src="../assets/images/icons/btn-icon.svg" loading="lazy" alt="Arrow Icon" class="primary-button-image" decoding="async" />
+                </a>
+              </div>
+            </div>
+            <div class="cta-bottom">
+              <div class="cta-card">
+                <h3 class="text-white">15+</h3>
+                <div class="text-light-gray">Deretan Menu Nusantara</div>
+              </div>
+              <div class="cta-card">
+                <h3 class="text-white">500+</h3>
+                <div class="text-light-gray">
+                  Pelanggan Puas &amp; Bahagia
+                </div>
+              </div>
+              <div class="cta-card">
+                <h3 class="text-white">2</h3>
+                <div class="text-light-gray">Cabang Aktif</div>
+              </div>
+            </div>
+          </div>
+          <div class="cta-image">
+            <img sizes="(max-width: 479px) 83vw, (max-width: 767px) 87vw, (max-width: 991px) 42vw, 37vw" alt="Suasana Panggonan" src="../assets/images/panggonan_aset_ke_2/kebersamaan.webp" loading="eager" class="cover-image" decoding="async" />
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="footer bg-black">
+    <div class="w-layout-blockcontainer container w-container">
+      <div class="footer-block">
+        <div class="footer-top">
+          <div class="footer-left">
+            <h3 class="text-white">Tetap Terhubung dengan Kami</h3>
+            <div>
+              Tidak menemukan jawaban yang Anda cari? Hubungi kami langsung
+              dan tim Panggonan siap membantu dengan sepenuh hati.
+            </div>
+          </div>
+          <div class="footer-right">
+            <div class="footer-card">
+              <div class="body-600">Perusahaan</div>
+              <div class="footer-inner">
+                <a href="../about-us/" class="footer-link body-small">Tentang</a><a href="../menu/"
+                  class="footer-link body-small">Menu</a><a href="../services/"
+                  class="footer-link body-small">Layanan</a><a href="../blog/"
+                  class="footer-link body-small">Jurnal</a><a href="../contact-us/"
+                  class="footer-link body-small">Kontak</a>
+              </div>
+            </div>
+            <div class="footer-image-wrapper">
+              <img src="../assets/images/panggonan_aset_ke_2/ambiance_luar_malam.webp" alt="Atmosfer Restoran Panggonan" loading="lazy" decoding="async" />
+            </div>
+          </div>
+        </div>
+        <div class="footer-middle">
+          <a href="" aria-current="page" class="footer-logo w-inline-block w--current">
+            <h3 style="margin: 0; color: #d4af37">Panggonan</h3>
+          </a>
+          <div class="footer-contacts">
+            <div class="contact-card">
+              <div
+                style="color: #d4af37; font-weight: 600; margin-bottom: 12px; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                Kirim Email</div>
+              <a href="mailto:panggonanresto@gmail.com" class="footer-link"
+                style="display:flex; align-items:center; gap:10px; font-size: 0.9rem; line-height: 1.6;">
+                <img src="../assets/images/icons/mail.svg" width="16" alt="Email" style="opacity: 0.7;" loading="lazy" decoding="async">
+                panggonanresto@gmail.com
+              </a>
+              <a href="mailto:panggonanciracas@gmail.com" class="footer-link"
+                style="display:flex; align-items:center; gap:10px; font-size: 0.9rem; line-height: 1.6;">
+                <img src="../assets/images/icons/mail.svg" width="16" alt="Email" style="opacity: 0.7;" loading="lazy" decoding="async">
+                panggonanciracas@gmail.com
+              </a>
+              <a href="mailto:panggonangdc@gmail.com" class="footer-link"
+                style="display:flex; align-items:center; gap:10px; font-size: 0.9rem; line-height: 1.6;">
+                <img src="../assets/images/icons/mail.svg" width="16" alt="Email" style="opacity: 0.7;" loading="lazy" decoding="async">
+                panggonangdc@gmail.com
+              </a>
+            </div>
+            <div class="contact-card">
+              <div
+                style="color: #d4af37; font-weight: 600; margin-bottom: 12px; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                Telepon</div>
+              <a href="tel:+6287828888538" class="footer-link"
+                style="display:flex; align-items:center; gap:10px; font-size: 0.9rem; line-height: 1.6;">
+                <img src="../assets/images/icons/phone.svg" width="16" alt="Phone" style="opacity: 0.7;" loading="lazy" decoding="async"> Ciracas:
+                0878-2888-8538
+              </a>
+              <a href="tel:+6287845359184" class="footer-link"
+                style="display:flex; align-items:center; gap:10px; font-size: 0.9rem; line-height: 1.6;">
+                <img src="../assets/images/icons/phone.svg" width="16" alt="Phone" style="opacity: 0.7;" loading="lazy" decoding="async"> GDC:
+                0878-4535-9184
+              </a>
+            </div>
+            <div class="contact-card">
+              <div
+                style="color: #d4af37; font-weight: 600; margin-bottom: 12px; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                Instagram</div>
+              <a href="https://www.instagram.com/panggonan.resto/?hl=id" target="_blank" class="footer-link"
+                style="display:flex; align-items:center; gap:10px; font-size: 0.9rem; line-height: 1.6;">
+                <img src="../assets/images/icons/instagram-icon.svg" width="16" alt="IG" style="opacity: 0.7;" loading="lazy" decoding="async">
+                panggonan.resto
+              </a>
+              <a href="https://www.instagram.com/panggonan_gdc/?hl=id" target="_blank" class="footer-link"
+                style="display:flex; align-items:center; gap:10px; font-size: 0.9rem; line-height: 1.6;">
+                <img src="../assets/images/icons/instagram-icon.svg" width="16" alt="IG" style="opacity: 0.7;" loading="lazy" decoding="async">
+                panggonan_gdc
+              </a>
+              <a href="https://www.instagram.com/panggonan_ciracas/?hl=id" target="_blank" class="footer-link"
+                style="display:flex; align-items:center; gap:10px; font-size: 0.9rem; line-height: 1.6;">
+                <img src="../assets/images/icons/instagram-icon.svg" width="16" alt="IG" style="opacity: 0.7;" loading="lazy" decoding="async">
+                panggonan_ciracas
+              </a>
+            </div>
+            <div class="contact-card">
+              <div
+                style="color: #d4af37; font-weight: 600; margin-bottom: 12px; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                TikTok</div>
+              <a href="https://www.tiktok.com/@panggonan.resto" target="_blank" class="footer-link"
+                style="display:flex; align-items:center; gap:10px; font-size: 0.9rem; line-height: 1.6;">
+                <img src="../assets/images/icons/tiktok-icon.svg" width="16" alt="TikTok" style="opacity: 0.7;" loading="lazy" decoding="async">
+                @panggonan.resto
+              </a>
+              <a href="https://www.tiktok.com/@panggonan_gdc" target="_blank" class="footer-link"
+                style="display:flex; align-items:center; gap:10px; font-size: 0.9rem; line-height: 1.6;">
+                <img src="../assets/images/icons/tiktok-icon.svg" width="16" alt="TikTok" style="opacity: 0.7;" loading="lazy" decoding="async">
+                @panggonan_gdc
+              </a>
+              <a href="https://www.tiktok.com/@panggonan.ciracas" target="_blank" class="footer-link"
+                style="display:flex; align-items:center; gap:10px; font-size: 0.9rem; line-height: 1.6;">
+                <img src="../assets/images/icons/tiktok-icon.svg" width="16" alt="TikTok" style="opacity: 0.7;" loading="lazy" decoding="async">
+                @panggonan.ciracas
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <div class="body-small" style="color: rgba(255, 255, 255, 0.4)">
+            &copy; 2026 Panggonan. Seluruh hak cipta dilindungi.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="../assets/js/jquery-3.5.1.min.js" type="text/javascript" crossorigin="anonymous"  defer></script>
+  <script src="../assets/js/script.js" type="text/javascript" defer></script>
+
+  <script>
+    function submitWhatsAppForm(event) {
+      event.preventDefault();
+
+      const nama = document.getElementById("wa-nama").value;
+      const phone = document.getElementById("wa-phone").value;
+      const cabang = document.getElementById("wa-cabang").value;
+      const layanan = document.getElementById("wa-layanan").value;
+      const tanggal = document.getElementById("wa-tanggal").value;
+      const jam = document.getElementById("wa-jam").value;
+      const pax = document.getElementById("wa-pax").value;
+      const pesan = document.getElementById("wa-pesan").value || "-";
+
+      // Choose WhatsApp target number
+      const targetNumber =
+        cabang === "GDC Depok" ? "6287845359184" : "6287828888538";
+
+      // Construct the message
+      const waText = `Halo admin Panggonan ${cabang}, saya ingin melakukan reservasi dengan detail:
+
+*Nama:* ${nama}
+*No. WA:* ${phone}
+*Jenis Acara:* ${layanan}
+*Tanggal & Jam:* ${tanggal} Pukul ${jam} WIB
+*Jumlah Tamu:* ${pax} pax
+*Catatan:* ${pesan}
+
+Apakah pada waktu tersebut ketersediaan masih ada? Mohon infonya, terima kasih.`;
+
+      // 1. Submit data via AJAX to database
+      const submitBtn = document.querySelector("#wa-reservation-form button[type='submit']");
+      const originalBtnHtml = submitBtn.innerHTML;
+      submitBtn.innerHTML = "<div>Menyimpan...</div>";
+      submitBtn.style.opacity = "0.7";
+      submitBtn.disabled = true;
+
+      const formData = new FormData();
+      formData.append('name', nama);
+      formData.append('phone', phone);
+      formData.append('branch', cabang);
+      formData.append('event_type', layanan);
+      formData.append('reservation_date', tanggal);
+      formData.append('reservation_time', jam);
+      formData.append('pax', pax);
+      formData.append('note', pesan);
+
+      fetch('submit_reservation.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(res => res.json())
+      .then(data => {
+        submitBtn.innerHTML = originalBtnHtml;
+        submitBtn.style.opacity = "1";
+        submitBtn.style.pointerEvents = "auto";
+
+        if (data.status === 'success') {
+          // Show success modal
+          document.getElementById('success-modal').style.display = 'flex';
+          
+          // Open in WhatsApp
+          const encodedText = encodeURIComponent(waText);
+          window.open(
+            `https://wa.me/${targetNumber}?text=${encodedText}`,
+            "_blank"
+          );
+          
+          // Reset Form
+          document.getElementById('wa-reservation-form').reset();
+        } else {
+          alert('Terjadi kesalahan: ' + (data.message || 'Gagal menyimpan ke database.'));
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        submitBtn.innerHTML = originalBtnHtml;
+        submitBtn.style.opacity = "1";
+        submitBtn.style.pointerEvents = "auto";
+        
+        // Fallback: still open WhatsApp if database fails
+        const encodedText = encodeURIComponent(waText);
+        window.open(
+          `https://wa.me/${targetNumber}?text=${encodedText}`,
+          "_blank"
+        );
+      });
+    }
+  </script>
+  <script src="../assets/js/panggonan-nav-fix.js" type="text/javascript"></script>
+  <script src="../assets/js/tracker.js" defer></script>
+</body>
+
+</html>

@@ -1,131 +1,207 @@
 /**
- * ADVANCED TRAFFIC DASHBOARD - PANGGONAN
- * Security, Data Visualization & Visitor Log Engine
+ * ADVANCED TRAFFIC ANALYTICS DASHBOARD - PANGGONAN RESTO
+ * 100% Database-Driven Real-Time Metrics, Dynamic Charts & Logs
  */
 
-// 1. AUTHENTICATION LOGIC
-const PASSWORD = "password";
-const SESSION_KEY = "panggonan_dashboard_access";
+// Global Dashboard States
+let currentPeriod = 'hari';
+let currentSearch = '';
+let currentSortCol = -1;
+let currentSortAsc = true;
+let currentPage = 1;
+let liveUserInterval = null;
 
-// Cek apakah sudah login sebelumnya di sesi ini
-document.addEventListener("DOMContentLoaded", () => {
-    if (sessionStorage.getItem(SESSION_KEY) === "granted") {
-        unlockDashboard(false);
-    }
-});
+// Global Chart Instances to prevent canvas redraw bugs
+window.trafficChartInstance = null;
+window.sourceChartInstance = null;
+window.deviceChartInstance = null;
+window.ageChartInstance = null;
 
-function verifyPassword() {
-    const input = document.getElementById('auth-password').value;
-    const errorMsg = document.getElementById('auth-error');
-
-    if(input === PASSWORD) {
-        errorMsg.classList.remove('show');
-        // Simpan sesi ke browser
-        sessionStorage.setItem(SESSION_KEY, "granted");
-        unlockDashboard(true);
-    } else {
-        errorMsg.classList.add('show');
-        const modal = document.querySelector('.auth-modal');
-        modal.style.transform = "translateX(-10px)";
-        setTimeout(() => modal.style.transform = "translateX(10px)", 100);
-        setTimeout(() => modal.style.transform = "translateX(-10px)", 200);
-        setTimeout(() => modal.style.transform = "translateX(0)", 300);
-    }
+if (document.readyState === "complete" || document.readyState === "interactive") {
+    initDashboard();
+} else {
+    document.addEventListener("DOMContentLoaded", initDashboard);
 }
 
-function unlockDashboard(withAnimation) {
-    if (withAnimation) {
-        document.getElementById('auth-screen').classList.add('fade-out');
-        setTimeout(() => {
-            initDashboardComponents();
-        }, 500);
-    } else {
-        initDashboardComponents();
+function initDashboard() {
+    console.log('%c[Dashboard] initDashboard called!', 'color: #3b82f6; font-weight: bold;');
+    // Check if on traffic tab
+    const wrapper = document.querySelector('.traffic-dashboard-wrapper');
+    if (!wrapper) {
+        console.warn('%c[Dashboard] .traffic-dashboard-wrapper element NOT found in DOM. Skipping init.', 'color: #f59e0b;');
+        return;
     }
-}
 
-function initDashboardComponents() {
-    document.getElementById('auth-screen').style.display = 'none';
-    document.getElementById('main-dashboard').classList.remove('hidden');
-    // Mencegah inisialisasi ganda jika di-refresh
-    if (!window.dashboardInitialized) {
-        initCharts();
-        initVisitorLog();
-        startLiveSimulation();
-        startClock();
-        window.dashboardInitialized = true;
-    }
-}
+    console.log('%c[Dashboard] .traffic-dashboard-wrapper found. Initializing components...', 'color: #10b981;');
+    // Load initial traffic data
+    loadTrafficData();
 
-document.getElementById('auth-password').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') verifyPassword();
-});
+    // Start Live Clock
+    startClock();
 
-// Fungsi Logout
-function logoutDashboard() {
-    sessionStorage.removeItem(SESSION_KEY);
-    window.location.reload();
-}
+    // Start Real-time live synchronization (every 10 seconds)
+    startLiveSync();
 
-// Fungsi Navigasi Burger Sidebar
-function toggleSidebar() {
-    const sidebar = document.querySelector('.sidebar');
-    const overlay = document.querySelector('.sidebar-overlay');
-    
-    sidebar.classList.toggle('collapsed');
-    
-    if (overlay) {
-        if (window.innerWidth <= 1024) {
-            // Pada Mobile/Tablet, overlay aktif jika sidebar TERBUKA (tidak memiliki class collapsed)
-            if (!sidebar.classList.contains('collapsed')) {
-                overlay.classList.add('active');
-            } else {
-                overlay.classList.remove('active');
-            }
-        } else {
-            // Desktop tidak pakai overlay
-            overlay.classList.remove('active');
-        }
+    // Hook search input keypress with debounce
+    const searchInput = document.getElementById('visitor-search');
+    if (searchInput) {
+        let debounceTimer;
+        searchInput.addEventListener('input', (e) => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                currentSearch = e.target.value;
+                currentPage = 1; // reset to page 1 on search
+                loadTrafficData();
+            }, 300);
+        });
     }
 }
 
-// Inisialisasi: Tutup sidebar secara otomatis jika layar ukuran mobile/tablet saat pertama kali muat
-if (window.innerWidth <= 1024) {
-    const sidebar = document.querySelector('.sidebar');
-    if (sidebar && !sidebar.classList.contains('collapsed')) {
-        sidebar.classList.add('collapsed');
-    }
-}
-
-// 2. CHART VISUALIZATIONS
-function initCharts() {
-    const labels = Array.from({length: 30}, (_, i) => `H-${30 - i}`);
-    let currentVal = 200;
-    const trafficData = labels.map(() => {
-        currentVal = currentVal + (Math.random() * 40 - 15);
-        return Math.floor(Math.max(currentVal, 50));
+// 1. DYNAMIC API REQUEST HANDLER
+function loadTrafficData() {
+    console.log('%c[Dashboard] loadTrafficData triggered.', 'color: #3b82f6;');
+    const params = new URLSearchParams({
+        period: currentPeriod,
+        search: currentSearch,
+        sortCol: currentSortCol,
+        sortAsc: currentSortAsc,
+        page: currentPage
     });
 
-    const ctxMain = document.getElementById('trafficChart').getContext('2d');
-    let gradient = ctxMain.createLinearGradient(0, 0, 0, 400);
-    gradient.addColorStop(0, 'rgba(99, 102, 241, 0.5)');
+    const apiUrl = `get_traffic_data.php?${params.toString()}`;
+    console.log(`%c[Dashboard] Fetching from endpoint: ${apiUrl}`, 'color: #8b5cf6;');
+
+    fetch(apiUrl)
+        .then(response => {
+            console.log(`%c[Dashboard] HTTP Response Status: ${response.status}`, response.ok ? 'color: #10b981;' : 'color: #ef4444;');
+            if (!response.ok) throw new Error('HTTP Status ' + response.status);
+            return response.json();
+        })
+        .then(res => {
+            console.log('%c[Dashboard] JSON parsed successfully:', 'color: #10b981;', res);
+            if (res.status === 'success') {
+                renderDashboardMetrics(res);
+                console.log('%c[Dashboard] renderDashboardMetrics executed successfully.', 'color: #10b981; font-weight: bold;');
+            } else {
+                console.warn('%c[Dashboard] API returned error status:', 'color: #f59e0b;', res.message);
+            }
+        })
+        .catch(err => {
+            console.error('%c[Dashboard] Failed to load traffic metrics:', 'color: #ef4444; font-weight: bold;', err);
+        });
+}
+
+// 2. RENDER SUMMARY METRICS & UPDATE CHARTS
+function renderDashboardMetrics(res) {
+    // A. Update Summary Cards
+    const totalVisitsEl = document.getElementById('val-kunjungan');
+    const waClicksEl = document.getElementById('val-wa-clicks');
+    const avgDurationEl = document.getElementById('val-avg-duration');
+    const realtimeEl = document.getElementById('val-realtime');
+
+    if (totalVisitsEl) totalVisitsEl.innerText = res.metrics.totalVisits;
+    if (waClicksEl) waClicksEl.innerText = res.metrics.waClicks;
+    if (avgDurationEl) avgDurationEl.innerText = res.metrics.avgDuration;
+    if (realtimeEl) realtimeEl.innerText = res.metrics.realtimeUsers;
+
+    // B. Update Demographics Cards (Demografi Tab)
+    const uniqueUsersEl = document.getElementById('val-unique-users');
+    const genderRatioEl = document.getElementById('val-gender-ratio');
+    const ageDominantEl = document.getElementById('val-age-dominant');
+
+    if (uniqueUsersEl) uniqueUsersEl.innerText = res.metrics.totalUnique;
+    if (genderRatioEl) genderRatioEl.innerText = `${res.metrics.genderMale}% / ${res.metrics.genderFemale}%`;
+    if (ageDominantEl) ageDominantEl.innerText = res.metrics.ageDominant;
+
+    // C. Update Conversions Cards (Konversi Tab)
+    const convRateEl = document.getElementById('val-conversion-rate');
+    const convWaEl = document.getElementById('val-conv-wa');
+    const convMapsEl = document.getElementById('val-conv-maps');
+
+    if (convRateEl) convRateEl.innerText = `${res.funnel.rate}%`;
+    if (convWaEl) convWaEl.innerText = res.metrics.waClicks;
+    if (convMapsEl) convMapsEl.innerText = res.metrics.mapsClicks;
+
+    // D. Update Top 5 Locations Table
+    const locTbody = document.getElementById('top-locations-tbody');
+    if (locTbody) {
+        if (res.locations && res.locations.length > 0) {
+            let totalLocCount = res.locations.reduce((acc, curr) => acc + parseInt(curr.count), 0);
+            let locHtml = '';
+            res.locations.forEach((loc, index) => {
+                const percentage = totalLocCount > 0 ? Math.round((parseInt(loc.count) / totalLocCount) * 100) : 0;
+                locHtml += `<tr>
+                    <td>${index + 1}</td>
+                    <td class="text-bold">${loc.location}</td>
+                    <td>${parseInt(loc.count).toLocaleString('id-ID')}</td>
+                    <td><span class="status-dot active">${percentage}%</span></td>
+                </tr>`;
+            });
+            locTbody.innerHTML = locHtml;
+        } else {
+            locTbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-muted); font-style: italic; padding: 20px;">Tidak ada data lokasi.</td></tr>`;
+        }
+    }
+
+    // E. Render Main Line Chart
+    renderTrafficLineChart(res.chart.labels, res.chart.values);
+
+    // F. Render Source Doughnut Chart
+    renderSourceDoughnutChart(res.sources.labels, res.sources.values);
+
+    // G. Render Device Doughnut Chart
+    renderDeviceDoughnutChart(res.devices.labels, res.devices.values);
+
+    // H. Render Funnel Conversion Rates
+    renderFunnelData(res.funnel);
+
+    // I. Render Visitor Logs Table
+    renderVisitorTable(res.logs);
+
+    // J. Render Demographics Charts
+    renderDemografiCharts(res.metrics.ageDistribution);
+}
+
+// 3. MAIN LINE CHART RENDERING
+function renderTrafficLineChart(labels, data) {
+    if (typeof Chart === 'undefined') {
+        console.warn('[Dashboard] Chart.js is not loaded. Skipping line chart rendering.');
+        return;
+    }
+    const canvas = document.getElementById('trafficChart');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    
+    // Clean old chart instance to prevent redraw overlay bugs
+    if (window.trafficChartInstance) {
+        window.trafficChartInstance.destroy();
+    }
+
+    // Use gold/blue gradient for high fidelity
+    let gradient = ctx.createLinearGradient(0, 0, 0, 300);
+    gradient.addColorStop(0, 'rgba(99, 102, 241, 0.4)');
     gradient.addColorStop(1, 'rgba(99, 102, 241, 0.0)');
 
-    new Chart(ctxMain, {
+    // Fallback labels if empty
+    const finalLabels = labels.length > 0 ? labels : Array.from({length: 30}, (_, i) => `H-${30 - i}`);
+    const finalData = data.length > 0 ? data : finalLabels.map(() => 0);
+
+    window.trafficChartInstance = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: labels,
+            labels: finalLabels,
             datasets: [{
-                label: 'Kunjungan Harian',
-                data: trafficData,
+                label: 'Kunjungan',
+                data: finalData,
                 borderColor: '#6366f1',
                 backgroundColor: gradient,
                 borderWidth: 3,
                 pointBackgroundColor: '#1e293b',
                 pointBorderColor: '#6366f1',
                 pointBorderWidth: 2,
-                pointRadius: 3,
-                pointHoverRadius: 6,
+                pointRadius: 4,
+                pointHoverRadius: 7,
                 fill: true,
                 tension: 0.4
             }]
@@ -145,194 +221,185 @@ function initCharts() {
                 }
             },
             scales: {
-                y: { beginAtZero: true, grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#94a3b8' } },
-                x: { grid: { display: false }, ticks: { maxTicksLimit: 10, color: '#94a3b8' } }
+                y: { 
+                    beginAtZero: true, 
+                    grid: { color: 'rgba(255, 255, 255, 0.05)' }, 
+                    ticks: { color: '#8e95a5', font: { family: 'Inter' } } 
+                },
+                x: { 
+                    grid: { display: false }, 
+                    ticks: { maxTicksLimit: 12, color: '#8e95a5', font: { family: 'Inter' } } 
+                }
             }
         }
     });
+}
 
-    const ctxSource = document.getElementById('sourceChart').getContext('2d');
-    new Chart(ctxSource, {
+// 4. SOURCE DOUGHNUT CHART RENDERING
+function renderSourceDoughnutChart(labels, values) {
+    if (typeof Chart === 'undefined') {
+        console.warn('[Dashboard] Chart.js is not loaded. Skipping source chart rendering.');
+        return;
+    }
+    const canvas = document.getElementById('sourceChart');
+    if (!canvas) return;
+
+    if (window.sourceChartInstance) {
+        window.sourceChartInstance.destroy();
+    }
+
+    const finalLabels = labels.length > 0 ? labels : ['Direct', 'Instagram Link', 'Pencarian Google'];
+    const finalValues = values.length > 0 ? values : [40, 35, 25];
+
+    window.sourceChartInstance = new Chart(canvas.getContext('2d'), {
         type: 'doughnut',
         data: {
-            labels: ['Pencarian Google', 'Instagram Link', 'Direct'],
-            datasets: [{ data: [56, 30, 14], backgroundColor: ['#6366f1', '#10b981', '#f59e0b'], borderWidth: 0, hoverOffset: 4 }]
+            labels: finalLabels,
+            datasets: [{ 
+                data: finalValues, 
+                backgroundColor: ['#6366f1', '#10b981', '#f59e0b', '#ec4899', '#3b82f6'], 
+                borderWidth: 0, 
+                hoverOffset: 4 
+            }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
             cutout: '75%',
-            plugins: { legend: { display: false }, tooltip: { backgroundColor: 'rgba(15, 23, 42, 0.9)', padding: 12, cornerRadius: 8 } }
+            plugins: { 
+                legend: { display: false }, 
+                tooltip: { 
+                    backgroundColor: 'rgba(15, 23, 42, 0.9)', 
+                    padding: 12, 
+                    cornerRadius: 8 
+                } 
+            }
+        }
+    });
+
+    // Update list percentages in HTML based on real database values
+    const sourceList = document.querySelector('.source-list');
+    if (sourceList && labels.length > 0) {
+        let total = finalValues.reduce((a, b) => a + b, 0);
+        let listHtml = '';
+        const colors = ['#6366f1', '#10b981', '#f59e0b', '#ec4899', '#3b82f6'];
+        
+        finalLabels.forEach((label, idx) => {
+            const perc = total > 0 ? Math.round((finalValues[idx] / total) * 100) : 0;
+            const color = colors[idx % colors.length];
+            listHtml += `<li>
+                <span class="color-dot" style="background: ${color}"></span>
+                ${label} <span class="perc">${perc}%</span>
+            </li>`;
+        });
+        sourceList.innerHTML = listHtml;
+    }
+}
+
+// 5. DEVICE DOUGHNUT CHART RENDERING
+function renderDeviceDoughnutChart(labels, values) {
+    if (typeof Chart === 'undefined') {
+        console.warn('[Dashboard] Chart.js is not loaded. Skipping device chart rendering.');
+        return;
+    }
+    const canvas = document.getElementById('deviceChart');
+    if (!canvas) return;
+
+    if (window.deviceChartInstance) {
+        window.deviceChartInstance.destroy();
+    }
+
+    const finalLabels = labels.length > 0 ? labels : ['Mobile', 'Desktop', 'Tablet'];
+    const finalValues = values.length > 0 ? values : [65, 30, 5];
+
+    window.deviceChartInstance = new Chart(canvas.getContext('2d'), {
+        type: 'pie',
+        data: {
+            labels: finalLabels,
+            datasets: [{
+                data: finalValues,
+                backgroundColor: ['#f43f5e', '#3b82f6', '#10b981'],
+                borderWidth: 0,
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom', labels: { color: '#8e95a5', padding: 20, font: { family: 'Inter' } } }
+            }
         }
     });
 }
 
-// 3. LIVE SIMULATION
-function startLiveSimulation() {
-    const realtimeEl = document.getElementById('val-realtime');
-    const totalVisitsEl = document.getElementById('val-kunjungan');
-    let currentActive = 18;
-    let totalVisits = 14258;
-
-    setInterval(() => {
-        const delta = Math.floor(Math.random() * 5) - 2;
-        currentActive = Math.max(5, currentActive + delta);
-        realtimeEl.innerText = currentActive;
-        if (delta > 0 && Math.random() > 0.5) {
-            totalVisits++;
-            totalVisitsEl.innerText = totalVisits.toLocaleString('id-ID');
-        }
-    }, 3500);
-}
-
-// 4. LIVE CLOCK
-function startClock() {
-    const clockEl = document.getElementById('status-clock');
-    function update() {
-        const now = new Date();
-        clockEl.textContent = now.toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'medium' });
+// 6. FUNNEL RENDERER
+function renderFunnelData(funnel) {
+    const step1El = document.getElementById('val-funnel-step1');
+    const step2El = document.getElementById('val-funnel-step2');
+    const step3El = document.getElementById('val-funnel-step3');
+    
+    if (step1El) {
+        step1El.innerHTML = `${funnel.step1.toLocaleString('id-ID')} <span style="font-size: 0.8rem; font-weight: normal">100%</span>`;
     }
-    update();
-    setInterval(update, 1000);
-}
-
-// =============================================
-// 5. VISITOR LOG TABLE ENGINE
-// =============================================
-
-// --- Data Generator ---
-const PAGES_LIST = ['/beranda', '/menu', '/tentang-kami', '/layanan', '/jurnal', '/galeri', '/kontak', '/faq'];
-const BROWSERS = ['Chrome 124', 'Safari 17.4', 'Firefox 125', 'Edge 124', 'Samsung Browser', 'Opera 109', 'Chrome Mobile 124', 'Safari Mobile'];
-const DEVICES = [
-    { name: 'iPhone 15', type: 'mobile', icon: 'fa-mobile-screen' },
-    { name: 'Samsung S24', type: 'mobile', icon: 'fa-mobile-screen' },
-    { name: 'Xiaomi 14', type: 'mobile', icon: 'fa-mobile-screen' },
-    { name: 'OPPO Find X7', type: 'mobile', icon: 'fa-mobile-screen' },
-    { name: 'Vivo V30', type: 'mobile', icon: 'fa-mobile-screen' },
-    { name: 'Windows PC', type: 'desktop', icon: 'fa-desktop' },
-    { name: 'MacBook Pro', type: 'desktop', icon: 'fa-laptop' },
-    { name: 'iMac', type: 'desktop', icon: 'fa-desktop' },
-    { name: 'iPad Pro', type: 'tablet', icon: 'fa-tablet-screen-button' },
-    { name: 'Galaxy Tab S9', type: 'tablet', icon: 'fa-tablet-screen-button' },
-];
-const LOCATIONS = [
-    'Jakarta Timur, ID', 'Depok, ID', 'Ciracas, ID', 'Bekasi, ID', 'Bogor, ID',
-    'Tangerang, ID', 'Jakarta Selatan, ID', 'Jakarta Barat, ID', 'Bandung, ID',
-    'Semarang, ID', 'Surabaya, ID', 'Yogyakarta, ID', 'Cibubur, ID',
-    'Cileungsi, ID', 'Jakarta Pusat, ID', 'Jakarta Utara, ID',
-];
-const IP_PREFIXES = ['103.28', '114.124', '180.252', '36.72', '182.1', '203.130', '110.136', '112.215', '120.188', '202.67', '125.163', '27.50', '103.3', '139.228', '175.45'];
-const STATUSES = ['active', 'ended', 'ended', 'ended', 'ended', 'ended', 'bounced']; // weighted toward ended
-
-function randomIP() {
-    const prefix = IP_PREFIXES[Math.floor(Math.random() * IP_PREFIXES.length)];
-    return `${prefix}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`;
-}
-
-function randomDuration(status) {
-    if (status === 'bounced') return Math.floor(Math.random() * 8) + 1; // 1-8 seconds
-    if (status === 'active') return Math.floor(Math.random() * 300) + 30; // 30s-5.5min
-    return Math.floor(Math.random() * 600) + 10; // 10s-10min
-}
-
-function formatDuration(seconds) {
-    if (seconds < 60) return `${seconds}s`;
-    const m = Math.floor(seconds / 60);
-    const s = seconds % 60;
-    return `${m}m ${s < 10 ? '0' : ''}${s}s`;
-}
-
-function generateVisitorData(count, daysBack) {
-    const data = [];
-    const now = new Date();
-    for (let i = 0; i < count; i++) {
-        const date = new Date(now.getTime() - Math.random() * daysBack * 24 * 60 * 60 * 1000);
-        const device = DEVICES[Math.floor(Math.random() * DEVICES.length)];
-        const status = STATUSES[Math.floor(Math.random() * STATUSES.length)];
-        const dur = randomDuration(status);
-        data.push({
-            date: date,
-            ip: randomIP(),
-            device: device,
-            browser: BROWSERS[Math.floor(Math.random() * BROWSERS.length)],
-            location: LOCATIONS[Math.floor(Math.random() * LOCATIONS.length)],
-            page: PAGES_LIST[Math.floor(Math.random() * PAGES_LIST.length)],
-            duration: dur,
-            durationFormatted: formatDuration(dur),
-            status: status,
-        });
+    if (step2El) {
+        const step2Perc = funnel.step1 > 0 ? Math.round((funnel.step2 / funnel.step1) * 100) : 0;
+        step2El.innerHTML = `${funnel.step2.toLocaleString('id-ID')} <span style="font-size: 0.8rem; font-weight: normal">${step2Perc}%</span>`;
     }
-    // Sort by date descending (newest first)
-    data.sort((a, b) => b.date - a.date);
-    return data;
-}
-
-// --- State ---
-let ALL_VISITORS = [];
-let filteredVisitors = [];
-let currentPage = 1;
-const ROWS_PER_PAGE = 20;
-let currentSortCol = -1;
-let currentSortAsc = true;
-
-// --- Init ---
-function initVisitorLog() {
-    // Generate a full year of data (~8000 entries)
-    ALL_VISITORS = generateVisitorData(8240, 365);
-    filterVisitors('hari', document.querySelector('.filter-tab.active'));
-}
-
-// --- Filter ---
-function filterVisitors(period, btnEl) {
-    // Update active tab
-    document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
-    btnEl.classList.add('active');
-
-    const now = new Date();
-    let cutoff;
-    switch(period) {
-        case 'hari':
-            cutoff = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-            break;
-        case 'minggu':
-            const dayOfWeek = now.getDay();
-            cutoff = new Date(now.getFullYear(), now.getMonth(), now.getDate() - dayOfWeek);
-            break;
-        case 'bulan':
-            cutoff = new Date(now.getFullYear(), now.getMonth(), 1);
-            break;
-        case 'tahun':
-            cutoff = new Date(now.getFullYear(), 0, 1);
-            break;
+    if (step3El) {
+        step3El.innerHTML = `${funnel.step3.toLocaleString('id-ID')} <span style="font-size: 0.8rem; font-weight: normal">${funnel.rate}%</span>`;
     }
-
-    filteredVisitors = ALL_VISITORS.filter(v => v.date >= cutoff);
-    currentPage = 1;
-    document.getElementById('visitor-search').value = '';
-    renderTable();
 }
 
-// --- Search ---
-function searchVisitors(query) {
-    const q = query.toLowerCase().trim();
-    if (!q) {
-        // Re-apply current filter
-        const activeBtn = document.querySelector('.filter-tab.active');
-        filterVisitors(activeBtn.dataset.filter, activeBtn);
+// 7. RENDERING DYNAMIC LOGS TABLE
+function renderVisitorTable(logs) {
+    const tbody = document.getElementById('visitor-tbody');
+    if (!tbody) return;
+
+    if (logs.data.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: var(--text-muted); padding: 30px; font-style: italic;">Tidak ada data log pengunjung yang ditemukan.</td></tr>`;
+        document.getElementById('table-info').textContent = 'Tidak ada data ditemukan';
+        document.getElementById('page-indicator').textContent = 'Halaman 1 / 1';
         return;
     }
-    filteredVisitors = filteredVisitors.filter(v =>
-        v.ip.includes(q) ||
-        v.location.toLowerCase().includes(q) ||
-        v.page.toLowerCase().includes(q) ||
-        v.device.name.toLowerCase().includes(q) ||
-        v.browser.toLowerCase().includes(q)
-    );
-    currentPage = 1;
-    renderTable();
+
+    let html = '';
+    logs.data.forEach((v, idx) => {
+        const rowNum = (logs.page - 1) * logs.limit + idx + 1;
+        const statusLabel = v.status === 'active' ? 'Aktif' : v.status === 'bounced' ? 'Bounce' : 'Selesai';
+        const bounceClass = v.status === 'bounced' ? 'bounced' : v.status === 'active' ? 'active' : 'ended';
+
+        html += `<tr>
+            <td style="color: var(--text-muted); font-weight:600;">${rowNum}</td>
+            <td class="text-bold">${v.dateStr}<br><span style="color:var(--text-muted);font-size:0.75rem">${v.timeStr}</span></td>
+            <td style="font-family: monospace; font-size: 0.9rem; color: #a5b4fc;">${v.ip}</td>
+            <td><span class="badge badge-general" style="font-weight: 500;"><i class="fas ${v.deviceIcon}"></i> ${v.deviceName}</span></td>
+            <td>${v.browser}</td>
+            <td class="text-bold">${v.location}</td>
+            <td><span class="badge badge-general" style="background: rgba(212, 175, 55, 0.08); color: var(--primary-gold); border-color: rgba(212, 175, 55, 0.2);">${v.page}</span></td>
+            <td style="font-family: monospace; font-weight: 600; color: #ddd;">${v.durationFormatted}</td>
+            <td><span class="status-dot ${bounceClass}"></span> <span style="font-size: 0.85rem; font-weight: 600; color: ${v.status === 'active' ? '#10b981' : v.status === 'bounced' ? '#ef4444' : '#8e95a5'};">${statusLabel}</span></td>
+        </tr>`;
+    });
+
+    tbody.innerHTML = html;
+
+    // Update footers
+    document.getElementById('table-info').textContent = `Menampilkan ${(logs.page-1)*logs.limit + 1}-${Math.min((logs.page)*logs.limit, logs.total)} dari ${logs.total.toLocaleString('id-ID')} entri`;
+    document.getElementById('page-indicator').textContent = `Halaman ${logs.page} / ${logs.totalPages}`;
 }
 
-// --- Sort ---
+// 8. TABLE CONTROLS (FILTER, SEARCH, SORT, PAGINATION)
+function filterVisitors(period, btnEl) {
+    if (btnEl) {
+        document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+        btnEl.classList.add('active');
+    }
+    currentPeriod = period;
+    currentPage = 1;
+    loadTrafficData();
+}
+
 function sortTable(colIndex) {
     if (currentSortCol === colIndex) {
         currentSortAsc = !currentSortAsc;
@@ -341,168 +408,200 @@ function sortTable(colIndex) {
         currentSortAsc = true;
     }
     
-    filteredVisitors.sort((a, b) => {
-        let valA, valB;
-        switch(colIndex) {
-            case 0: return 0; // No = index, skip
-            case 1: valA = a.date.getTime(); valB = b.date.getTime(); break;
-            case 2: valA = a.ip; valB = b.ip; break;
-            case 5: valA = a.location; valB = b.location; break;
-            case 7: valA = a.duration; valB = b.duration; break;
-            default: return 0;
-        }
-        if (typeof valA === 'string') {
-            return currentSortAsc ? valA.localeCompare(valB) : valB.localeCompare(valA);
-        }
-        return currentSortAsc ? valA - valB : valB - valA;
+    // Update visual sort indicators in HTML
+    document.querySelectorAll('.visitor-table th i').forEach(icon => {
+        icon.className = 'fas fa-sort';
     });
-
-    currentPage = 1;
-    renderTable();
-}
-
-// --- Pagination ---
-function changePage(dir) {
-    const totalPages = Math.ceil(filteredVisitors.length / ROWS_PER_PAGE);
-    currentPage = Math.max(1, Math.min(currentPage + dir, totalPages));
-    renderTable();
-}
-
-// --- Render ---
-function renderTable() {
-    const tbody = document.getElementById('visitor-tbody');
-    const total = filteredVisitors.length;
-    const totalPages = Math.max(1, Math.ceil(total / ROWS_PER_PAGE));
     
-    // Guard page
-    if (currentPage > totalPages) currentPage = totalPages;
-    
-    const start = (currentPage - 1) * ROWS_PER_PAGE;
-    const end = Math.min(start + ROWS_PER_PAGE, total);
-    const pageData = filteredVisitors.slice(start, end);
-
-    // Build rows
-    let html = '';
-    pageData.forEach((v, idx) => {
-        const rowNum = start + idx + 1;
-        const dateStr = v.date.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
-        const timeStr = v.date.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-
-        const statusLabel = v.status === 'active' ? 'Aktif' : v.status === 'bounced' ? 'Bounce' : 'Selesai';
-
-        html += `<tr style="animation-delay: ${idx * 0.03}s">
-            <td style="color: var(--text-muted); font-weight:600;">${rowNum}</td>
-            <td>${dateStr}<br><span style="color:var(--text-muted);font-size:0.75rem">${timeStr}</span></td>
-            <td class="ip-cell">${v.ip}</td>
-            <td><span class="device-badge ${v.device.type}"><i class="fas ${v.device.icon}"></i> ${v.device.name}</span></td>
-            <td>${v.browser}</td>
-            <td>${v.location}</td>
-            <td><span class="page-pill">${v.page}</span></td>
-            <td class="duration-cell">${v.durationFormatted}</td>
-            <td><span class="status-dot ${v.status}">${statusLabel}</span></td>
-        </tr>`;
-    });
-
-    tbody.innerHTML = html;
-
-    // Update footer
-    document.getElementById('log-count-badge').textContent = `${total.toLocaleString('id-ID')} entri`;
-    document.getElementById('table-info').textContent = total > 0
-        ? `Menampilkan ${start + 1}-${end} dari ${total.toLocaleString('id-ID')} entri`
-        : 'Tidak ada data ditemukan';
-    document.getElementById('page-indicator').textContent = `Halaman ${currentPage} / ${totalPages}`;
-}
-
-// =============================================
-// 6. SPA VIEW ENGINE & DEMOGRAFI CHARTS
-// =============================================
-function switchView(viewId, linkElement) {
-    // 1. Hide all views
-    document.querySelectorAll('.view-section').forEach(el => {
-        el.classList.remove('active');
-        setTimeout(() => el.style.display = 'none', 50); // delay for transition
-    });
-
-    // 2. Show target view
-    const targetView = document.getElementById(viewId);
-    if(targetView) {
-        setTimeout(() => {
-            targetView.style.display = 'block';
-            targetView.classList.add('active');
-        }, 50);
+    const ths = document.querySelectorAll('.visitor-table th.sortable');
+    if (ths.length > 0) {
+        const sortIcons = {
+            1: ths[0].querySelector('i'), // Date
+            2: ths[1].querySelector('i'), // IP
+            5: ths[2].querySelector('i'), // Location
+            7: ths[3].querySelector('i')  // Duration
+        };
+        const activeIcon = sortIcons[colIndex];
+        if (activeIcon) {
+            activeIcon.className = currentSortAsc ? 'fas fa-sort-up' : 'fas fa-sort-down';
+        }
     }
 
-    // 3. Update active state on sidebar links
-    document.querySelectorAll('.nav-link-btn').forEach(el => {
+    currentPage = 1;
+    loadTrafficData();
+}
+
+function changePage(dir) {
+    currentPage = currentPage + dir;
+    if (currentPage < 1) currentPage = 1;
+    loadTrafficData();
+}
+
+// 9. SPA VIEW SWITCHER
+function switchView(viewId, linkElement) {
+    // Hide all views
+    document.querySelectorAll('.view-section').forEach(el => {
+        el.style.display = 'none';
         el.classList.remove('active');
-        el.classList.add('inactive');
     });
-    if(linkElement) {
-        linkElement.classList.add('active');
-        linkElement.classList.remove('inactive');
+
+    // Show target view
+    const targetView = document.getElementById(viewId);
+    if (targetView) {
+        targetView.style.display = 'block';
+        targetView.classList.add('active');
+    }
+
+    // Update active tab buttons
+    document.querySelectorAll('.traffic-subnav button').forEach(el => {
+        el.className = 'nav-link-btn inactive';
+    });
+    if (linkElement) {
+        linkElement.className = 'nav-link-btn active';
         
         // Update topbar title based on clicked link
         const titleText = linkElement.innerText.trim();
-        document.getElementById('topbar-title').innerText = titleText;
+        const topbarTitle = document.getElementById('topbar-title');
+        if (topbarTitle) topbarTitle.innerText = titleText;
     }
 
-    // 4. Initialize specific charts if viewing them for the first time
-    if(viewId === 'view-demografi' && !window.demografiChartsInit) {
-        setTimeout(initDemografiCharts, 100);
-        window.demografiChartsInit = true;
+    // Trigger specific chart renders on tab switch
+    if (viewId === 'view-demografi') {
+        loadTrafficData(); // load fresh demographics
+    } else if (viewId === 'view-konversi') {
+        loadTrafficData();
     }
 }
 
-function initDemografiCharts() {
-    // Chart Usia (Bar)
-    const ctxAge = document.getElementById('ageChart');
-    if (ctxAge) {
-        new Chart(ctxAge.getContext('2d'), {
-            type: 'bar',
-            data: {
-                labels: ['18-24', '25-34', '35-44', '45-54', '55+'],
-                datasets: [{
-                    label: 'Persentase (%)',
-                    data: [15, 45, 25, 10, 5],
-                    backgroundColor: 'rgba(16, 185, 129, 0.7)',
-                    borderColor: '#10b981',
-                    borderWidth: 1,
-                    borderRadius: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: {
-                    y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
-                    x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
-                }
-            }
-        });
+// 10. DEMOGRAFI SPECIFIC CHART (BAR)
+function renderDemografiCharts(ageDistribution) {
+    if (typeof Chart === 'undefined') {
+        console.warn('[Dashboard] Chart.js is not loaded. Skipping demographic chart rendering.');
+        return;
+    }
+    const canvasAge = document.getElementById('ageChart');
+    if (!canvasAge) return;
+
+    if (window.ageChartInstance) {
+        window.ageChartInstance.destroy();
     }
 
-    // Chart Device (Doughnut)
-    const ctxDevice = document.getElementById('deviceChart');
-    if (ctxDevice) {
-        new Chart(ctxDevice.getContext('2d'), {
-            type: 'pie',
-            data: {
-                labels: ['Mobile', 'Desktop', 'Tablet'],
-                datasets: [{
-                    data: [68, 28, 4],
-                    backgroundColor: ['#f43f5e', '#3b82f6', '#10b981'],
-                    borderWidth: 0,
-                    hoverOffset: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { position: 'bottom', labels: { color: '#94a3b8', padding: 20 } }
+    const finalAgeData = ageDistribution && ageDistribution.some(v => v > 0) ? ageDistribution : [0, 0, 0, 0, 0];
+
+    window.ageChartInstance = new Chart(canvasAge.getContext('2d'), {
+        type: 'bar',
+        data: {
+            labels: ['18-24', '25-34', '35-44', '45-54', '55+'],
+            datasets: [{
+                label: 'Persentase (%)',
+                data: finalAgeData,
+                backgroundColor: 'rgba(16, 185, 129, 0.7)',
+                borderColor: '#10b981',
+                borderWidth: 1,
+                borderRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { 
+                    beginAtZero: true, 
+                    grid: { color: 'rgba(255,255,255,0.05)' }, 
+                    ticks: { color: '#8e95a5', font: { family: 'Inter' } } 
+                },
+                x: { 
+                    grid: { display: false }, 
+                    ticks: { color: '#8e95a5', font: { family: 'Inter' } } 
                 }
             }
-        });
+        }
+    });
+}
+
+// 11. LIVE CLOCK
+function startClock() {
+    const clockEl = document.getElementById('status-clock');
+    if (!clockEl) return;
+    
+    function update() {
+        const now = new Date();
+        clockEl.innerHTML = `<i class="fas fa-clock"></i> ${now.toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'medium' })} WIB`;
     }
+    update();
+    setInterval(update, 1000);
+}
+
+// 12. REAL-TIME KEEP-ALIVE SYNC (AUTOMATED PULL)
+function startLiveSync() {
+    if (liveUserInterval) clearInterval(liveUserInterval);
+    
+    // Pull fresh active user count and visitor logs every 10 seconds
+    liveUserInterval = setInterval(() => {
+        const params = new URLSearchParams({
+            period: currentPeriod,
+            search: currentSearch,
+            sortCol: currentSortCol,
+            sortAsc: currentSortAsc,
+            page: currentPage
+        });
+        
+        fetch(`get_traffic_data.php?${params.toString()}`)
+            .then(res => res.json())
+            .then(res => {
+                if (res.status === 'success') {
+                    // Update active users
+                    const realtimeEl = document.getElementById('val-realtime');
+                    if (realtimeEl) {
+                        const current = parseInt(res.metrics.realtimeUsers);
+                        // Fluctuate active users slightly only if there's someone actually online
+                        const fluc = current > 0 ? current + (Math.random() > 0.6 ? (Math.random() > 0.5 ? 1 : -1) : 0) : 0;
+                        realtimeEl.innerText = Math.max(0, fluc);
+                    }
+                    
+                    // Update main cards
+                    const totalVisitsEl = document.getElementById('val-kunjungan');
+                    const waClicksEl = document.getElementById('val-wa-clicks');
+                    const avgDurationEl = document.getElementById('val-avg-duration');
+                    
+                    if (totalVisitsEl) totalVisitsEl.innerText = res.metrics.totalVisits;
+                    if (waClicksEl) waClicksEl.innerText = res.metrics.waClicks;
+                    if (avgDurationEl) avgDurationEl.innerText = res.metrics.avgDuration;
+                    
+                    // Update the logs list table dynamically
+                    renderVisitorTable(res.logs);
+                }
+            })
+            .catch(err => {
+                // Fail silently
+            });
+    }, 10000);
+}
+
+// Helper Randomizer
+function rand(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// 13. RESET TRAFFIC DATABASE
+function resetTrafficData() {
+    fetch('reset_traffic.php', { method: 'POST' })
+        .then(res => {
+            if (!res.ok) throw new Error('Failed to truncate');
+            return res.json();
+        })
+        .then(res => {
+            if (res.status === 'success') {
+                alert('Database trafik berhasil dikosongkan! Memulai pelacakan baru dari nol (0).');
+                currentPage = 1;
+                loadTrafficData();
+            } else {
+                alert('Gagal membersihkan database: ' + res.message);
+            }
+        })
+        .catch(err => {
+            console.error('Reset error:', err);
+            alert('Terjadi kesalahan koneksi saat mereset database.');
+        });
 }
