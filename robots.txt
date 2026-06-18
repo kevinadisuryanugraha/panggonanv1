@@ -7,4 +7,4 @@ Disallow: /chat_owner_hari_ini/
 Disallow: /admin/
 Disallow: /admin-traffic/
 
-Sitemap: https://panggonanresto.com/sitemap.xml
+Sitemap: https://panggonanresto.com/sitemap.php
