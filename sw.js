@@ -4,8 +4,8 @@
  * a cache-first strategy for static assets, while fully bypassing admin zones.
  */
 
-const CACHE_NAME = 'panggonan-pwa-static-v2';
-const DYNAMIC_CACHE_NAME = 'panggonan-pwa-dynamic-v2';
+const CACHE_NAME = 'panggonan-pwa-static-v3';
+const DYNAMIC_CACHE_NAME = 'panggonan-pwa-dynamic-v3';
 
 // Core static assets to cache on installation
 const STATIC_ASSETS = [

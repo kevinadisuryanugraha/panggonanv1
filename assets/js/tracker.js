@@ -37,7 +37,7 @@
                 }
             }
         } catch (e) {
-            console.warn('[Tracker] Gagal mengambil IP publik untuk uji coba lokal:', e.message);
+            _warn('[Tracker] Gagal mengambil IP publik untuk uji coba lokal:', e.message);
         }
         return null;
     }
@@ -221,7 +221,7 @@
                             _log('%c[PWA] Service Worker registered successfully! Scope:', 'color: #10b981; font-weight: bold;', reg.scope);
                         })
                         .catch(err => {
-                            console.warn('[PWA] Service Worker registration failed:', err.message);
+                            _warn('[PWA] Service Worker registration failed:', err.message);
                         });
                 } catch (e) {
                     _error('[PWA] Gagal menyelesaikan URL Service Worker:', e.message);
