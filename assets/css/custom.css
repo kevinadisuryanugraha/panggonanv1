@@ -1,12 +1,17 @@
-﻿/* =============================================================
-   custom.css â€” Global Styles untuk SEMUA halaman Panggonan
+/* =============================================================
+   custom.css — Global Styles untuk SEMUA halaman Panggonan
    
    Style yang khusus per-halaman ada di file terpisah:
-     home.css     â†’ Beranda (index.html)
-     about.css    â†’ Tentang Kami (about-us/index.html)
-     projects.css â†’ Galeri (projects/index.html)
-     contact.css  â†’ Kontak (contact-us/index.html) [inline di HTML]
+     home.css     → Beranda (index.html)
+     about.css    → Tentang Kami (about-us/index.html)
+     projects.css → Galeri (projects/index.html)
+     contact.css  → Kontak (contact-us/index.html) [inline di HTML]
    ============================================================= */
+
+/* ---- Hide Breadcrumbs (Navigasi Hitam) ---- */
+.breadcrumb-wrap, .breadcrumb, .breadcrumb-container {
+  display: none !important;
+}
 
 /* ---- Brand Variables (Palet Warna Panggonan) ---- */
 :root {
