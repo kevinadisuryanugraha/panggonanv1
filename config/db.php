@@ -14,8 +14,8 @@
 // 4. Ubah baris konfigurasi di bawah ini sesuai kredensial hosting Anda!
 // ========================================================
 define('DB_HOST', 'localhost');      // Biasanya tetap 'localhost' di sebagian besar hosting cPanel
-define('DB_USER', 'root');           // GANTI dengan nama user database hosting Anda
-define('DB_PASS', '');               // GANTI dengan kata sandi user database hosting Anda
+define('DB_USER', 'panggona_admin');  // GANTI dengan nama user database hosting Anda
+define('DB_PASS', 'Bijikaret134');    // GANTI dengan kata sandi user database hosting Anda
 define('DB_NAME', 'panggonan_db');   // GANTI dengan nama database hosting Anda
 
 try {
