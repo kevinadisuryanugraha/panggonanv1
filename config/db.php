@@ -16,7 +16,7 @@
 define('DB_HOST', 'localhost');      // Biasanya tetap 'localhost' di sebagian besar hosting cPanel
 define('DB_USER', 'panggona_admin');  // GANTI dengan nama user database hosting Anda
 define('DB_PASS', 'Bijikaret134');    // GANTI dengan kata sandi user database hosting Anda
-define('DB_NAME', 'panggonan_db');   // GANTI dengan nama database hosting Anda
+define('DB_NAME', 'panggona_resto');  // GANTI dengan nama database hosting Anda
 
 try {
     $pdo = new PDO(
