@@ -908,7 +908,7 @@ try {
         if (e.target === this) closeLightbox();
       });
   </script>
-  <script src="../../assets/js/panggonan-nav-fix.js" type="text/javascript"></script>
+  <script src="../assets/js/panggonan-nav-fix.js" type="text/javascript"></script>
   <script src="../assets/js/tracker.js" defer></script>
 </body>
 

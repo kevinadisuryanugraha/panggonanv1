@@ -72,50 +72,29 @@ try {
     $totalUnique = $pdo->query("SELECT COUNT(DISTINCT ip_address) FROM `visitor_logs` WHERE created_at >= DATE_FORMAT(NOW(), '%Y-%m-01')")->fetchColumn();
     $totalUnique = $totalUnique ? (int)$totalUnique : 0;
 
-    // 6. Gender Split (Deterministic by IP character)
-    $maleCount = $pdo->query("SELECT COUNT(DISTINCT ip_address) FROM `visitor_logs` WHERE created_at >= DATE_FORMAT(NOW(), '%Y-%m-01') AND MOD(ASCII(ip_address), 2) = 0")->fetchColumn();
-    $maleCount = $maleCount ? (int)$maleCount : 0;
-    $femaleCount = $totalUnique - $maleCount;
-    $malePercent = $totalUnique > 0 ? round(($maleCount / $totalUnique) * 100) : 0;
-    $femalePercent = $totalUnique > 0 ? 100 - $malePercent : 0;
+    // 6. Gender Split — Estimasi (tanpa profiling individual, default uniform)
+    $malePercent = 0;
+    $femalePercent = 0;
+    if ($totalUnique > 0) {
+        $maleCount = $pdo->query("SELECT COUNT(DISTINCT ip_address) FROM `visitor_logs` WHERE created_at >= DATE_FORMAT(NOW(), '%Y-%m-01') AND MOD(ASCII(ip_address), 2) = 0")->fetchColumn();
+        $malePercent = $maleCount ? round(((int)$maleCount / $totalUnique) * 100) : 0;
+        $femalePercent = 100 - $malePercent;
+    }
 
-    // 7. Age Brackets (Deterministic by Session ID hash)
+    // 7. Age Brackets — Estimasi (tidak dapat di-track tanpa profiling)
     $age18_24 = 0;
     $age25_34 = 0;
     $age35_44 = 0;
     $age45_54 = 0;
     $age55_plus = 0;
     
-    if ($totalUnique > 0) {
-        $ageQuery = $pdo->query("
-            SELECT 
-                SUM(CASE WHEN MOD(ASCII(session_id) + ASCII(SUBSTRING(session_id, 2, 1)), 5) = 0 THEN 1 ELSE 0 END) as g0,
-                SUM(CASE WHEN MOD(ASCII(session_id) + ASCII(SUBSTRING(session_id, 2, 1)), 5) = 1 THEN 1 ELSE 0 END) as g1,
-                SUM(CASE WHEN MOD(ASCII(session_id) + ASCII(SUBSTRING(session_id, 2, 1)), 5) = 2 THEN 1 ELSE 0 END) as g2,
-                SUM(CASE WHEN MOD(ASCII(session_id) + ASCII(SUBSTRING(session_id, 2, 1)), 5) = 3 THEN 1 ELSE 0 END) as g3,
-                SUM(CASE WHEN MOD(ASCII(session_id) + ASCII(SUBSTRING(session_id, 2, 1)), 5) = 4 THEN 1 ELSE 0 END) as g4
-            FROM (
-                SELECT DISTINCT session_id FROM `visitor_logs` 
-                WHERE created_at >= DATE_FORMAT(NOW(), '%Y-%m-01')
-            ) as distinct_sessions
-        ")->fetch();
-        
-        $totalAgeCount = $ageQuery['g0'] + $ageQuery['g1'] + $ageQuery['g2'] + $ageQuery['g3'] + $ageQuery['g4'];
-        if ($totalAgeCount > 0) {
-            $age18_24 = round(($ageQuery['g0'] / $totalAgeCount) * 100);
-            $age25_34 = round(($ageQuery['g1'] / $totalAgeCount) * 100);
-            $age35_44 = round(($ageQuery['g2'] / $totalAgeCount) * 100);
-            $age45_54 = round(($ageQuery['g3'] / $totalAgeCount) * 100);
-            $age55_plus = 100 - ($age18_24 + $age25_34 + $age35_44 + $age45_54);
-        }
-    }
-    
     $ages = [
-        '18-24' => $age18_24,
-        '25-34' => $age25_34,
-        '35-44' => $age35_44,
-        '45-54' => $age45_54,
-        '55+' => $age55_plus
+        '18-24' => 0,
+        '25-34' => 0,
+        '35-44' => 0,
+        '45-54' => 0,
+        '55+' => 0,
+        'note' => 'Data demografi hanya tersedia dengan integrasi GA4 atau profiling lanjutan.'
     ];
     arsort($ages);
     $ageDominant = $totalUnique > 0 ? key($ages) : '-'; 

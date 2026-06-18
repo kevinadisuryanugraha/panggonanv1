@@ -3,6 +3,12 @@
  * 100% Database-Driven Real-Time Metrics, Dynamic Charts & Logs
  */
 
+/* set to true to enable debug console output */
+const DEBUG = false;
+function _log() { if (DEBUG) console.log.apply(console, arguments); }
+function _warn() { if (DEBUG) console.warn.apply(console, arguments); }
+function _error() { if (DEBUG) console.error.apply(console, arguments); }
+
 // Global Dashboard States
 let currentPeriod = 'hari';
 let currentSearch = '';
@@ -24,15 +30,15 @@ if (document.readyState === "complete" || document.readyState === "interactive")
 }
 
 function initDashboard() {
-    console.log('%c[Dashboard] initDashboard called!', 'color: #3b82f6; font-weight: bold;');
+    _log('%c[Dashboard] initDashboard called!', 'color: #3b82f6; font-weight: bold;');
     // Check if on traffic tab
     const wrapper = document.querySelector('.traffic-dashboard-wrapper');
     if (!wrapper) {
-        console.warn('%c[Dashboard] .traffic-dashboard-wrapper element NOT found in DOM. Skipping init.', 'color: #f59e0b;');
+        _warn('%c[Dashboard] .traffic-dashboard-wrapper element NOT found in DOM. Skipping init.', 'color: #f59e0b;');
         return;
     }
 
-    console.log('%c[Dashboard] .traffic-dashboard-wrapper found. Initializing components...', 'color: #10b981;');
+    _log('%c[Dashboard] .traffic-dashboard-wrapper found. Initializing components...', 'color: #10b981;');
     // Load initial traffic data
     loadTrafficData();
 
@@ -59,7 +65,7 @@ function initDashboard() {
 
 // 1. DYNAMIC API REQUEST HANDLER
 function loadTrafficData() {
-    console.log('%c[Dashboard] loadTrafficData triggered.', 'color: #3b82f6;');
+    _log('%c[Dashboard] loadTrafficData triggered.', 'color: #3b82f6;');
     const params = new URLSearchParams({
         period: currentPeriod,
         search: currentSearch,
@@ -69,25 +75,25 @@ function loadTrafficData() {
     });
 
     const apiUrl = `get_traffic_data.php?${params.toString()}`;
-    console.log(`%c[Dashboard] Fetching from endpoint: ${apiUrl}`, 'color: #8b5cf6;');
+    _log(`%c[Dashboard] Fetching from endpoint: ${apiUrl}`, 'color: #8b5cf6;');
 
     fetch(apiUrl)
         .then(response => {
-            console.log(`%c[Dashboard] HTTP Response Status: ${response.status}`, response.ok ? 'color: #10b981;' : 'color: #ef4444;');
+            _log(`%c[Dashboard] HTTP Response Status: ${response.status}`, response.ok ? 'color: #10b981;' : 'color: #ef4444;');
             if (!response.ok) throw new Error('HTTP Status ' + response.status);
             return response.json();
         })
         .then(res => {
-            console.log('%c[Dashboard] JSON parsed successfully:', 'color: #10b981;', res);
+            _log('%c[Dashboard] JSON parsed successfully:', 'color: #10b981;', res);
             if (res.status === 'success') {
                 renderDashboardMetrics(res);
-                console.log('%c[Dashboard] renderDashboardMetrics executed successfully.', 'color: #10b981; font-weight: bold;');
+                _log('%c[Dashboard] renderDashboardMetrics executed successfully.', 'color: #10b981; font-weight: bold;');
             } else {
-                console.warn('%c[Dashboard] API returned error status:', 'color: #f59e0b;', res.message);
+                _warn('%c[Dashboard] API returned error status:', 'color: #f59e0b;', res.message);
             }
         })
         .catch(err => {
-            console.error('%c[Dashboard] Failed to load traffic metrics:', 'color: #ef4444; font-weight: bold;', err);
+            _error('%c[Dashboard] Failed to load traffic metrics:', 'color: #ef4444; font-weight: bold;', err);
         });
 }
 
@@ -165,7 +171,7 @@ function renderDashboardMetrics(res) {
 // 3. MAIN LINE CHART RENDERING
 function renderTrafficLineChart(labels, data) {
     if (typeof Chart === 'undefined') {
-        console.warn('[Dashboard] Chart.js is not loaded. Skipping line chart rendering.');
+        _warn('[Dashboard] Chart.js is not loaded. Skipping line chart rendering.');
         return;
     }
     const canvas = document.getElementById('trafficChart');
@@ -238,7 +244,7 @@ function renderTrafficLineChart(labels, data) {
 // 4. SOURCE DOUGHNUT CHART RENDERING
 function renderSourceDoughnutChart(labels, values) {
     if (typeof Chart === 'undefined') {
-        console.warn('[Dashboard] Chart.js is not loaded. Skipping source chart rendering.');
+        _warn('[Dashboard] Chart.js is not loaded. Skipping source chart rendering.');
         return;
     }
     const canvas = document.getElementById('sourceChart');
@@ -299,7 +305,7 @@ function renderSourceDoughnutChart(labels, values) {
 // 5. DEVICE DOUGHNUT CHART RENDERING
 function renderDeviceDoughnutChart(labels, values) {
     if (typeof Chart === 'undefined') {
-        console.warn('[Dashboard] Chart.js is not loaded. Skipping device chart rendering.');
+        _warn('[Dashboard] Chart.js is not loaded. Skipping device chart rendering.');
         return;
     }
     const canvas = document.getElementById('deviceChart');
@@ -476,7 +482,7 @@ function switchView(viewId, linkElement) {
 // 10. DEMOGRAFI SPECIFIC CHART (BAR)
 function renderDemografiCharts(ageDistribution) {
     if (typeof Chart === 'undefined') {
-        console.warn('[Dashboard] Chart.js is not loaded. Skipping demographic chart rendering.');
+        _warn('[Dashboard] Chart.js is not loaded. Skipping demographic chart rendering.');
         return;
     }
     const canvasAge = document.getElementById('ageChart');
@@ -601,7 +607,7 @@ function resetTrafficData() {
             }
         })
         .catch(err => {
-            console.error('Reset error:', err);
+            _error('Reset error:', err);
             alert('Terjadi kesalahan koneksi saat mereset database.');
         });
 }

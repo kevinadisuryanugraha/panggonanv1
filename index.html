@@ -177,158 +177,57 @@
   </script>
   <link href="assets/images/logo.webp" rel="icon" type="image/webp" />
   <link href="assets/images/logo.webp" rel="apple-touch-icon" />
+  <style>
+    .menu-highlight-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 48px;
+    }
+    .menu-highlight-card {
+      position: relative;
+      background: #0e0d09;
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(212, 175, 55, 0.12);
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease, border-color 0.4s ease;
+    }
+    .menu-highlight-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(212, 175, 55, 0.35);
+      border-color: rgba(212, 175, 55, 0.35);
+    }
+    .menu-card-img-wrap { width: 100%; height: 260px; overflow: hidden; position: relative; }
+    .menu-card-img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(14, 13, 9, 0.7) 100%);
+      pointer-events: none;
+    }
+    .menu-card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .menu-highlight-card:hover .menu-card-img { transform: scale(1.08); }
+    .menu-card-badge {
+      position: absolute; top: 18px; left: 18px;
+      background: rgba(212, 175, 55, 0.95); color: #0e0d09;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 5px 12px; border-radius: 100px; z-index: 2; backdrop-filter: blur(4px);
+    }
+    .menu-card-body { padding: 28px; display: flex; flex-direction: column; flex: 1; border-top: 3px solid #d4af37; }
+    .menu-card-name { font-size: 1.15rem; font-weight: 700; color: #fff; margin: 0 0 10px; line-height: 1.3; }
+    .menu-card-desc { font-size: 0.875rem; color: rgba(255,255,255,0.55); line-height: 1.6; margin: 0 0 20px; flex: 1; }
+    .menu-card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.07); }
+    .menu-card-price { font-size: 1.1rem; font-weight: 700; color: #d4af37; letter-spacing: 0.02em; }
+    .menu-card-cta { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.4); letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.3s ease; text-decoration: none; }
+    .menu-highlight-card:hover .menu-card-cta { color: #d4af37; }
+    .menu-card-cta-arrow { width: 16px; height: 16px; transition: transform 0.3s ease; }
+    .menu-highlight-card:hover .menu-card-cta-arrow { transform: translateX(4px); }
+    @media (max-width: 991px) { .menu-highlight-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .menu-highlight-grid { grid-template-columns: 1fr; } }
+  </style>
 </head>
-<style>
-  /* ============================================
-       MENU HIGHLIGHT CARDS - Premium Design
-    ============================================ */
-  .menu-highlight-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
-    margin-top: 48px;
-  }
-
-  .menu-highlight-card {
-    position: relative;
-    background: #0e0d09;
-    border-radius: 16px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid rgba(212, 175, 55, 0.12);
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-      box-shadow 0.4s ease,
-      border-color 0.4s ease;
-  }
-
-  .menu-highlight-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(212, 175, 55, 0.35);
-    border-color: rgba(212, 175, 55, 0.35);
-  }
-
-  .menu-card-img-wrap {
-    width: 100%;
-    height: 260px;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .menu-card-img-wrap::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, transparent 40%, rgba(14, 13, 9, 0.7) 100%);
-    pointer-events: none;
-  }
-
-  .menu-card-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .menu-highlight-card:hover .menu-card-img {
-    transform: scale(1.08);
-  }
-
-  .menu-card-badge {
-    position: absolute;
-    top: 18px;
-    left: 18px;
-    background: rgba(212, 175, 55, 0.95);
-    color: #0e0d09;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 5px 12px;
-    border-radius: 100px;
-    z-index: 2;
-    backdrop-filter: blur(4px);
-  }
-
-  .menu-card-body {
-    padding: 28px;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    border-top: 3px solid #d4af37;
-  }
-
-  .menu-card-name {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: #ffffff;
-    margin: 0 0 10px 0;
-    line-height: 1.3;
-  }
-
-  .menu-card-desc {
-    font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.55);
-    line-height: 1.6;
-    margin: 0 0 20px 0;
-    flex: 1;
-  }
-
-  .menu-card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 16px;
-    border-top: 1px solid rgba(255, 255, 255, 0.07);
-  }
-
-  .menu-card-price {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #d4af37;
-    letter-spacing: 0.02em;
-  }
-
-  .menu-card-cta {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.4);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    transition: color 0.3s ease;
-    text-decoration: none;
-  }
-
-  .menu-highlight-card:hover .menu-card-cta {
-    color: #d4af37;
-  }
-
-  .menu-card-cta-arrow {
-    width: 16px;
-    height: 16px;
-    transition: transform 0.3s ease;
-  }
-
-  .menu-highlight-card:hover .menu-card-cta-arrow {
-    transform: translateX(4px);
-  }
-
-  @media (max-width: 991px) {
-    .menu-highlight-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .menu-highlight-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>
-
 <body>
   <div data-w-id="c4cece30-ea7b-9bee-6ab3-e3f6d3fb5623" data-animation="default" data-collapse="medium"
     data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
@@ -434,7 +333,7 @@
         <div class="hero-video">
           <div data-w-id="4f44d3ce-e360-7938-4d1e-db625bd42b51" class="hero-top">
             <img src="assets/images/panggonan_aset_ke_2/sugeng_rawuh.webp" loading="eager"
-              sizes="(max-width: 479px) 87vw, 318px" srcset="" alt="Hero Mini" class="cover-image" decoding="async" />
+  alt="Hero Mini" class="cover-image" decoding="async" />
             <div style="
                   -webkit-transform: translate3d(0, 0px, 0) scale3d(1, 1, 1)
                     rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
@@ -499,7 +398,7 @@
             </div>
             <div data-w-id="17557d29-f61a-7474-2eda-939f3c7a57fb" class="about-us-mini">
               <img src="assets/images/panggonan_aset_ke_2/suasana2_landscape.webp" loading="lazy"
-                sizes="(max-width: 479px) 92vw, (max-width: 767px) 95vw, (max-width: 991px) 43vw, 45vw" srcset=""
+ 
                 alt="About Left" class="cover-image" decoding="async" />
               <div style="
                     -webkit-transform: translate3d(0, 0px, 0) scale3d(1, 1, 1)
@@ -530,7 +429,7 @@
           </div>
           <div data-w-id="b9f37a7c-eb53-5d04-1fc2-f8d9ac190817" class="about-right">
             <img src="assets/images/panggonan7.jpeg" loading="lazy"
-              sizes="(max-width: 479px) 92vw, (max-width: 767px) 95vw, (max-width: 991px) 49vw, 45vw" srcset=""
+ 
               alt="About Right" class="cover-image" decoding="async" />
             <div style="
                   -webkit-transform: translate3d(0, 0px, 0) scale3d(1, 1, 1)
@@ -581,8 +480,8 @@
                   <div class="project-cover">
                     <img src="assets/images/panggonan_aset_ke_2/ambiance_malam.webp" loading="lazy"
                       style=" -webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0); -moz-transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0); -ms-transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0); transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0); "
-                      alt="Merangkai Kisah Positif" sizes="(max-width: 479px) 85vw, (max-width: 767px) 42vw, 43vw"
-                      srcset="" class="cover-image" decoding="async" />
+                      alt="Merangkai Kisah Positif"
+                       class="cover-image" decoding="async" />
                   </div>
                   <div class="project-title">
                     <h5>Merangkai Kisah Positif</h5>
@@ -597,8 +496,8 @@
                   <div class="project-cover">
                     <img src="assets/images/panggonan_aset_ke_2/ambiance_luar_malam.webp" loading="lazy"
                       style=" -webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0); -moz-transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0); -ms-transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0); transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0); "
-                      alt="Makna di Balik Objek Usang" sizes="(max-width: 479px) 85vw, (max-width: 767px) 42vw, 43vw"
-                      srcset="" class="cover-image" decoding="async" />
+                      alt="Makna di Balik Objek Usang"
+                       class="cover-image" decoding="async" />
                   </div>
                   <div class="project-title">
                     <h5>Makna di Balik Objek Usang</h5>
@@ -613,7 +512,7 @@
                   <div class="project-cover">
                     <img src="assets/images/panggonan5.jpeg" loading="lazy"
                       style=" -webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0); -moz-transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0); -ms-transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0); transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0); "
-                      alt="Ruang Refleksi Jiwa" sizes="(max-width: 479px) 85vw, (max-width: 767px) 42vw, 43vw" srcset=""
+                      alt="Ruang Refleksi Jiwa" 
                       class="cover-image" decoding="async" />
                   </div>
                   <div class="project-title">
@@ -629,7 +528,7 @@
                   <div class="project-cover">
                     <img src="assets/images/panggonan_aset_ke_2/sudut_telepon.webp" loading="lazy"
                       style=" -webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0); -moz-transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0); -ms-transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0); transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0); "
-                      alt="Menulis Cerita Anda" sizes="(max-width: 479px) 85vw, (max-width: 767px) 42vw, 43vw" srcset=""
+                      alt="Menulis Cerita Anda" 
                       class="cover-image" decoding="async" />
                   </div>
                   <div class="project-title">
@@ -664,9 +563,8 @@
           <div class="w-dyn-list">
             <div data-w-id="2640cab6-207c-bbab-5d64-20ff329e7e10" style="opacity: 0" role="list"
               class="service-block w-dyn-items">
-              <div id="w-node-_2640cab6-207c-bbab-5d64-20ff329e7e11-d29afc8a" role="listitem" class="w-dyn-item">
-                <a id="w-node-dec0cb60-d2e7-1924-6640-762e6a5f368c-d29afc8a"
-                  data-w-id="dec0cb60-d2e7-1924-6640-762e6a5f368c" href="services/" class="service-card w-inline-block">
+              <div role="listitem" class="w-dyn-item">
+                <a data-w-id="dec0cb60-d2e7-1924-6640-762e6a5f368c" href="services/" class="service-card w-inline-block">
                   <div class="service-icon">
                     <img src="assets/images/icons/service-icon-03.svg" loading="lazy" alt="Kehangatan Ambiance"
                       decoding="async" />
@@ -687,9 +585,8 @@
                   </div>
                 </a>
               </div>
-              <div id="w-node-_2640cab6-207c-bbab-5d64-20ff329e7e11-d29afc8a" role="listitem" class="w-dyn-item">
-                <a id="w-node-dec0cb60-d2e7-1924-6640-762e6a5f368c-d29afc8a"
-                  data-w-id="dec0cb60-d2e7-1924-6640-762e6a5f368c" href="services/" class="service-card w-inline-block">
+              <div role="listitem" class="w-dyn-item">
+                <a data-w-id="dec0cb60-d2e7-1924-6640-762e6a5f368c" href="services/" class="service-card w-inline-block">
                   <div class="service-icon">
                     <img src="assets/images/icons/service-icon-01.svg" loading="lazy" alt="Upcycled Material"
                       decoding="async" />
@@ -710,9 +607,8 @@
                   </div>
                 </a>
               </div>
-              <div id="w-node-_2640cab6-207c-bbab-5d64-20ff329e7e11-d29afc8a" role="listitem" class="w-dyn-item">
-                <a id="w-node-dec0cb60-d2e7-1924-6640-762e6a5f368c-d29afc8a"
-                  data-w-id="dec0cb60-d2e7-1924-6640-762e6a5f368c" href="services/" class="service-card w-inline-block">
+              <div role="listitem" class="w-dyn-item">
+                <a data-w-id="dec0cb60-d2e7-1924-6640-762e6a5f368c" href="services/" class="service-card w-inline-block">
                   <div class="service-icon">
                     <img src="assets/images/icons/service-icon-04.svg" loading="lazy" alt="Ruang Interaksi"
                       decoding="async" />
@@ -888,7 +784,7 @@
           </div>
           <div data-w-id="e6a15c45-8ef6-bdbd-a68e-32be86d71ddc" class="why-image">
             <img src="assets/images/panggonan6.jpeg" loading="lazy"
-              sizes="(max-width: 479px) 92vw, (max-width: 767px) 95vw, (max-width: 991px) 46vw, 45vw" srcset=""
+ 
               alt="Why Image" class="cover-image" decoding="async" />
             <div style="
                   -webkit-transform: translate3d(0, 0px, 0) scale3d(1, 1, 1)
@@ -952,7 +848,7 @@
             </div>
           </div>
           <div data-w-id="548f1e75-ad94-f8b6-782e-cc1d15c6c576" class="cta-image">
-            <img sizes="(max-width: 479px) 83vw, (max-width: 767px) 87vw, (max-width: 991px) 42vw, 37vw" srcset=""
+            <img 
               alt="Cta Right" src="assets/images/panggonan9.jpeg" loading="lazy" class="cover-image" decoding="async" />
             <div class="slide-in"></div>
           </div>
@@ -1134,7 +1030,7 @@
           <div data-w-id="03176696-0141-699a-d7ea-1c7705700e7e" class="team-card bento-1">
             <div class="team-cover">
               <img src="assets/images/panggonan_aset_ke_2/ambiance_sudut_tempatmakan.webp" loading="lazy"
-                sizes="(max-width: 479px) 85vw, (max-width: 767px) 42vw, 19vw" srcset="" alt="Team Member"
+  alt="Team Member"
                 class="cover-image" decoding="async" />
             </div>
             <div>
@@ -1148,7 +1044,7 @@
           <div data-w-id="03176696-0141-699a-d7ea-1c7705700e86" class="team-card bento-2">
             <div class="team-cover">
               <img src="assets/images/panggonan_aset_ke_2/tempat_sejuk.webp" loading="lazy"
-                sizes="(max-width: 479px) 85vw, (max-width: 767px) 42vw, 19vw" srcset="" alt="Team Member"
+  alt="Team Member"
                 class="cover-image" decoding="async" />
             </div>
             <div>
@@ -1162,7 +1058,7 @@
           <div data-w-id="03176696-0141-699a-d7ea-1c7705700e8e" class="team-card bento-3">
             <div class="team-cover">
               <img src="assets/images/panggonan10.jpeg" loading="lazy"
-                sizes="(max-width: 479px) 85vw, (max-width: 767px) 42vw, 19vw" srcset="" alt="Team Member"
+  alt="Team Member"
                 class="cover-image" decoding="async" />
             </div>
             <div>
@@ -1176,7 +1072,7 @@
           <div data-w-id="03176696-0141-699a-d7ea-1c7705700e96" class="team-card bento-4">
             <div class="team-cover">
               <img src="assets/images/panggonan8.jpeg" loading="lazy"
-                sizes="(max-width: 479px) 85vw, (max-width: 767px) 42vw, 19vw" srcset="" alt="Team Member"
+  alt="Team Member"
                 class="cover-image" decoding="async" />
             </div>
             <div>

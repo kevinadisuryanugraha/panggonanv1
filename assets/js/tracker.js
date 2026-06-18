@@ -4,6 +4,12 @@
  */
 
 (function() {
+    /* set to true to enable debug console output */
+    var DEBUG = false;
+    function _log() { if (DEBUG) console.log.apply(console, arguments); }
+    function _warn() { if (DEBUG) console.warn.apply(console, arguments); }
+    function _error() { if (DEBUG) console.error.apply(console, arguments); }
+
     document.addEventListener("DOMContentLoaded", () => {
         initTracker();
     });
@@ -127,10 +133,10 @@
             return response.json();
         })
         .then(res => {
-            console.log(`%c[Tracker] Success: ${data.action} ->`, 'color: #10b981; font-weight: bold;', res);
+            _log(`%c[Tracker] Success: ${data.action} ->`, 'color: #10b981; font-weight: bold;', res);
         })
         .catch(err => {
-            console.error(`%c[Tracker] Failed to sync ${data.action}:`, 'color: #ef4444; font-weight: bold;', err);
+            _error(`%c[Tracker] Failed to sync ${data.action}:`, 'color: #ef4444; font-weight: bold;', err);
         });
     }
 
@@ -196,10 +202,10 @@
                 manifestLink.rel = 'manifest';
                 manifestLink.href = manifestUrl;
                 document.head.appendChild(manifestLink);
-                console.log('%c[PWA] Dynamic Manifest link injected successfully:', 'color: #d4af37;', manifestUrl);
+                _log('%c[PWA] Dynamic Manifest link injected successfully:', 'color: #d4af37;', manifestUrl);
             }
         } catch (e) {
-            console.error('[PWA] Gagal menyuntikkan link manifest:', e.message);
+            _error('[PWA] Gagal menyuntikkan link manifest:', e.message);
         }
     }
 
@@ -212,13 +218,13 @@
                     
                     navigator.serviceWorker.register(swUrl)
                         .then(reg => {
-                            console.log('%c[PWA] Service Worker registered successfully! Scope:', 'color: #10b981; font-weight: bold;', reg.scope);
+                            _log('%c[PWA] Service Worker registered successfully! Scope:', 'color: #10b981; font-weight: bold;', reg.scope);
                         })
                         .catch(err => {
                             console.warn('[PWA] Service Worker registration failed:', err.message);
                         });
                 } catch (e) {
-                    console.error('[PWA] Gagal menyelesaikan URL Service Worker:', e.message);
+                    _error('[PWA] Gagal menyelesaikan URL Service Worker:', e.message);
                 }
             });
         }

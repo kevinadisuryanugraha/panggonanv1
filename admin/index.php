@@ -57,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_login'])) {
             $_SESSION['admin_role'] = $admin['role'];
             $_SESSION['login_time'] = time();
             $_SESSION['user_ip'] = $_SERVER['REMOTE_ADDR'];
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
             header('Location: index.php');
             exit;
         } else {
@@ -83,9 +84,27 @@ if (isset($_SESSION['admin_logged']) && $_SESSION['admin_logged'] === true) {
 }
 
 // ============================================
+// CSRF HELPER
+// ============================================
+function validateCsrf($token) {
+    return isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $token);
+}
+
+// ============================================
 // PROTECTED ACTIONS (require login)
 // ============================================
 if (isset($_SESSION['admin_logged']) && $_SESSION['admin_logged'] === true) {
+
+    // CSRF check for all state-changing POST requests (except login)
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['admin_login'])) {
+        $submittedToken = $_POST['csrf_token'] ?? '';
+        if (!validateCsrf($submittedToken)) {
+            $_SESSION['toast'] = 'Token keamanan tidak valid. Silakan refresh halaman dan coba lagi.';
+            $_SESSION['toast_type'] = 'error';
+            header('Location: index.php?tab=' . ($_GET['tab'] ?? 'dashboard'));
+            exit;
+        }
+    }
 
     // --- CONFIRM RESERVATION ---
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action_reservation_confirm'])) {
@@ -180,7 +199,9 @@ if (isset($_SESSION['admin_logged']) && $_SESSION['admin_logged'] === true) {
         $id = (int) $_POST['journal_id'];
         $author = trim($_POST['edit_author']);
         $date_label = trim($_POST['edit_date']);
-        $text = trim($_POST['edit_text']);
+        $allowed_tags = '<p><br><strong><b><i><em><u><ul><ol><li>';
+        $text = strip_tags(trim($_POST['edit_text']), $allowed_tags);
+        $text = preg_replace('/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i', '<$1$2>', $text);
         $plain_text = strip_tags($text);
         $quote = '"' . mb_substr($plain_text, 0, 80) . (mb_strlen($plain_text) > 80 ? '...' : '') . '"';
         $media_type = $_POST['edit_media_type'];
@@ -209,7 +230,10 @@ if (isset($_SESSION['admin_logged']) && $_SESSION['admin_logged'] === true) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action_create'])) {
         $author = mb_substr(trim($_POST['create_author']), 0, 255);
         $date_label = mb_substr(trim($_POST['create_date']), 0, 255);
-        $text = mb_substr(trim($_POST['create_text']), 0, 65000);
+        $allowed_tags = '<p><br><strong><b><i><em><u><ul><ol><li>';
+        $text = strip_tags(trim($_POST['create_text']), $allowed_tags);
+        $text = preg_replace('/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i', '<$1$2>', $text);
+        $text = mb_substr($text, 0, 65000);
         $plain_text = strip_tags($text);
         $quote = '"' . mb_substr($plain_text, 0, 80) . (mb_strlen($plain_text) > 80 ? '...' : '') . '"';
         $media_type = $_POST['create_media_type'];
@@ -625,20 +649,25 @@ $pending_res_count = 0;
 $res_list = [];
 
 if (isset($_SESSION['admin_logged']) && $_SESSION['admin_logged'] === true) {
-    $active_count = $pdo->query("SELECT COUNT(*) FROM journals WHERE status = 'approved'")->fetchColumn();
-    $pending_count = $pdo->query("SELECT COUNT(*) FROM journals WHERE status = 'pending'")->fetchColumn();
-    $pending_list = $pdo->query("SELECT * FROM journals WHERE status = 'pending' ORDER BY created_at DESC")->fetchAll();
-    $active_list = $pdo->query("SELECT * FROM journals WHERE status = 'approved' ORDER BY id DESC")->fetchAll();
-    $pending_res_count = $pdo->query("SELECT COUNT(*) FROM reservations WHERE status = 'pending'")->fetchColumn();
-    $res_list = $pdo->query("SELECT * FROM reservations ORDER BY reservation_date DESC, id DESC")->fetchAll();
-    
-    // Fetch Menu Categories & Relational Menu Items
-    $categories_list = $pdo->query("SELECT c.*, (SELECT COUNT(*) FROM `menu_items` m WHERE m.category_id = c.id) as item_count FROM `menu_categories` c ORDER BY c.column_position ASC, c.sort_order ASC")->fetchAll();
-    $menu_items_list = $pdo->query("SELECT m.*, c.name as category_name, c.column_position FROM `menu_items` m JOIN `menu_categories` c ON m.category_id = c.id ORDER BY c.column_position ASC, c.sort_order ASC, m.sort_order ASC")->fetchAll();
-    
-    // Fetch Gallery Items & Categories
-    $gallery_categories_list = $pdo->query("SELECT c.*, (SELECT COUNT(*) FROM `gallery` g WHERE g.category_id = c.id) as item_count FROM `gallery_categories` c ORDER BY c.sort_order ASC, c.id ASC")->fetchAll();
-    $gallery_list = $pdo->query("SELECT g.*, c.name as category_name, c.slug as category_slug FROM `gallery` g JOIN `gallery_categories` c ON g.category_id = c.id ORDER BY g.id DESC")->fetchAll();
+    try {
+        $active_count = $pdo->query("SELECT COUNT(*) FROM journals WHERE status = 'approved'")->fetchColumn();
+        $pending_count = $pdo->query("SELECT COUNT(*) FROM journals WHERE status = 'pending'")->fetchColumn();
+        $pending_list = $pdo->query("SELECT * FROM journals WHERE status = 'pending' ORDER BY created_at DESC")->fetchAll();
+        $active_list = $pdo->query("SELECT * FROM journals WHERE status = 'approved' ORDER BY id DESC")->fetchAll();
+        $pending_res_count = $pdo->query("SELECT COUNT(*) FROM reservations WHERE status = 'pending'")->fetchColumn();
+        $res_list = $pdo->query("SELECT * FROM reservations ORDER BY reservation_date DESC, id DESC")->fetchAll();
+        
+        // Fetch Menu Categories & Relational Menu Items
+        $categories_list = $pdo->query("SELECT c.*, (SELECT COUNT(*) FROM `menu_items` m WHERE m.category_id = c.id) as item_count FROM `menu_categories` c ORDER BY c.column_position ASC, c.sort_order ASC")->fetchAll();
+        $menu_items_list = $pdo->query("SELECT m.*, c.name as category_name, c.column_position FROM `menu_items` m JOIN `menu_categories` c ON m.category_id = c.id ORDER BY c.column_position ASC, c.sort_order ASC, m.sort_order ASC")->fetchAll();
+        
+        // Fetch Gallery Items & Categories
+        $gallery_categories_list = $pdo->query("SELECT c.*, (SELECT COUNT(*) FROM `gallery` g WHERE g.category_id = c.id) as item_count FROM `gallery_categories` c ORDER BY c.sort_order ASC, c.id ASC")->fetchAll();
+        $gallery_list = $pdo->query("SELECT g.*, c.name as category_name, c.slug as category_slug FROM `gallery` g JOIN `gallery_categories` c ON g.category_id = c.id ORDER BY g.id DESC")->fetchAll();
+    } catch (Exception $e) {
+        error_log("Panggonan Admin Dashboard DB Error: " . $e->getMessage());
+        // All variables remain at their default empty values
+    }
 } else {
     $categories_list = [];
     $menu_items_list = [];

@@ -30,5 +30,6 @@ try {
         ]
     );
 } catch (PDOException $e) {
-    die("Koneksi database gagal: " . $e->getMessage());
+    error_log("Panggonan DB Error: " . $e->getMessage());
+    die("Koneksi database gagal. Silakan coba lagi nanti.");
 }

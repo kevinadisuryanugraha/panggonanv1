@@ -134,13 +134,13 @@ if (!empty($upload_error)) {
     exit;
 }
 
-// Clean up form retention variables on success
-unset($_SESSION['story_form_data']);
-unset($_SESSION['story_upload_error']);
-
 // Save to database as pending
 $stmt = $pdo->prepare("INSERT INTO journals (author, quote, text, media_type, media_url, date_label, status) VALUES (?, ?, ?, ?, ?, ?, 'pending')");
 $stmt->execute([$nama, $quote, $text, $media_type, $media_url, $date_label]);
+
+// Clean up form retention variables only after successful insert
+unset($_SESSION['story_form_data']);
+unset($_SESSION['story_upload_error']);
 
 // Store success data in session for display
 $_SESSION['story_submitted'] = true;

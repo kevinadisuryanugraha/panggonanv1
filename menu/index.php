@@ -17,21 +17,21 @@ try {
     $rightCategories = [];
 }
 
-// Helper to fetch active/available items for a category
-function getMenuItems($pdo, $categoryId) {
-    try {
-        $stmt = $pdo->prepare("SELECT * FROM `menu_items` WHERE `category_id` = ? AND `is_available` = 1 ORDER BY `sort_order` ASC");
-        $stmt->execute([$categoryId]);
-        return $stmt->fetchAll();
-    } catch (Exception $e) {
-        return [];
+// Batch fetch all available items once to avoid N+1 queries
+$allItems = [];
+try {
+    $stmtAllItems = $pdo->query("SELECT * FROM `menu_items` WHERE `is_available` = 1 ORDER BY `category_id`, `sort_order` ASC");
+    while ($row = $stmtAllItems->fetch()) {
+        $allItems[$row['category_id']][] = $row;
     }
+} catch (Exception $e) {
+    $allItems = [];
 }
 
 // Construct JSON-LD Menu Schema dynamically
 $menuSections = [];
 foreach ($leftCategories as $cat) {
-    $items = getMenuItems($pdo, $cat['id']);
+    $items = $allItems[$cat['id']] ?? [];
     if (count($items) > 0) {
         $sectionItems = [];
         foreach ($items as $item) {
@@ -54,7 +54,7 @@ foreach ($leftCategories as $cat) {
     }
 }
 foreach ($rightCategories as $cat) {
-    $items = getMenuItems($pdo, $cat['id']);
+    $items = $allItems[$cat['id']] ?? [];
     if (count($items) > 0) {
         $sectionItems = [];
         foreach ($items as $item) {
@@ -316,7 +316,7 @@ $menuSchema = [
           <!-- Left Column -->
           <div class="menu-list-col">
             <?php foreach ($leftCategories as $cat): ?>
-              <?php $items = getMenuItems($pdo, $cat['id']); ?>
+              <?php $items = $allItems[$cat['id']] ?? []; ?>
               <?php if (count($items) > 0): ?>
                 <div class="menu-list-category">
                   <h3 class="menu-list-title"><?= htmlspecialchars($cat['name']) ?></h3>
@@ -341,7 +341,7 @@ $menuSchema = [
           <!-- Right Column -->
           <div class="menu-list-col">
             <?php foreach ($rightCategories as $cat): ?>
-              <?php $items = getMenuItems($pdo, $cat['id']); ?>
+              <?php $items = $allItems[$cat['id']] ?? []; ?>
               <?php if (count($items) > 0): ?>
                 <div class="menu-list-category">
                   <?php if ($cat['name'] !== 'Minuman Part 2'): ?>
@@ -617,7 +617,7 @@ $menuSchema = [
   </section>
   <script src="../assets/js/jquery-3.5.1.min.js" type="text/javascript" crossorigin="anonymous" defer></script>
   <script src="../assets/js/script.js" type="text/javascript" defer></script>
-  <script src="../../assets/js/panggonan-nav-fix.js" type="text/javascript"></script>
+  <script src="../assets/js/panggonan-nav-fix.js" type="text/javascript"></script>
   <script src="../assets/js/tracker.js" defer></script>
 </body>
 
