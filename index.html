@@ -147,12 +147,27 @@
             "url": "https://panggonanresto.com",
             "name": "Panggonan Resto",
             "description": "Website resmi Panggonan Resto — Rumah Makan Tradisional Jawa di Ciracas & GDC Depok",
-            "inLanguage": "id-ID"
+            "inLanguage": "id-ID",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://panggonanresto.com/?q={search_term_string}"
+              },
+              "query-input": "required name=search_term_string"
+            }
           },
           {
             "@type": "BreadcrumbList",
             "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://panggonanresto.com/" }
+              { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://panggonanresto.com/" },
+              { "@type": "ListItem", "position": 2, "name": "Menu", "item": "https://panggonanresto.com/menu/" },
+              { "@type": "ListItem", "position": 3, "name": "Tentang Kami", "item": "https://panggonanresto.com/about-us/" },
+              { "@type": "ListItem", "position": 4, "name": "Layanan", "item": "https://panggonanresto.com/services/" },
+              { "@type": "ListItem", "position": 5, "name": "Galeri", "item": "https://panggonanresto.com/gallery/" },
+              { "@type": "ListItem", "position": 6, "name": "Jurnal", "item": "https://panggonanresto.com/blog/" },
+              { "@type": "ListItem", "position": 7, "name": "Hubungi Kami", "item": "https://panggonanresto.com/contact-us/" },
+              { "@type": "ListItem", "position": 8, "name": "Tanya Jawab", "item": "https://panggonanresto.com/faq/" }
             ]
           }
         ]
