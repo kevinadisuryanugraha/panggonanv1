@@ -2638,6 +2638,34 @@ $current_tab = $_GET['tab'] ?? 'dashboard';
         closeGalleryCategoryEditModal();
       }
     });
+
+    // CSRF Token Auto-Injection for all POST forms
+    document.addEventListener('submit', function(e) {
+      var form = e.target;
+      if (form.getAttribute('method') && form.getAttribute('method').toUpperCase() === 'POST') {
+        if (!form.querySelector('input[name="csrf_token"]')) {
+          var input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = 'csrf_token';
+          input.value = <?= json_encode($_SESSION['csrf_token'] ?? '') ?>;
+          form.appendChild(input);
+        }
+      }
+    });
+
+    // Also pre-inject on load for compatibility
+    document.addEventListener('DOMContentLoaded', function() {
+      var csrfToken = <?= json_encode($_SESSION['csrf_token'] ?? '') ?>;
+      document.querySelectorAll('form[method="POST"], form[method="post"]').forEach(function(form) {
+        if (!form.querySelector('input[name="csrf_token"]')) {
+          var input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = 'csrf_token';
+          input.value = csrfToken;
+          form.appendChild(input);
+        }
+      });
+    });
   </script>
   <?php endif; ?>
   <!-- END MODALS -->
